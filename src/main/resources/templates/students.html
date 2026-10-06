@@ -1,0 +1,1319 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f5eb">
+  <title>Студентам — практика в Очаково</title>
+  <meta
+    name="description"
+    content="Узнайте, как проходит практика, как подготовиться к первому дню и где посмотреть актуальные предложения."
+  >
+
+  <style>
+    :root {
+      --green-dark: #123c31;
+      --green: #1b5944;
+      --green-light: #dce9c8;
+      --cream: #f7f5eb;
+      --gold: #e6b84d;
+      --text: #17382e;
+      --muted: #718078;
+      --white: #fff;
+      --line: rgba(18, 60, 49, 0.12);
+      --shadow: 0 18px 50px rgba(18, 60, 49, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 235, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topline {
+      min-height: 36px;
+      padding: 7px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream);
+      background: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .topline-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .topline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(230, 184, 77, 0.16);
+    }
+
+    .topline-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .nav-shell {
+      position: relative;
+      width: min(1440px, 100%);
+      min-height: 82px;
+      margin: 0 auto;
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px 16px 16px 5px;
+      background: var(--green);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark svg {
+      width: 29px;
+      height: 29px;
+      transform: rotate(3deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 1.7vw, 25px);
+    }
+
+    .nav-link,
+    .more-menu summary {
+      padding: 10px 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .more-menu summary:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--green);
+    }
+
+    .nav-link[aria-current="page"] {
+      box-shadow: inset 0 -2px var(--gold);
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .more-menu summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .more-menu[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      right: -18px;
+      min-width: 230px;
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropdown a {
+      padding: 12px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dropdown a:hover {
+      background: var(--green-light);
+    }
+
+    .nav-cta,
+    .button {
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta,
+    .button-primary {
+      color: var(--green-dark);
+      background: var(--gold);
+      box-shadow: 0 5px 14px rgba(230, 184, 77, 0.22);
+    }
+
+    .nav-cta:hover,
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      color: var(--green-dark);
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .breadcrumbs {
+      width: min(1200px, 90%);
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      width: min(1200px, 90%);
+      margin: 0 auto;
+      padding: 58px 0 62px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 48px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .eyebrow-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-light);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      margin-bottom: 18px;
+      color: var(--green-dark);
+      font-size: clamp(43px, 6vw, 72px);
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+
+    .hero-description {
+      max-width: 610px;
+      margin-bottom: 24px;
+      color: #53685e;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-card {
+      min-height: 310px;
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 87% 12%, rgba(230, 184, 77, 0.26), transparent 30%),
+        var(--green);
+      border-radius: 27px 27px 27px 7px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card-label {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .hero-card-number {
+      margin: 26px 0 10px;
+      color: var(--gold);
+      font-size: 64px;
+      font-weight: 900;
+      letter-spacing: -0.07em;
+      line-height: 1;
+    }
+
+    .hero-card h2 {
+      max-width: 330px;
+      margin-bottom: 10px;
+      color: var(--white);
+      font-size: 25px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .hero-card p {
+      max-width: 370px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 72px 5vw;
+    }
+
+    .section-alt {
+      background: #eeefe4;
+    }
+
+    .section-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--green-dark);
+      font-size: clamp(31px, 4.2vw, 48px);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+    }
+
+    .section-heading > p:last-child {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .benefit-card {
+      min-height: 200px;
+      padding: 23px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 20px;
+    }
+
+    .benefit-icon {
+      width: 42px;
+      height: 42px;
+      margin-bottom: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--green-light);
+      font-size: 18px;
+    }
+
+    .benefit-card:nth-child(2) .benefit-icon {
+      background: #f8e7b8;
+    }
+
+    .benefit-card:nth-child(3) .benefit-icon {
+      background: #e8e0f2;
+    }
+
+    .benefit-card h3 {
+      margin-bottom: 9px;
+      color: var(--green-dark);
+      font-size: 18px;
+    }
+
+    .benefit-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step-card {
+      min-height: 205px;
+      padding: 21px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 19px;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      margin-bottom: 21px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--green-dark);
+      background: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .step-card h3 {
+      margin-bottom: 8px;
+      color: var(--green-dark);
+      font-size: 17px;
+    }
+
+    .step-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .first-day {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: start;
+      gap: 45px;
+    }
+
+    .first-day-intro h2 {
+      margin-bottom: 13px;
+      color: var(--green-dark);
+      font-size: clamp(31px, 4vw, 45px);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+    }
+
+    .first-day-intro p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .day-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .day-item {
+      padding: 17px 19px;
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 15px;
+    }
+
+    .day-time {
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .day-item h3 {
+      margin-bottom: 5px;
+      color: var(--green-dark);
+      font-size: 14px;
+    }
+
+    .day-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .portfolio-card {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 28px;
+      color: var(--cream);
+      background: var(--green-dark);
+      border-radius: 24px;
+    }
+
+    .portfolio-card .section-kicker {
+      color: var(--gold);
+    }
+
+    .portfolio-card h2 {
+      margin-bottom: 12px;
+      color: var(--white);
+      font-size: clamp(27px, 4vw, 40px);
+      letter-spacing: -0.05em;
+      line-height: 1.08;
+    }
+
+    .portfolio-card > div:first-child > p:last-child {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .portfolio-list {
+      display: grid;
+      gap: 9px;
+    }
+
+    .portfolio-item {
+      padding: 13px 15px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 13px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .portfolio-check {
+      width: 23px;
+      height: 23px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--green-dark);
+      background: var(--gold);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 16px 18px;
+      color: #53685e;
+      background: #f8e7b8;
+      border-radius: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .faq-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-item {
+      padding: 18px 20px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 15px;
+    }
+
+    .faq-item summary {
+      color: var(--green-dark);
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .faq-item p {
+      max-width: 850px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .next-step {
+      padding: 0 5vw 75px;
+    }
+
+    .next-step-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 29px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: #e9eddd;
+      border: 1px solid rgba(18, 60, 49, 0.07);
+      border-radius: 22px;
+    }
+
+    .next-step h2 {
+      margin-bottom: 7px;
+      color: var(--green-dark);
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.045em;
+    }
+
+    .next-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      padding: 27px 5vw;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5vw;
+        right: 5vw;
+        padding: 15px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .nav-link,
+      .more-menu summary {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 10px;
+      }
+
+      .more-menu {
+        width: 100%;
+      }
+
+      .more-menu summary {
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        position: static;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 4px 8px 8px 17px;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .nav-cta {
+        margin-top: 7px;
+      }
+
+      .steps {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .first-day {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .portfolio-card {
+        grid-template-columns: 1fr;
+      }
+
+      .next-step-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topline {
+        padding-inline: 5vw;
+        font-size: 10px;
+      }
+
+      .topline-note {
+        display: none;
+      }
+
+      .nav-shell {
+        min-height: 72px;
+        padding-block: 10px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-caption {
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 12vw, 60px);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .benefit-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .section {
+        padding-block: 58px;
+      }
+
+      .next-step {
+        padding-bottom: 58px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="topline">
+      <div class="topline-label">
+        <span class="topline-dot" aria-hidden="true"></span>
+        <span>КАРЬЕРА НА ПРОИЗВОДСТВЕ</span>
+      </div>
+      <span class="topline-note">Узнай, что стоит за знакомым брендом</span>
+    </div>
+
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Очаково — главная">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path
+              d="M23.7 6.2C15.4 6.5 8.1 9.7 8.1 17.1c0 4.1 2.8 6.7 6.4 6.7 7 0 9.5-8.6 9.2-17.6Z"
+              fill="#E6B84D"
+            />
+            <path
+              d="M8.2 25.9c3.3-5.2 7.1-8.4 12.5-11.2"
+              stroke="#F7F5EB"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="7" cy="8" r="1.5" fill="#F7F5EB"/>
+            <circle cx="25.5" cy="25" r="1.2" fill="#F7F5EB"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">ОЧАКОВО</span>
+          <span class="brand-caption">карьера и практика</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Открыть меню"
+        aria-controls="main-nav"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Главная навигация">
+        <a class="nav-link" href="/about">О компании</a>
+        <a class="nav-link" href="/professions">Профессии</a>
+        <a class="nav-link" href="/students" aria-current="page">Студентам</a>
+        <a class="nav-link" href="/try">Попробуй себя</a>
+        <a class="nav-link" href="/conditions">Условия</a>
+
+        <details class="more-menu">
+          <summary>
+            Ещё
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path
+                d="m2 4 4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </summary>
+          <div class="dropdown">
+            <a href="/route">Маршрут по предприятию</a>
+            <a href="/team">Истории сотрудников</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="/jobs">Вакансии</a>
+        <a class="nav-cta" href="/jobs">Найти практику ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="/">Главная</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Студентам</span>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          <span class="eyebrow-icon" aria-hidden="true">✦</span>
+          Первый опыт — это старт
+        </p>
+
+        <h1>Практика, с которой начинается дело</h1>
+
+        <p class="hero-description">
+          Узнай, как посмотреть доступные практики, подготовиться к отклику
+          и чего ожидать в первый день. Требования, график и оплата указаны
+          в карточке каждого актуального предложения.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="/jobs">Посмотреть практики ↗</a>
+          <a class="button button-secondary" href="#first-day">Как проходит первый день ↓</a>
+        </div>
+      </div>
+
+      <aside class="hero-card">
+        <span class="hero-card-label">Твой карьерный маршрут</span>
+        <div>
+          <div class="hero-card-number" aria-hidden="true">01</div>
+          <h2>От интереса — к реальному опыту</h2>
+          <p>
+            Начни с изучения направлений, задай вопросы и проверь условия
+            практики до отклика.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Что даёт практика</p>
+          <h2>Познакомься с работой изнутри</h2>
+          <p>
+            Практика помогает увидеть реальные задачи и понять,
+            подходит ли тебе выбранное направление.
+          </p>
+        </div>
+
+        <div class="benefit-grid">
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">◎</span>
+            <h3>Опыт в выбранной сфере</h3>
+            <p>
+              Можно познакомиться с рабочими процессами и применить знания
+              в задачах, подходящих для конкретной практики.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">✳</span>
+            <h3>Обучение и поддержка</h3>
+            <p>
+              В описании предложения будет указано, предусмотрены ли обучение,
+              вводный инструктаж и помощь наставника.
+            </p>
+          </article>
+
+          <article class="benefit-card">
+            <span class="benefit-icon" aria-hidden="true">↗</span>
+            <h3>Понимание карьерного пути</h3>
+            <p>
+              Ты сможешь лучше понять задачи профессии и обсудить,
+              какие возможности могут быть после практики.
+            </p>
+          </article>
+        </div>
+
+        <div class="notice">
+          В кейсе предусмотрена оплачиваемая практика. Размер оплаты, график,
+          сроки и порядок оформления нужно указывать в актуальной карточке
+          конкретного предложения.
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Понятные шаги</p>
+          <h2>Как попасть на практику</h2>
+          <p>
+            Начни с актуальных предложений: требования и порядок отбора
+            могут отличаться для разных направлений.
+          </p>
+        </div>
+
+        <div class="steps">
+          <article class="step-card">
+            <span class="step-number">01</span>
+            <h3>Выбери направление</h3>
+            <p>
+              Изучи профессии и найди практику, которая соответствует твоим
+              интересам и учебной специальности.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">02</span>
+            <h3>Проверь условия</h3>
+            <p>
+              Посмотри требования, график, сроки, оплату и документы
+              в карточке конкретного предложения.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">03</span>
+            <h3>Отправь отклик</h3>
+            <p>
+              Заполни форму отклика и укажи контакты, по которым с тобой
+              можно связаться.
+            </p>
+          </article>
+
+          <article class="step-card">
+            <span class="step-number">04</span>
+            <h3>Обсуди детали</h3>
+            <p>
+              Уточни у HR дальнейшие этапы, вопросы по оформлению
+              и подготовку к первому дню.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="first-day">
+      <div class="section-inner first-day">
+        <div class="first-day-intro">
+          <p class="section-kicker">Без неизвестности</p>
+          <h2>Мой первый день</h2>
+          <p>
+            Точный порядок зависит от места практики и позиции. На странице
+            предложения или при оформлении уточни, куда прийти, к кому обратиться
+            и что взять с собой.
+          </p>
+          <a class="button button-primary" href="/jobs">Посмотреть предложения ↗</a>
+        </div>
+
+        <div class="day-list">
+          <article class="day-item">
+            <span class="day-time">01</span>
+            <div>
+              <h3>Знакомство и организационные вопросы</h3>
+              <p>Уточнение расписания, контакта наставника и правил площадки.</p>
+            </div>
+          </article>
+
+          <article class="day-item">
+            <span class="day-time">02</span>
+            <div>
+              <h3>Вводный инструктаж</h3>
+              <p>
+                Информация о правилах, безопасности и порядке работы
+                для конкретного места практики.
+              </p>
+            </div>
+          </article>
+
+          <article class="day-item">
+            <span class="day-time">03</span>
+            <div>
+              <h3>Знакомство с задачами</h3>
+              <p>
+                Обсуждение задач практиканта, обучения и того,
+                к кому обращаться с вопросами.
+              </p>
+            </div>
+          </article>
+
+          <article class="day-item">
+            <span class="day-time">04</span>
+            <div>
+              <h3>Первый шаг в команде</h3>
+              <p>
+                Начало работы с подходящими уровню подготовки задачами
+                под согласованным сопровождением.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="portfolio-card">
+          <div>
+            <p class="section-kicker">Портфолио практиканта</p>
+            <h2>Покажи, что тебе интересно</h2>
+            <p>
+              Собери небольшую карточку о себе: направление, навыки и учебные
+              проекты. Портфолио — добровольное дополнение к отклику, а не
+              замена резюме или требованиям вакансии.
+            </p>
+          </div>
+
+          <div class="portfolio-list" aria-label="Что можно включить в портфолио">
+            <div class="portfolio-item">
+              <span class="portfolio-check" aria-hidden="true">✓</span>
+              Учебные проекты и практические работы
+            </div>
+            <div class="portfolio-item">
+              <span class="portfolio-check" aria-hidden="true">✓</span>
+              Инструменты и программы, с которыми ты работал
+            </div>
+            <div class="portfolio-item">
+              <span class="portfolio-check" aria-hidden="true">✓</span>
+              Интересующее направление и желаемый период практики
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Частые вопросы</p>
+          <h2>Что важно узнать заранее</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item">
+            <summary>Нужен ли опыт работы?</summary>
+            <p>
+              Требования зависят от практики. Проверь карточку предложения:
+              там должно быть указано, требуется ли опыт.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Практика оплачивается?</summary>
+            <p>
+              В кейсе предусмотрена оплачиваемая практика. Конкретные условия,
+              размер оплаты и порядок выплат уточняются в описании актуального набора.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Можно ли совмещать практику с учёбой?</summary>
+            <p>
+              Это зависит от графика конкретной позиции. Сверь расписание
+              с учебным графиком и уточни детали у HR до отклика.
+            </p>
+          </details>
+
+          <details class="faq-item">
+            <summary>Что будет после окончания практики?</summary>
+            <p>
+              Возможность продолжить работу зависит от результатов практики,
+              наличия вакансий и условий компании. Это стоит обсудить заранее.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-step">
+      <div class="next-step-inner">
+        <div>
+          <h2>Готов выбрать практику?</h2>
+          <p>Посмотри актуальные направления, требования и условия.</p>
+        </div>
+        <a class="button button-primary" href="/jobs">Перейти к предложениям ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="/">ОЧАКОВО · КАРЬЕРА</a>
+      <nav class="footer-links" aria-label="Навигация в подвале">
+        <a href="/about">О компании</a>
+        <a href="/professions">Профессии</a>
+        <a href="/jobs">Вакансии</a>
+      </nav>
+      <span>© Карьерный проект «Очаково»</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector("#main-nav");
+    const navShell = document.querySelector(".nav-shell");
+
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Закрыть меню" : "Открыть меню"
+      );
+    });
+
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a") && window.innerWidth <= 1100) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth <= 1100 &&
+        !navShell.contains(event.target) &&
+        mainNav.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>
