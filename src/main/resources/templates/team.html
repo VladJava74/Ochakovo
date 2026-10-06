@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f5eb">
+  <title>Истории сотрудников — карьера в Очаково</title>
+  <meta
+    name="description"
+    content="Узнайте о работе, практике и развитии в Очаково из историй сотрудников."
+  >
+
+  <style>
+    :root {
+      --green-dark: #123c31;
+      --green: #1b5944;
+      --green-light: #dce9c8;
+      --cream: #f7f5eb;
+      --gold: #e6b84d;
+      --text: #17382e;
+      --muted: #718078;
+      --white: #fff;
+      --line: rgba(18, 60, 49, 0.12);
+      --shadow: 0 18px 50px rgba(18, 60, 49, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 235, 0.95);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topline {
+      min-height: 36px;
+      padding: 7px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream);
+      background: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .topline-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .topline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(230, 184, 77, 0.16);
+    }
+
+    .topline-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .nav-shell {
+      position: relative;
+      width: min(1440px, 100%);
+      min-height: 82px;
+      margin: 0 auto;
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px 16px 16px 5px;
+      background: var(--green);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark svg {
+      width: 29px;
+      height: 29px;
+      transform: rotate(3deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 1.7vw, 25px);
+    }
+
+    .nav-link,
+    .more-menu summary {
+      padding: 10px 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .more-menu summary:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--green);
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .more-menu summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .more-menu[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      right: -18px;
+      min-width: 230px;
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropdown a {
+      padding: 12px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dropdown a:hover,
+    .dropdown a[aria-current="page"] {
+      color: var(--green-dark);
+      background: var(--green-light);
+    }
+
+    .nav-cta,
+    .button {
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta,
+    .button-primary {
+      color: var(--green-dark);
+      background: var(--gold);
+      box-shadow: 0 5px 14px rgba(230, 184, 77, 0.22);
+    }
+
+    .nav-cta:hover,
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      color: var(--green-dark);
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .breadcrumbs {
+      width: min(1200px, 90%);
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      width: min(1200px, 90%);
+      margin: 0 auto;
+      padding: 58px 0 54px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 44px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .eyebrow-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-light);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      max-width: 720px;
+      margin-bottom: 18px;
+      color: var(--green-dark);
+      font-size: clamp(43px, 6vw, 72px);
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+
+    .hero-description {
+      max-width: 630px;
+      margin-bottom: 24px;
+      color: #53685e;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-art {
+      min-height: 300px;
+      padding: 27px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      color: var(--cream);
+      background:
+        radial-gradient(circle at 85% 16%, rgba(230, 184, 77, 0.25), transparent 28%),
+        var(--green);
+      border-radius: 27px 27px 27px 7px;
+      box-shadow: var(--shadow);
+    }
+
+    .hero-art-label {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .quote-mark {
+      margin: 22px 0 3px;
+      color: var(--gold);
+      font-family: Georgia, serif;
+      font-size: 76px;
+      line-height: 0.8;
+    }
+
+    .hero-art h2 {
+      max-width: 380px;
+      margin-bottom: 10px;
+      color: var(--white);
+      font-size: 27px;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+    }
+
+    .hero-art p {
+      max-width: 390px;
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .section {
+      padding: 70px 5vw;
+    }
+
+    .section-alt {
+      background: #eeefe4;
+    }
+
+    .section-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 700px;
+      margin-bottom: 30px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--green-dark);
+      font-size: clamp(31px, 4.2vw, 48px);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+    }
+
+    .section-heading > p:last-child {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .story-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .story-card {
+      min-height: 380px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 21px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .story-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow);
+    }
+
+    .story-top {
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .avatar {
+      width: 51px;
+      height: 51px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 17px 17px 17px 5px;
+      color: var(--green-dark);
+      background: var(--green-light);
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .story-card:nth-child(2) .avatar {
+      background: #f8e7b8;
+    }
+
+    .story-card:nth-child(3) .avatar {
+      background: #e8e0f2;
+    }
+
+    .story-role {
+      margin-bottom: 4px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story-name {
+      margin-bottom: 0;
+      color: var(--green-dark);
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .story-card h3 {
+      margin-bottom: 10px;
+      color: var(--green-dark);
+      font-size: 20px;
+      letter-spacing: -0.035em;
+      line-height: 1.15;
+    }
+
+    .story-summary {
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    blockquote {
+      margin: 0 0 20px;
+      padding: 14px 15px;
+      color: #53685e;
+      background: #edf2e5;
+      border-left: 3px solid var(--gold);
+      border-radius: 0 12px 12px 0;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .story-link {
+      margin-top: auto;
+      padding-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--green);
+      border-top: 1px solid var(--line);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .story-link:hover {
+      color: var(--green-dark);
+    }
+
+    .editor-note {
+      margin: 18px 0 0;
+      padding: 15px 17px;
+      color: #53685e;
+      background: #f8e7b8;
+      border-radius: 14px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .questions-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .question-card {
+      padding: 18px 19px;
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 16px;
+    }
+
+    .question-number {
+      width: 29px;
+      height: 29px;
+      flex: 0 0 auto;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      color: var(--green-dark);
+      background: var(--gold);
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .question-card p {
+      margin: 3px 0 0;
+      color: #53685e;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.55;
+    }
+
+    .next-step {
+      padding: 0 5vw 75px;
+    }
+
+    .next-step-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 29px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 22px;
+      background: #e9eddd;
+      border: 1px solid rgba(18, 60, 49, 0.07);
+      border-radius: 22px;
+    }
+
+    .next-step h2 {
+      margin-bottom: 7px;
+      color: var(--green-dark);
+      font-size: clamp(22px, 3vw, 30px);
+      letter-spacing: -0.045em;
+    }
+
+    .next-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      padding: 27px 5vw;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5vw;
+        right: 5vw;
+        padding: 15px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .nav-link,
+      .more-menu summary {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 10px;
+      }
+
+      .more-menu {
+        width: 100%;
+      }
+
+      .more-menu summary {
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        position: static;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 4px 8px 8px 17px;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .nav-cta {
+        margin-top: 7px;
+      }
+
+      .story-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .story-card:last-child {
+        grid-column: 1 / -1;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 28px;
+      }
+
+      .next-step-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 560px) {
+      .topline {
+        padding-inline: 5vw;
+        font-size: 10px;
+      }
+
+      .topline-note {
+        display: none;
+      }
+
+      .nav-shell {
+        min-height: 72px;
+        padding-block: 10px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-caption {
+        font-size: 9px;
+      }
+
+      .hero {
+        padding-top: 42px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 12vw, 60px);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .story-grid,
+      .questions-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .story-card:last-child {
+        grid-column: auto;
+      }
+
+      .section {
+        padding-block: 58px;
+      }
+
+      .next-step {
+        padding-bottom: 58px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="topline">
+      <div class="topline-label">
+        <span class="topline-dot" aria-hidden="true"></span>
+        <span>КАРЬЕРА НА ПРОИЗВОДСТВЕ</span>
+      </div>
+      <span class="topline-note">Узнай, что стоит за знакомым брендом</span>
+    </div>
+
+    <div class="nav-shell">
+      <a class="brand" href="/" aria-label="Очаково — главная">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path
+              d="M23.7 6.2C15.4 6.5 8.1 9.7 8.1 17.1c0 4.1 2.8 6.7 6.4 6.7 7 0 9.5-8.6 9.2-17.6Z"
+              fill="#E6B84D"
+            />
+            <path
+              d="M8.2 25.9c3.3-5.2 7.1-8.4 12.5-11.2"
+              stroke="#F7F5EB"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="7" cy="8" r="1.5" fill="#F7F5EB"/>
+            <circle cx="25.5" cy="25" r="1.2" fill="#F7F5EB"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">ОЧАКОВО</span>
+          <span class="brand-caption">карьера и практика</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Открыть меню"
+        aria-controls="main-nav"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Главная навигация">
+        <a class="nav-link" href="/">Главная</a>
+        <a class="nav-link" href="/about">О компании</a>
+        <a class="nav-link" href="/professions">Профессии</a>
+        <a class="nav-link" href="/students">Студентам</a>
+
+        <details class="more-menu">
+          <summary>
+            Ещё
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path
+                d="m2 4 4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </summary>
+          <div class="dropdown">
+            <a href="/route">Маршрут по предприятию</a>
+            <a href="/team" aria-current="page">Истории сотрудников</a>
+            <a href="/conditions">Условия работы</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="/try">Попробуй себя</a>
+        <a class="nav-link" href="/jobs">Вакансии</a>
+        <a class="nav-cta" href="/jobs">Найти практику ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="/">Главная</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">Истории сотрудников</span>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          <span class="eyebrow-icon" aria-hidden="true">✦</span>
+          Люди рассказывают сами
+        </p>
+
+        <h1>Услышь тех, кто работает в Очаково</h1>
+
+        <p class="hero-description">
+          Как проходит первый день? Чем занимается специалист?
+          Чему можно научиться на практике? Здесь собраны истории сотрудников,
+          которые помогают увидеть работу не через обещания, а через личный опыт.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#stories">Читать истории ↓</a>
+          <a class="button button-secondary" href="/professions">Посмотреть профессии ↗</a>
+        </div>
+      </div>
+
+      <aside class="hero-art">
+        <span class="hero-art-label">Один вопрос — живой ответ</span>
+        <div>
+          <div class="quote-mark" aria-hidden="true">“</div>
+          <h2>Что бы ты хотел знать до своего первого рабочего дня?</h2>
+          <p>
+            Добавьте сюда короткий ответ сотрудника, записанный и согласованный
+            для публикации.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section section-alt" id="stories">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Истории команды</p>
+          <h2>Разные люди — разные маршруты</h2>
+          <p>
+            Ниже — шаблоны карточек для интервью с молодым специалистом,
+            наставником и руководителем. Заполните их реальными историями
+            сотрудников компании.
+          </p>
+        </div>
+
+        <div class="story-grid">
+          <article class="story-card">
+            <div class="story-top">
+              <div class="avatar" aria-hidden="true">М</div>
+              <div>
+                <p class="story-role">Молодой специалист</p>
+                <p class="story-name">[Имя сотрудника]</p>
+              </div>
+            </div>
+
+            <h3>Первый опыт на производстве</h3>
+            <p class="story-summary">
+              Расскажите, как человек пришёл в компанию, чем занимается сейчас
+              и что оказалось неожиданным в первые недели.
+            </p>
+
+            <blockquote>
+              «[Добавьте короткую согласованную цитату сотрудника о первом дне
+              или начале работы.]»
+            </blockquote>
+
+            <a class="story-link" href="/professions">
+              Посмотреть направления <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="story-card">
+            <div class="story-top">
+              <div class="avatar" aria-hidden="true">Н</div>
+              <div>
+                <p class="story-role">Наставник</p>
+                <p class="story-name">[Имя сотрудника]</p>
+              </div>
+            </div>
+
+            <h3>Как поддерживают новичков</h3>
+            <p class="story-summary">
+              Покажите, как устроено знакомство с задачами, кто помогает
+              практиканту и куда обратиться с вопросами.
+            </p>
+
+            <blockquote>
+              «[Добавьте согласованный ответ наставника о поддержке и обучении
+              новичков.]»
+            </blockquote>
+
+            <a class="story-link" href="/students">
+              Узнать о практике <span aria-hidden="true">→</span>
+            </a>
+          </article>
+
+          <article class="story-card">
+            <div class="story-top">
+              <div class="avatar" aria-hidden="true">Р</div>
+              <div>
+                <p class="story-role">Руководитель направления</p>
+                <p class="story-name">[Имя сотрудника]</p>
+              </div>
+            </div>
+
+            <h3>Какие задачи решает команда</h3>
+            <p class="story-summary">
+              Объясните простым языком, чем занимается направление,
+              какие навыки полезны и какие задачи поручают новичкам.
+            </p>
+
+            <blockquote>
+              «[Добавьте согласованную цитату о работе команды и возможностях
+              для начинающих.]»
+            </blockquote>
+
+            <a class="story-link" href="/jobs">
+              Найти практику <span aria-hidden="true">→</span>
+            </a>
+          </article>
+        </div>
+
+        <p class="editor-note">
+          Перед публикацией замените шаблонные поля реальными фактами.
+          Получите согласие сотрудников на публикацию имён, фотографий,
+          видео и цитат; не указывайте личные данные без разрешения.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Вопросы для интервью</p>
+          <h2>О чём спросить сотрудника</h2>
+          <p>
+            Эти вопросы помогут подготовить короткие, живые интервью
+            для сайта или видеоисторий.
+          </p>
+        </div>
+
+        <div class="questions-grid">
+          <article class="question-card">
+            <span class="question-number">01</span>
+            <p>Как ты узнал о своей профессии и почему выбрал это направление?</p>
+          </article>
+
+          <article class="question-card">
+            <span class="question-number">02</span>
+            <p>Какая задача чаще всего встречается в твоей работе?</p>
+          </article>
+
+          <article class="question-card">
+            <span class="question-number">03</span>
+            <p>Что помогло освоиться в первые недели?</p>
+          </article>
+
+          <article class="question-card">
+            <span class="question-number">04</span>
+            <p>Какие навыки ты посоветовал бы развивать студенту?</p>
+          </article>
+
+          <article class="question-card">
+            <span class="question-number">05</span>
+            <p>Что в твоей работе оказалось не таким, как ты ожидал?</p>
+          </article>
+
+          <article class="question-card">
+            <span class="question-number">06</span>
+            <p>Что бы ты хотел знать до первого рабочего дня?</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="next-step">
+      <div class="next-step-inner">
+        <div>
+          <h2>Хочешь представить себя в этой команде?</h2>
+          <p>Изучи профессии и проверь, какие практики доступны сейчас.</p>
+        </div>
+        <a class="button button-primary" href="/jobs">Посмотреть предложения ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="/">ОЧАКОВО · КАРЬЕРА</a>
+      <nav class="footer-links" aria-label="Навигация в подвале">
+        <a href="/about">О компании</a>
+        <a href="/students">Студентам</a>
+        <a href="/jobs">Вакансии</a>
+      </nav>
+      <span>© Карьерный проект «Очаково»</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector("#main-nav");
+    const navShell = document.querySelector(".nav-shell");
+
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Закрыть меню" : "Открыть меню"
+      );
+    });
+
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a") && window.innerWidth <= 1100) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth <= 1100 &&
+        !navShell.contains(event.target) &&
+        mainNav.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>
