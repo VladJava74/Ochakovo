@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f5eb">
+  <title>О компании — карьера в Очаково</title>
+  <meta
+    name="description"
+    content="Познакомьтесь с компанией, узнайте о производстве и историях людей, которые здесь работают."
+  >
+
+  <style>
+    :root {
+      --green-dark: #123c31;
+      --green: #1b5944;
+      --green-light: #dce9c8;
+      --cream: #f7f5eb;
+      --gold: #e6b84d;
+      --text: #17382e;
+      --muted: #718078;
+      --white: #fff;
+      --line: rgba(18, 60, 49, 0.12);
+      --shadow: 0 18px 50px rgba(18, 60, 49, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 235, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topline {
+      min-height: 36px;
+      padding: 7px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream);
+      background: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .topline-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .topline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(230, 184, 77, 0.16);
+    }
+
+    .topline-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .nav-shell {
+      position: relative;
+      width: min(1440px, 100%);
+      min-height: 82px;
+      margin: 0 auto;
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px 16px 16px 5px;
+      background: var(--green);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark svg {
+      width: 29px;
+      height: 29px;
+      transform: rotate(3deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 1.7vw, 25px);
+    }
+
+    .nav-link,
+    .more-menu summary {
+      padding: 10px 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .nav-link:hover,
+    .more-menu summary:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--green);
+    }
+
+    .nav-link[aria-current="page"] {
+      box-shadow: inset 0 -2px var(--gold);
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .more-menu summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .more-menu[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      right: -18px;
+      min-width: 230px;
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropdown a {
+      padding: 12px 13px;
+      border-radius: 10px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .dropdown a:hover {
+      background: var(--green-light);
+    }
+
+    .nav-cta,
+    .button {
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta,
+    .button-primary {
+      color: var(--green-dark);
+      background: var(--gold);
+      box-shadow: 0 5px 14px rgba(230, 184, 77, 0.22);
+    }
+
+    .nav-cta:hover,
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-secondary {
+      color: var(--green-dark);
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Хлебные крошки и вступление */
+    .breadcrumbs {
+      width: min(1200px, 90%);
+      margin: 24px auto 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--green);
+    }
+
+    .hero {
+      width: min(1200px, 90%);
+      min-height: 370px;
+      margin: 0 auto;
+      padding: 65px 0 70px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 50px;
+    }
+
+    .eyebrow,
+    .section-kicker {
+      margin: 0 0 14px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .eyebrow-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-light);
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      max-width: 680px;
+      margin-bottom: 18px;
+      color: var(--green-dark);
+      font-size: clamp(44px, 6vw, 76px);
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+
+    .hero-description {
+      max-width: 580px;
+      margin-bottom: 24px;
+      color: #53685e;
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-art {
+      position: relative;
+      min-height: 280px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 50%, rgba(220, 233, 200, 0.75), transparent 58%);
+    }
+
+    .hero-art-circle {
+      position: absolute;
+      width: 250px;
+      height: 250px;
+      border: 1px solid rgba(27, 89, 68, 0.18);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 24px rgba(27, 89, 68, 0.035),
+        0 0 0 50px rgba(27, 89, 68, 0.025);
+    }
+
+    .hero-art-card {
+      position: relative;
+      z-index: 1;
+      width: min(310px, 80%);
+      padding: 28px;
+      color: var(--cream);
+      background: var(--green);
+      border-radius: 26px 26px 26px 7px;
+      box-shadow: var(--shadow);
+      transform: rotate(3deg);
+    }
+
+    .hero-art-card small {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .hero-art-card strong {
+      margin: 42px 0 12px;
+      display: block;
+      color: var(--white);
+      font-size: 29px;
+      letter-spacing: -0.045em;
+      line-height: 1.05;
+    }
+
+    .hero-art-card p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .art-bubble {
+      position: absolute;
+      z-index: 2;
+      width: 17px;
+      height: 17px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+    }
+
+    .art-bubble.one {
+      top: 48px;
+      right: 55px;
+    }
+
+    .art-bubble.two {
+      bottom: 52px;
+      left: 45px;
+      width: 11px;
+      height: 11px;
+    }
+
+    .art-bubble.three {
+      right: 37px;
+      bottom: 75px;
+      width: 10px;
+      height: 10px;
+    }
+
+    /* Общие секции */
+    .section {
+      padding: 75px 5vw;
+    }
+
+    .section-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 690px;
+      margin-bottom: 32px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--green-dark);
+      font-size: clamp(32px, 4.5vw, 50px);
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+    }
+
+    .section-heading > p:last-child {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* История */
+    .history-section {
+      background: #eeefe4;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .timeline-card {
+      position: relative;
+      min-height: 220px;
+      padding: 24px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 20px;
+    }
+
+    .timeline-number {
+      width: 38px;
+      height: 38px;
+      margin-bottom: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 13px;
+      color: var(--green-dark);
+      background: var(--green-light);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .timeline-card:nth-child(2) .timeline-number {
+      background: #f8e7b8;
+    }
+
+    .timeline-card:nth-child(3) .timeline-number {
+      background: #e8e0f2;
+    }
+
+    .timeline-card h3 {
+      margin-bottom: 9px;
+      color: var(--green-dark);
+      font-size: 20px;
+      letter-spacing: -0.035em;
+    }
+
+    .timeline-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .editor-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Мифы */
+    .myth-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .myth-card {
+      padding: 23px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 20px;
+    }
+
+    .myth-label,
+    .fact-label {
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .myth-card h3 {
+      margin-bottom: 19px;
+      color: var(--green-dark);
+      font-size: 18px;
+      line-height: 1.3;
+    }
+
+    .fact-box {
+      padding: 15px;
+      background: #edf2e5;
+      border-radius: 13px;
+    }
+
+    .fact-label {
+      margin-bottom: 7px;
+      color: var(--green);
+    }
+
+    .fact-box p {
+      margin-bottom: 0;
+      color: #53685e;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    /* Люди */
+    .people-section {
+      color: var(--cream);
+      background: var(--green-dark);
+    }
+
+    .people-section .section-kicker {
+      color: var(--gold);
+    }
+
+    .people-section .section-heading h2 {
+      color: var(--white);
+    }
+
+    .people-section .section-heading > p:last-child {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .person-card {
+      min-height: 245px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 20px;
+    }
+
+    .person-avatar {
+      width: 52px;
+      height: 52px;
+      margin-bottom: 20px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px 17px 17px 5px;
+      color: var(--green-dark);
+      background: var(--gold);
+      font-size: 20px;
+      font-weight: 900;
+    }
+
+    .person-role {
+      margin-bottom: 8px;
+      color: var(--gold);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .person-card h3 {
+      margin-bottom: 9px;
+      color: var(--white);
+      font-size: 19px;
+    }
+
+    .person-card p {
+      margin-bottom: 0;
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .people-note {
+      margin: 18px 0 0;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Нижний переход */
+    .next-step {
+      padding: 62px 5vw;
+    }
+
+    .next-step-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      background: #e9eddd;
+      border: 1px solid rgba(18, 60, 49, 0.07);
+      border-radius: 22px;
+    }
+
+    .next-step h2 {
+      margin-bottom: 8px;
+      color: var(--green-dark);
+      font-size: clamp(23px, 3vw, 32px);
+      letter-spacing: -0.045em;
+    }
+
+    .next-step p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .site-footer {
+      padding: 27px 5vw;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5vw;
+        right: 5vw;
+        padding: 15px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .nav-link,
+      .more-menu summary {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 10px;
+      }
+
+      .more-menu {
+        width: 100%;
+      }
+
+      .more-menu summary {
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        position: static;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 4px 8px 8px 17px;
+        border: 0;
+        box-shadow: none;
+      }
+
+      .nav-cta {
+        margin-top: 7px;
+      }
+
+      .hero {
+        gap: 25px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 48px;
+      }
+
+      .hero-art {
+        min-height: 260px;
+      }
+
+      .timeline,
+      .myth-grid,
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .timeline-card,
+      .myth-card,
+      .person-card {
+        min-height: auto;
+      }
+
+      .next-step-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topline {
+        padding-inline: 5vw;
+        font-size: 10px;
+      }
+
+      .topline-note {
+        display: none;
+      }
+
+      .nav-shell {
+        min-height: 72px;
+        padding-block: 10px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-caption {
+        font-size: 9px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 13vw, 64px);
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .section {
+        padding-block: 58px;
+      }
+
+      .next-step {
+        padding-block: 48px;
+      }
+
+      .next-step-inner {
+        padding: 23px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="topline">
+      <div class="topline-label">
+        <span class="topline-dot" aria-hidden="true"></span>
+        <span>КАРЬЕРА НА ПРОИЗВОДСТВЕ</span>
+      </div>
+      <span class="topline-note">Узнай, что стоит за знакомым брендом</span>
+    </div>
+
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Очаково — главная">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path
+              d="M23.7 6.2C15.4 6.5 8.1 9.7 8.1 17.1c0 4.1 2.8 6.7 6.4 6.7 7 0 9.5-8.6 9.2-17.6Z"
+              fill="#E6B84D"
+            />
+            <path
+              d="M8.2 25.9c3.3-5.2 7.1-8.4 12.5-11.2"
+              stroke="#F7F5EB"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="7" cy="8" r="1.5" fill="#F7F5EB"/>
+            <circle cx="25.5" cy="25" r="1.2" fill="#F7F5EB"/>
+          </svg>
+        </span>
+        <span class="brand-copy">
+          <span class="brand-name">ОЧАКОВО</span>
+          <span class="brand-caption">карьера и практика</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Открыть меню"
+        aria-controls="main-nav"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Главная навигация">
+        <a class="nav-link" href="about.html" aria-current="page">О компании</a>
+        <a class="nav-link" href="professions.html">Профессии</a>
+        <a class="nav-link" href="students.html">Студентам</a>
+        <a class="nav-link" href="try.html">Попробуй себя</a>
+        <a class="nav-link" href="conditions.html">Условия</a>
+
+        <details class="more-menu">
+          <summary>
+            Ещё
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path
+                d="m2 4 4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </summary>
+          <div class="dropdown">
+            <a href="route.html">Маршрут по предприятию</a>
+            <a href="team.html">Истории сотрудников</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="jobs.html">Вакансии</a>
+        <a class="nav-cta" href="jobs.html">Найти практику ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <nav class="breadcrumbs" aria-label="Хлебные крошки">
+      <a href="index.html">Главная</a>
+      <span aria-hidden="true"> / </span>
+      <span aria-current="page">О компании</span>
+    </nav>
+
+    <section class="hero">
+      <div>
+        <p class="eyebrow">
+          <span class="eyebrow-icon" aria-hidden="true">✦</span>
+          Больше, чем знакомый бренд
+        </p>
+        <h1>Узнай Очаково изнутри</h1>
+        <p class="hero-description">
+          За каждым продуктом стоят люди, процессы и разные профессии.
+          Познакомься с компанией, узнай её историю и посмотри,
+          как устроена работа на современном производстве.
+        </p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="route.html">
+            Пройти маршрут по предприятию ↗
+          </a>
+          <a class="button button-secondary" href="team.html">
+            Познакомиться с командой
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-art-circle"></div>
+        <div class="hero-art-card">
+          <small>Люди · процессы · возможности</small>
+          <strong>Узнай, что за этим стоит</strong>
+          <p>Исследуй компанию и найди направление, которое тебе интересно.</p>
+        </div>
+        <span class="art-bubble one"></span>
+        <span class="art-bubble two"></span>
+        <span class="art-bubble three"></span>
+      </div>
+    </section>
+
+    <section class="section history-section">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Путь компании</p>
+          <h2>История Очаково</h2>
+          <p>
+            Познакомься с ключевыми этапами развития компании —
+            от её истоков до сегодняшнего дня.
+          </p>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-card">
+            <span class="timeline-number">01</span>
+            <h3>Истоки</h3>
+            <p>
+              Добавьте подтверждённые сведения об основании компании,
+              начальных этапах и важных событиях.
+            </p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-number">02</span>
+            <h3>Развитие</h3>
+            <p>
+              Расскажите о значимых изменениях, новых направлениях
+              и этапах развития — с проверенными датами.
+            </p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="timeline-number">03</span>
+            <h3>Сегодня</h3>
+            <p>
+              Укажите актуальные направления деятельности, технологии
+              и возможности для студентов и выпускников.
+            </p>
+          </article>
+        </div>
+
+        <p class="editor-note">
+          Перед публикацией замените описания на факты и даты из официальных
+          материалов компании.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Без стереотипов</p>
+          <h2>Миф или правда?</h2>
+          <p>
+            Разбираемся, какие представления о производстве стоит проверить,
+            и где найти точную информацию о конкретной работе.
+          </p>
+        </div>
+
+        <div class="myth-grid">
+          <article class="myth-card">
+            <span class="myth-label">Миф</span>
+            <h3>«На производстве есть только физический труд»</h3>
+            <div class="fact-box">
+              <span class="fact-label">Что важно знать</span>
+              <p>
+                На предприятиях бывают разные направления и задачи.
+                Смотрите список профессий и реальные обязанности в каждой вакансии.
+              </p>
+            </div>
+          </article>
+
+          <article class="myth-card">
+            <span class="myth-label">Миф</span>
+            <h3>«Без опыта нельзя начать»</h3>
+            <div class="fact-box">
+              <span class="fact-label">Что важно знать</span>
+              <p>
+                Требования зависят от позиции. На странице каждой практики
+                укажите, нужен ли опыт и предусмотрено ли обучение.
+              </p>
+            </div>
+          </article>
+
+          <article class="myth-card">
+            <span class="myth-label">Миф</span>
+            <h3>«Все профессии на производстве одинаковые»</h3>
+            <div class="fact-box">
+              <span class="fact-label">Что важно знать</span>
+              <p>
+                Задачи отличаются в зависимости от направления.
+                Изучи карточки профессий, чтобы сравнить реальные обязанности.
+              </p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section people-section">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Люди, которые знают изнутри</p>
+          <h2>Истории сотрудников</h2>
+          <p>
+            Лучше всего о работе рассказывают те, кто выполняет её каждый день.
+            Здесь будут интервью с сотрудниками, наставниками и молодыми специалистами.
+          </p>
+        </div>
+
+        <div class="people-grid">
+          <article class="person-card">
+            <div class="person-avatar" aria-hidden="true">И</div>
+            <p class="person-role">Техническое направление</p>
+            <h3>Инженер производства</h3>
+            <p>
+              Добавьте имя сотрудника, его реальную задачу и короткий ответ
+              на вопрос: «Что в работе оказалось самым интересным?»
+            </p>
+          </article>
+
+          <article class="person-card">
+            <div class="person-avatar" aria-hidden="true">К</div>
+            <p class="person-role">Контроль качества</p>
+            <h3>Специалист по качеству</h3>
+            <p>
+              Добавьте согласованное интервью о задачах специалиста,
+              внимательности к деталям и взаимодействии с командой.
+            </p>
+          </article>
+
+          <article class="person-card">
+            <div class="person-avatar" aria-hidden="true">Н</div>
+            <p class="person-role">Обучение и поддержка</p>
+            <h3>Наставник практикантов</h3>
+            <p>
+              Расскажите, как проходит знакомство новичка с командой
+              и какие задачи ему поручают на практике.
+            </p>
+          </article>
+        </div>
+
+        <p class="people-note">
+          Имена, фотографии и цитаты добавляйте только с согласия сотрудников.
+        </p>
+      </div>
+    </section>
+
+    <section class="next-step">
+      <div class="next-step-inner">
+        <div>
+          <h2>Хочешь узнать, какие профессии есть в Очаково?</h2>
+          <p>Изучи направления и выбери то, которое тебе интересно.</p>
+        </div>
+        <a class="button button-primary" href="professions.html">
+          Смотреть профессии ↗
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="index.html">ОЧАКОВО · КАРЬЕРА</a>
+      <nav class="footer-links" aria-label="Навигация в подвале">
+        <a href="about.html">О компании</a>
+        <a href="students.html">Студентам</a>
+        <a href="jobs.html">Вакансии</a>
+      </nav>
+      <span>© Карьерный проект «Очаково»</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector("#main-nav");
+    const navShell = document.querySelector(".nav-shell");
+
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Закрыть меню" : "Открыть меню"
+      );
+    });
+
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a") && window.innerWidth <= 1100) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth <= 1100 &&
+        !navShell.contains(event.target) &&
+        mainNav.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

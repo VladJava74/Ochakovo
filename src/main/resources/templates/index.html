@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f7f5eb">
+
+  <title>Открой свой потенциал — карьера в Очаково</title>
+  <meta
+    name="description"
+    content="Узнай о профессиях, практике и работе на производстве. Выбери своё направление в Очаково."
+  >
+
+  <style>
+    :root {
+      --green-dark: #123c31;
+      --green: #1b5944;
+      --green-light: #dce9c8;
+      --cream: #f7f5eb;
+      --gold: #e6b84d;
+      --text: #17382e;
+      --muted: #718078;
+      --white: #fff;
+      --line: rgba(18, 60, 49, 0.12);
+      --shadow: 0 18px 50px rgba(18, 60, 49, 0.12);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background: var(--cream);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 235, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .topline {
+      min-height: 36px;
+      padding: 7px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream);
+      background: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .topline-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .topline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(230, 184, 77, 0.16);
+    }
+
+    .topline-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .nav-shell {
+      position: relative;
+      width: min(1440px, 100%);
+      min-height: 82px;
+      margin: 0 auto;
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px 16px 16px 5px;
+      color: var(--cream);
+      background: var(--green);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark svg {
+      width: 29px;
+      height: 29px;
+      transform: rotate(3deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 1.7vw, 25px);
+    }
+
+    .nav-link,
+    .more-menu summary {
+      padding: 10px 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .more-menu summary:hover,
+    .nav-link[aria-current="page"] {
+      color: var(--green);
+    }
+
+    .nav-link[aria-current="page"] {
+      box-shadow: inset 0 -2px var(--gold);
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .more-menu summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .more-menu[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      right: -18px;
+      min-width: 230px;
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropdown a {
+      padding: 12px 13px;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s ease;
+    }
+
+    .dropdown a:hover {
+      background: var(--green-light);
+    }
+
+    .nav-cta,
+    .button-primary,
+    .button-secondary {
+      min-height: 46px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta,
+    .button-primary {
+      color: var(--green-dark);
+      background: var(--gold);
+      box-shadow: 0 5px 14px rgba(230, 184, 77, 0.22);
+    }
+
+    .nav-cta:hover,
+    .button-primary:hover,
+    .button-secondary:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 8px 18px rgba(230, 184, 77, 0.32);
+    }
+
+    .button-secondary {
+      color: var(--green-dark);
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .button-secondary:hover {
+      box-shadow: 0 8px 18px rgba(18, 60, 49, 0.08);
+    }
+
+    .button-arrow {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    /* Главный экран */
+    .hero {
+      position: relative;
+      overflow: hidden;
+      padding: 72px 5vw 82px;
+      background:
+        radial-gradient(circle at 82% 18%, rgba(220, 233, 200, 0.75), transparent 23%),
+        var(--cream);
+    }
+
+    .hero-inner {
+      width: min(1280px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(380px, 0.92fr);
+      align-items: center;
+      gap: clamp(40px, 7vw, 100px);
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.11em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow-mark {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--green-dark);
+      background: var(--green-light);
+      font-size: 13px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    .hero h1 {
+      max-width: 700px;
+      margin-bottom: 20px;
+      color: var(--green-dark);
+      font-size: clamp(46px, 7vw, 88px);
+      font-weight: 900;
+      letter-spacing: -0.065em;
+      line-height: 0.98;
+    }
+
+    .hero h1 span {
+      position: relative;
+      z-index: 0;
+      white-space: nowrap;
+    }
+
+    .hero h1 span::after {
+      position: absolute;
+      z-index: -1;
+      right: -5px;
+      bottom: 4px;
+      left: -3px;
+      height: 20px;
+      content: "";
+      background: var(--gold);
+      border-radius: 50% 35% 45% 30%;
+      transform: rotate(-1.5deg);
+      opacity: 0.8;
+    }
+
+    .hero-description {
+      max-width: 540px;
+      margin-bottom: 27px;
+      color: #53685e;
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-note {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    /* Декоративная карточка */
+    .hero-visual {
+      position: relative;
+      min-height: 440px;
+      display: grid;
+      place-items: center;
+    }
+
+    .visual-orbit {
+      position: absolute;
+      width: min(420px, 88vw);
+      aspect-ratio: 1;
+      border: 1px solid rgba(27, 89, 68, 0.16);
+      border-radius: 50%;
+    }
+
+    .visual-orbit::before,
+    .visual-orbit::after {
+      position: absolute;
+      content: "";
+      border: 1px solid rgba(27, 89, 68, 0.11);
+      border-radius: 50%;
+    }
+
+    .visual-orbit::before {
+      inset: 28px;
+    }
+
+    .visual-orbit::after {
+      inset: 58px;
+    }
+
+    .visual-card {
+      position: relative;
+      z-index: 1;
+      width: min(350px, 80vw);
+      min-height: 365px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+      color: var(--cream);
+      background: var(--green);
+      border-radius: 28px 28px 28px 8px;
+      box-shadow: 0 28px 65px rgba(18, 60, 49, 0.22);
+      transform: rotate(3deg);
+    }
+
+    .visual-card::before {
+      position: absolute;
+      top: -75px;
+      right: -55px;
+      width: 210px;
+      height: 210px;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 22px rgba(255, 255, 255, 0.035),
+        0 0 0 47px rgba(255, 255, 255, 0.025);
+    }
+
+    .visual-card-top,
+    .visual-card-bottom {
+      position: relative;
+      z-index: 1;
+    }
+
+    .visual-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: rgba(255, 255, 255, 0.76);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .visual-label-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--gold);
+    }
+
+    .production-art {
+      position: relative;
+      height: 190px;
+      margin: 8px 0 4px;
+      display: grid;
+      place-items: center;
+    }
+
+    .art-circle {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 50%;
+      background: rgba(220, 233, 200, 0.13);
+    }
+
+    .art-leaf {
+      position: relative;
+      width: 115px;
+      height: 155px;
+      border-radius: 100% 0 100% 0;
+      background: var(--gold);
+      transform: rotate(38deg);
+    }
+
+    .art-leaf::before {
+      position: absolute;
+      top: 20px;
+      left: 54px;
+      width: 2px;
+      height: 120px;
+      content: "";
+      background: rgba(18, 60, 49, 0.55);
+      transform: rotate(8deg);
+    }
+
+    .art-bubble {
+      position: absolute;
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      border-radius: 50%;
+    }
+
+    .art-bubble.one {
+      top: 15px;
+      right: 42px;
+      width: 18px;
+      height: 18px;
+    }
+
+    .art-bubble.two {
+      right: 14px;
+      bottom: 40px;
+      width: 10px;
+      height: 10px;
+    }
+
+    .art-bubble.three {
+      bottom: 17px;
+      left: 48px;
+      width: 13px;
+      height: 13px;
+    }
+
+    .visual-card h2 {
+      max-width: 260px;
+      margin: 0 0 8px;
+      color: var(--white);
+      font-size: 25px;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+    }
+
+    .visual-card-bottom p {
+      max-width: 260px;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .floating-tag {
+      position: absolute;
+      z-index: 2;
+      padding: 12px 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--green-dark);
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 14px;
+      box-shadow: var(--shadow);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .floating-tag-top {
+      top: 45px;
+      right: 0;
+      transform: rotate(4deg);
+    }
+
+    .floating-tag-bottom {
+      bottom: 40px;
+      left: -3px;
+      transform: rotate(-4deg);
+    }
+
+    .tag-icon {
+      width: 25px;
+      height: 25px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--green-light);
+    }
+
+    /* Основные ссылки */
+    .section {
+      padding: 82px 5vw;
+    }
+
+    .section-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+    }
+
+    .section-heading {
+      max-width: 650px;
+      margin-bottom: 34px;
+    }
+
+    .section-kicker {
+      margin-bottom: 12px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      color: var(--green-dark);
+      font-size: clamp(32px, 4.5vw, 52px);
+      letter-spacing: -0.055em;
+      line-height: 1.04;
+    }
+
+    .section-heading p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .path-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .path-card {
+      position: relative;
+      min-height: 245px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.08);
+      border-radius: 22px;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .path-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .path-icon {
+      width: 43px;
+      height: 43px;
+      margin-bottom: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--green-light);
+      font-size: 20px;
+    }
+
+    .path-card:nth-child(2) .path-icon {
+      background: #f8e7b8;
+    }
+
+    .path-card:nth-child(3) .path-icon {
+      background: #e8e0f2;
+    }
+
+    .path-card h3 {
+      margin-bottom: 9px;
+      color: var(--green-dark);
+      font-size: 20px;
+      letter-spacing: -0.035em;
+    }
+
+    .path-card p {
+      max-width: 310px;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .card-link {
+      margin-top: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--green);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .card-link span {
+      transition: transform 0.2s ease;
+    }
+
+    .path-card:hover .card-link span {
+      transform: translateX(4px);
+    }
+
+    /* Блок о знакомом бренде */
+    .inside-section {
+      padding: 0 5vw 82px;
+    }
+
+    .inside-card {
+      position: relative;
+      width: min(1200px, 100%);
+      min-height: 300px;
+      margin: 0 auto;
+      padding: clamp(28px, 5vw, 58px);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      gap: 35px;
+      overflow: hidden;
+      color: var(--cream);
+      background: var(--green-dark);
+      border-radius: 28px;
+    }
+
+    .inside-card::after {
+      position: absolute;
+      top: -145px;
+      right: -85px;
+      width: 400px;
+      height: 400px;
+      content: "";
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 50%;
+      box-shadow:
+        0 0 0 32px rgba(255, 255, 255, 0.035),
+        0 0 0 70px rgba(255, 255, 255, 0.025);
+    }
+
+    .inside-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .inside-content .section-kicker {
+      color: var(--gold);
+    }
+
+    .inside-content h2 {
+      max-width: 570px;
+      margin-bottom: 14px;
+      color: var(--white);
+      font-size: clamp(30px, 4vw, 46px);
+      letter-spacing: -0.055em;
+      line-height: 1.05;
+    }
+
+    .inside-content p {
+      max-width: 510px;
+      margin-bottom: 23px;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    .inside-links {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      gap: 10px;
+    }
+
+    .inside-link {
+      min-height: 58px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      color: var(--white);
+      background: rgba(255, 255, 255, 0.09);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      font-size: 13px;
+      font-weight: 700;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .inside-link:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(3px);
+    }
+
+    .inside-link span:last-child {
+      color: var(--gold);
+      font-size: 18px;
+    }
+
+    /* Финальный призыв */
+    .final-cta {
+      padding: 0 5vw 82px;
+    }
+
+    .final-cta-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      padding: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 25px;
+      background: #e9eddd;
+      border: 1px solid rgba(18, 60, 49, 0.07);
+      border-radius: 22px;
+    }
+
+    .final-cta h2 {
+      margin-bottom: 7px;
+      color: var(--green-dark);
+      font-size: clamp(23px, 3vw, 32px);
+      letter-spacing: -0.045em;
+    }
+
+    .final-cta p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Подвал */
+    .site-footer {
+      padding: 27px 5vw;
+      color: rgba(255, 255, 255, 0.72);
+      background: var(--green-dark);
+      font-size: 12px;
+    }
+
+    .footer-inner {
+      width: min(1200px, 100%);
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      color: var(--white);
+      font-weight: 800;
+      letter-spacing: 0.06em;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5vw;
+        right: 5vw;
+        padding: 15px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--white);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .nav-link,
+      .more-menu summary {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 10px;
+      }
+
+      .nav-link:hover,
+      .more-menu summary:hover {
+        background: var(--cream);
+      }
+
+      .more-menu {
+        width: 100%;
+      }
+
+      .more-menu summary {
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        position: static;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 4px 8px 8px 17px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .nav-cta {
+        margin-top: 7px;
+      }
+
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr) minmax(320px, 0.8fr);
+        gap: 35px;
+      }
+
+      .hero-visual {
+        min-height: 390px;
+      }
+
+      .inside-card {
+        grid-template-columns: 1fr 0.9fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero {
+        padding-top: 55px;
+        padding-bottom: 55px;
+      }
+
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy {
+        max-width: 650px;
+      }
+
+      .hero-visual {
+        min-height: 390px;
+      }
+
+      .path-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .path-card {
+        min-height: 215px;
+      }
+
+      .inside-card {
+        grid-template-columns: 1fr;
+      }
+
+      .inside-links {
+        max-width: 520px;
+      }
+
+      .final-cta-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topline {
+        padding-inline: 5vw;
+        font-size: 10px;
+      }
+
+      .topline-note {
+        display: none;
+      }
+
+      .nav-shell {
+        min-height: 72px;
+        padding-block: 10px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-caption {
+        font-size: 9px;
+      }
+
+      .hero h1 {
+        font-size: clamp(43px, 13vw, 64px);
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .hero-actions a {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 360px;
+      }
+
+      .visual-card {
+        width: min(310px, 78vw);
+        min-height: 330px;
+      }
+
+      .visual-card h2 {
+        font-size: 22px;
+      }
+
+      .floating-tag {
+        padding: 10px 12px;
+        font-size: 11px;
+      }
+
+      .floating-tag-top {
+        right: -2px;
+      }
+
+      .floating-tag-bottom {
+        left: -2px;
+      }
+
+      .section {
+        padding-block: 60px;
+      }
+
+      .inside-section,
+      .final-cta {
+        padding-bottom: 60px;
+      }
+
+      .final-cta-inner {
+        padding: 24px;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="topline">
+      <div class="topline-label">
+        <span class="topline-dot" aria-hidden="true"></span>
+        <span>КАРЬЕРА НА ПРОИЗВОДСТВЕ</span>
+      </div>
+      <span class="topline-note">Узнай, что стоит за знакомым брендом</span>
+    </div>
+
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Очаково — главная">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <path
+              d="M23.7 6.2C15.4 6.5 8.1 9.7 8.1 17.1c0 4.1 2.8 6.7 6.4 6.7 7 0 9.5-8.6 9.2-17.6Z"
+              fill="#E6B84D"
+            />
+            <path
+              d="M8.2 25.9c3.3-5.2 7.1-8.4 12.5-11.2"
+              stroke="#F7F5EB"
+              stroke-width="2"
+              stroke-linecap="round"
+            />
+            <circle cx="7" cy="8" r="1.5" fill="#F7F5EB"/>
+            <circle cx="25.5" cy="25" r="1.2" fill="#F7F5EB"/>
+          </svg>
+        </span>
+
+        <span class="brand-copy">
+          <span class="brand-name">ОЧАКОВО</span>
+          <span class="brand-caption">карьера и практика</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Открыть меню"
+        aria-controls="main-nav"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path
+            d="M4 7h16M4 12h16M4 17h16"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Главная навигация">
+        <a class="nav-link" href="about.html">О компании</a>
+        <a class="nav-link" href="professions.html">Профессии</a>
+        <a class="nav-link" href="students.html">Студентам</a>
+        <a class="nav-link" href="try.html">Попробуй себя</a>
+        <a class="nav-link" href="conditions.html">Условия</a>
+
+        <details class="more-menu">
+          <summary>
+            Ещё
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path
+                d="m2 4 4 4 4-4"
+                stroke="currentColor"
+                stroke-width="1.7"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </summary>
+
+          <div class="dropdown">
+            <a href="route.html">Маршрут по предприятию</a>
+            <a href="team.html">Истории сотрудников</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="jobs.html">Вакансии</a>
+
+        <a class="nav-cta" href="jobs.html">
+          Найти практику
+          <span class="button-arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="eyebrow-mark" aria-hidden="true">✦</span>
+            Твоя точка старта
+          </p>
+
+          <h1>Открой свой <span>потенциал</span></h1>
+
+          <p class="hero-description">
+            За знакомым брендом — люди, технологии и десятки разных профессий.
+            Узнай, как устроено производство, попробуй себя в интерактиве
+            и найди направление для практики.
+          </p>
+
+          <div class="hero-actions">
+            <a class="button-primary" href="professions.html">
+              Выбрать профессию
+              <span class="button-arrow" aria-hidden="true">↗</span>
+            </a>
+
+            <a class="button-secondary" href="try.html">
+              Попробовать смену
+              <span class="button-arrow" aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <p class="hero-note">
+            Информация о наборе, условиях и доступных местах размещается
+            на страницах актуальных практик и вакансий.
+          </p>
+        </div>
+
+        <div class="hero-visual" aria-label="Иллюстрация о возможностях на производстве">
+          <div class="visual-orbit" aria-hidden="true"></div>
+
+          <div class="visual-card">
+            <div class="visual-card-top">
+              <span class="visual-label">
+                <span class="visual-label-dot"></span>
+                Изнутри производства
+              </span>
+            </div>
+
+            <div class="production-art" aria-hidden="true">
+              <div class="art-circle"></div>
+              <div class="art-leaf"></div>
+              <span class="art-bubble one"></span>
+              <span class="art-bubble two"></span>
+              <span class="art-bubble three"></span>
+            </div>
+
+            <div class="visual-card-bottom">
+              <h2>Не просто бренд. Твоя будущая команда.</h2>
+              <p>Посмотри на производство глазами тех, кто создаёт его каждый день.</p>
+            </div>
+          </div>
+
+          <div class="floating-tag floating-tag-top">
+            <span class="tag-icon" aria-hidden="true">✦</span>
+            Найди своё направление
+          </div>
+
+          <div class="floating-tag floating-tag-bottom">
+            <span class="tag-icon" aria-hidden="true">↗</span>
+            Начни с интереса
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="choose-title">
+      <div class="section-inner">
+        <div class="section-heading">
+          <p class="section-kicker">Твой следующий шаг</p>
+          <h2 id="choose-title">С чего начнём?</h2>
+          <p>
+            Необязательно сразу знать название профессии. Выбери, что тебе
+            интереснее, и изучи подходящий маршрут.
+          </p>
+        </div>
+
+        <div class="path-grid">
+          <a class="path-card" href="professions.html">
+            <span class="path-icon" aria-hidden="true">⌕</span>
+            <h3>Найти свою профессию</h3>
+            <p>
+              Посмотри направления, рабочие задачи и навыки,
+              которые могут пригодиться.
+            </p>
+            <span class="card-link">
+              Смотреть профессии <span aria-hidden="true">→</span>
+            </span>
+          </a>
+
+          <a class="path-card" href="try.html">
+            <span class="path-icon" aria-hidden="true">◉</span>
+            <h3>Попробовать смену</h3>
+            <p>
+              Реши короткую игровую задачу и узнай,
+              какие специалисты работают с похожими процессами.
+            </p>
+            <span class="card-link">
+              Запустить интерактив <span aria-hidden="true">→</span>
+            </span>
+          </a>
+
+          <a class="path-card" href="students.html">
+            <span class="path-icon" aria-hidden="true">✳</span>
+            <h3>Узнать о практике</h3>
+            <p>
+              Разберись, как проходит знакомство с компанией,
+              обучение и первый день.
+            </p>
+            <span class="card-link">
+              Студентам <span aria-hidden="true">→</span>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="inside-section" aria-labelledby="inside-title">
+      <div class="inside-card">
+        <div class="inside-content">
+          <p class="section-kicker">Загляни за кулисы</p>
+          <h2 id="inside-title">Знакомый бренд — новые возможности</h2>
+          <p>
+            Исследуй историю компании, познакомься с производством и узнай,
+            чем занимаются люди разных профессий.
+          </p>
+          <a class="button-primary" href="about.html">
+            Познакомиться с Очаково
+            <span class="button-arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+
+        <div class="inside-links" aria-label="Дополнительные разделы">
+          <a class="inside-link" href="route.html">
+            <span>Пройти маршрут по предприятию</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="inside-link" href="team.html">
+            <span>Послушать истории сотрудников</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          <a class="inside-link" href="conditions.html">
+            <span>Посмотреть условия работы</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section class="final-cta" aria-labelledby="final-title">
+      <div class="final-cta-inner">
+        <div>
+          <h2 id="final-title">Готов посмотреть актуальные предложения?</h2>
+          <p>Выбери практику или вакансию и изучи условия конкретного предложения.</p>
+        </div>
+
+        <a class="button-primary" href="jobs.html">
+          Перейти к предложениям
+          <span class="button-arrow" aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <a class="footer-brand" href="index.html">ОЧАКОВО · КАРЬЕРА</a>
+
+      <nav class="footer-links" aria-label="Навигация в подвале">
+        <a href="about.html">О компании</a>
+        <a href="students.html">Студентам</a>
+        <a href="jobs.html">Вакансии</a>
+      </nav>
+
+      <span>© Карьерный проект «Очаково»</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector("#main-nav");
+    const navShell = document.querySelector(".nav-shell");
+
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Закрыть меню" : "Открыть меню"
+      );
+    });
+
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a") && window.innerWidth <= 1100) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth <= 1100 &&
+        !navShell.contains(event.target) &&
+        mainNav.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>

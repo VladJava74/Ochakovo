@@ -8,7 +8,6 @@ public class OchakovoApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OchakovoApplication.class, args);
-		System.out.println(111);
 	}
 
 }

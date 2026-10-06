@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Карьера в Очаково</title>
+
+  <style>
+    :root {
+      --green-dark: #123c31;
+      --green: #1b5944;
+      --green-light: #dce9c8;
+      --cream: #f7f5eb;
+      --gold: #e6b84d;
+      --text: #17382e;
+      --muted: #718078;
+      --white: #fff;
+      --shadow: 0 14px 38px rgba(18, 60, 49, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background: var(--cream);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(247, 245, 235, 0.94);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(18, 60, 49, 0.1);
+    }
+
+    /* Верхняя информационная полоска */
+    .topline {
+      min-height: 36px;
+      padding: 7px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      color: var(--cream);
+      background: var(--green-dark);
+      font-size: 12px;
+      letter-spacing: 0.04em;
+    }
+
+    .topline-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 700;
+    }
+
+    .topline-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(230, 184, 77, 0.16);
+    }
+
+    .topline-note {
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    /* Основная панель */
+    .nav-shell {
+      position: relative;
+      width: min(1440px, 100%);
+      min-height: 82px;
+      margin: 0 auto;
+      padding: 12px 5vw;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+    }
+
+    .brand {
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .brand-mark {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 16px 16px 16px 5px;
+      color: var(--cream);
+      background: var(--green);
+      transform: rotate(-3deg);
+    }
+
+    .brand-mark svg {
+      width: 29px;
+      height: 29px;
+      transform: rotate(3deg);
+    }
+
+    .brand-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .brand-name {
+      color: var(--green-dark);
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .brand-caption {
+      color: var(--muted);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .main-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: clamp(12px, 1.7vw, 25px);
+    }
+
+    .nav-link,
+    .more-menu summary {
+      padding: 10px 0;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover,
+    .more-menu summary:hover {
+      color: var(--green);
+    }
+
+    .more-menu {
+      position: relative;
+    }
+
+    .more-menu summary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      list-style: none;
+    }
+
+    .more-menu summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .chevron {
+      width: 12px;
+      height: 12px;
+      transition: transform 0.2s ease;
+    }
+
+    .more-menu[open] .chevron {
+      transform: rotate(180deg);
+    }
+
+    .dropdown {
+      position: absolute;
+      top: calc(100% + 13px);
+      right: -18px;
+      min-width: 230px;
+      padding: 9px;
+      display: grid;
+      gap: 3px;
+      background: var(--white);
+      border: 1px solid rgba(18, 60, 49, 0.09);
+      border-radius: 16px;
+      box-shadow: var(--shadow);
+    }
+
+    .dropdown a {
+      padding: 12px 13px;
+      border-radius: 10px;
+      color: var(--text);
+      font-size: 13px;
+      font-weight: 600;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .dropdown a:hover {
+      color: var(--green-dark);
+      background: var(--green-light);
+    }
+
+    .nav-cta {
+      min-height: 44px;
+      padding: 0 17px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 9px;
+      border-radius: 999px;
+      color: var(--green-dark);
+      background: var(--gold);
+      font-size: 13px;
+      font-weight: 800;
+      white-space: nowrap;
+      box-shadow: 0 5px 14px rgba(230, 184, 77, 0.22);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(230, 184, 77, 0.32);
+    }
+
+    .cta-arrow {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .menu-toggle {
+      display: none;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(18, 60, 49, 0.13);
+      border-radius: 14px;
+      color: var(--green-dark);
+      background: var(--white);
+      cursor: pointer;
+    }
+
+    .menu-toggle svg {
+      width: 22px;
+      height: 22px;
+    }
+
+    .nav-link:focus-visible,
+    .more-menu summary:focus-visible,
+    .dropdown a:focus-visible,
+    .nav-cta:focus-visible,
+    .brand:focus-visible,
+    .menu-toggle:focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 1100px) {
+      .nav-shell {
+        min-height: 74px;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        flex: 0 0 auto;
+      }
+
+      .main-nav {
+        position: absolute;
+        top: calc(100% + 8px);
+        left: 5vw;
+        right: 5vw;
+        padding: 15px;
+        display: none;
+        align-items: stretch;
+        flex-direction: column;
+        gap: 2px;
+        background: var(--white);
+        border: 1px solid rgba(18, 60, 49, 0.09);
+        border-radius: 20px;
+        box-shadow: var(--shadow);
+      }
+
+      .main-nav.is-open {
+        display: flex;
+      }
+
+      .nav-link,
+      .more-menu summary {
+        width: 100%;
+        padding: 13px 12px;
+        border-radius: 10px;
+      }
+
+      .nav-link:hover,
+      .more-menu summary:hover {
+        background: var(--cream);
+      }
+
+      .more-menu {
+        width: 100%;
+      }
+
+      .more-menu summary {
+        justify-content: space-between;
+      }
+
+      .dropdown {
+        position: static;
+        min-width: 0;
+        margin: 0 0 6px;
+        padding: 4px 8px 8px 17px;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
+      }
+
+      .dropdown a {
+        padding: 11px 12px;
+      }
+
+      .nav-cta {
+        margin-top: 7px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .topline {
+        padding-inline: 5vw;
+        font-size: 10px;
+      }
+
+      .topline-note {
+        display: none;
+      }
+
+      .nav-shell {
+        padding-block: 10px;
+      }
+
+      .brand-mark {
+        width: 42px;
+        height: 42px;
+      }
+
+      .brand-name {
+        font-size: 16px;
+      }
+
+      .brand-caption {
+        font-size: 9px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="topline">
+      <div class="topline-label">
+        <span class="topline-dot" aria-hidden="true"></span>
+        <span>КАРЬЕРА НА ПРОИЗВОДСТВЕ</span>
+      </div>
+      <span class="topline-note">Узнай, что стоит за знакомым брендом</span>
+    </div>
+
+    <div class="nav-shell">
+      <a class="brand" href="index.html" aria-label="Очаково — на главную">
+        <span class="brand-mark" aria-hidden="true">
+          <!-- Абстрактный знак: лист и пузырьки -->
+          <svg viewBox="0 0 32 32" fill="none">
+            <path d="M23.7 6.2C15.4 6.5 8.1 9.7 8.1 17.1c0 4.1 2.8 6.7 6.4 6.7 7 0 9.5-8.6 9.2-17.6Z"
+                  fill="#E6B84D"/>
+            <path d="M8.2 25.9c3.3-5.2 7.1-8.4 12.5-11.2"
+                  stroke="#F7F5EB" stroke-width="2" stroke-linecap="round"/>
+            <circle cx="7" cy="8" r="1.5" fill="#F7F5EB"/>
+            <circle cx="25.5" cy="25" r="1.2" fill="#F7F5EB"/>
+          </svg>
+        </span>
+
+        <span class="brand-copy">
+          <span class="brand-name">ОЧАКОВО</span>
+          <span class="brand-caption">карьера и практика</span>
+        </span>
+      </a>
+
+      <button
+        class="menu-toggle"
+        type="button"
+        aria-label="Открыть меню"
+        aria-controls="main-nav"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M4 7h16M4 12h16M4 17h16"
+                stroke="currentColor" stroke-width="2"
+                stroke-linecap="round"/>
+        </svg>
+      </button>
+
+      <nav class="main-nav" id="main-nav" aria-label="Главная навигация">
+        <a class="nav-link" href="about.html">О компании</a>
+        <a class="nav-link" href="professions.html">Профессии</a>
+        <a class="nav-link" href="students.html">Студентам</a>
+        <a class="nav-link" href="try.html">Попробуй себя</a>
+        <a class="nav-link" href="conditions.html">Условия</a>
+
+        <details class="more-menu">
+          <summary>
+            Ещё
+            <svg class="chevron" viewBox="0 0 12 12" fill="none" aria-hidden="true">
+              <path d="m2 4 4 4 4-4" stroke="currentColor"
+                    stroke-width="1.7" stroke-linecap="round"
+                    stroke-linejoin="round"/>
+            </svg>
+          </summary>
+
+          <div class="dropdown">
+            <a href="route.html">Маршрут по предприятию</a>
+            <a href="team.html">Истории сотрудников</a>
+          </div>
+        </details>
+
+        <a class="nav-link" href="jobs.html">Вакансии</a>
+
+        <a class="nav-cta" href="jobs.html">
+          Найти практику
+          <span class="cta-arrow" aria-hidden="true">↗</span>
+        </a>
+      </nav>
+    </div>
+  </header>
+
+  <script>
+    const menuButton = document.querySelector(".menu-toggle");
+    const mainNav = document.querySelector("#main-nav");
+    const navShell = document.querySelector(".nav-shell");
+
+    function closeMenu() {
+      mainNav.classList.remove("is-open");
+      menuButton.setAttribute("aria-expanded", "false");
+      menuButton.setAttribute("aria-label", "Открыть меню");
+    }
+
+    menuButton.addEventListener("click", () => {
+      const isOpen = mainNav.classList.toggle("is-open");
+
+      menuButton.setAttribute("aria-expanded", String(isOpen));
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen ? "Закрыть меню" : "Открыть меню"
+      );
+    });
+
+    mainNav.addEventListener("click", (event) => {
+      if (event.target.closest("a") && window.innerWidth <= 1100) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("click", (event) => {
+      if (
+        window.innerWidth <= 1100 &&
+        !navShell.contains(event.target) &&
+        mainNav.classList.contains("is-open")
+      ) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && mainNav.classList.contains("is-open")) {
+        closeMenu();
+        menuButton.focus();
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 1100) {
+        closeMenu();
+      }
+    });
+  </script>
+</body>
+</html>
