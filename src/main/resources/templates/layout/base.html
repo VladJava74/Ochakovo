@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org" th:fragment="layout(pageTitle, pageContent, pageScripts)">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:replace="${pageTitle}">Работа в Очаково</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<!-- Общая шапка -->
+<div th:replace="~{fragments/header :: site-header}"></div>
+
+<!-- Уникальный контент страницы -->
+<main th:insert="${pageContent}"></main>
+
+<!-- Общий подвал -->
+<div th:replace="~{fragments/footer :: site-footer}"></div>
+
+<!-- Подключение специфичных скриптов страницы -->
+<th:block th:replace="${pageScripts}"></th:block>
+
+</body>
+</html>

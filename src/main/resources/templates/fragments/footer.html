@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<footer th:fragment="site-footer">
+    <p>ОЧАКОВО &copy; <span th:text="${#calendars.format(#calendars.createNow(), 'yyyy')}">2026</span>. Все права защищены.</p>
+</footer>
+</body>
+</html>
