@@ -11,19 +11,14 @@ public class MController {
         return "about";
     }
 
-    @GetMapping({"/career", "/career.html"})
-    public String careerPage() {
-        return "career";
-    }
-
     @GetMapping({"/conditions", "/conditions.html"})
     public String conditions() {
         return "conditions";
     }
 
-    @GetMapping({"/", "/index.html"})
+    @GetMapping({"/", "/home.html"})
     public String home() {
-        return "index";
+        return "home";
     }
 
     @GetMapping({"/jobs", "/jobs.html"})
@@ -36,25 +31,6 @@ public class MController {
         return "professions";
     }
 
-    @GetMapping({"/qr", "/qr.html"})
-    public String qrLanding() {
-        return "qr";
-    }
-
-    @GetMapping({"/route", "/route.html"})
-    public String route() {
-        return "route";
-    }
-
-    @GetMapping({"/students", "/students.html"})
-    public String students() {
-        return "students";
-    }
-
-    @GetMapping({"/team", "/team.html"})
-    public String team() {
-        return "team";
-    }
 
     @GetMapping({"/try", "/try.html"})
     public String tryPage() {
