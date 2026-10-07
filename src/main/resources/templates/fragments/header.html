@@ -1,11 +1,33 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <body>
-<header th:fragment="site-header">
-    <div class="logo">ОЧАКОВО <span>•</span> Карьера</div>
-    <nav>
-        <button class="tab-btn active" onclick="switchTab('office')">Офис</button>
-        <button class="tab-btn" onclick="switchTab('factory')">Производство</button>
+<header class="site-header" th:fragment="site-header">
+    <div class="site-header__top">
+        <a class="site-header__logo" th:href="@{/}">
+            ОЧАКОВО <span>•</span> Карьера
+        </a>
+
+        <div class="site-header__tabs" aria-label="Направление">
+            <button class="tab-btn active" type="button" onclick="switchTab('office')">
+                Офис
+            </button>
+            <button class="tab-btn" type="button" onclick="switchTab('factory')">
+                Производство
+            </button>
+        </div>
+    </div>
+
+    <nav class="site-header__nav" aria-label="Основная навигация">
+        <a th:href="@{/about}">О компании</a>
+        <a th:href="@{/professions}">Профессии</a>
+        <a th:href="@{/students}">Студентам</a>
+        <a th:href="@{/try-yourself}">Попробуй себя</a>
+        <a th:href="@{/conditions}">Условия</a>
+        <a th:href="@{/more}">Ещё</a>
+        <a class="site-header__vacancies" th:href="@{/vacancies}">Вакансии</a>
+        <a class="site-header__practice" th:href="@{/internship}">
+            Найти практику <span aria-hidden="true">↗</span>
+        </a>
     </nav>
 </header>
 </body>

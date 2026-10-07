@@ -218,3 +218,106 @@ footer {
   .photo-item { height: 250px; }
   nav { display: none; }
 }
+
+.site-header {
+    padding: 18px 32px 0;
+    border-bottom: 1px solid #e9e9e9;
+    color: #202020;
+    font-family: Arial, sans-serif;
+}
+
+.site-header__top,
+.site-header__nav {
+    display: flex;
+    align-items: center;
+}
+
+.site-header__top {
+    justify-content: space-between;
+    padding-bottom: 16px;
+}
+
+.site-header__logo {
+    color: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+}
+
+.site-header__logo span {
+    color: #e84b35;
+}
+
+.site-header__tabs {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: #f4f4f4;
+}
+
+.tab-btn {
+    padding: 7px 13px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: #666;
+    font: inherit;
+    font-size: 13px;
+    cursor: pointer;
+}
+
+.tab-btn.active {
+    background: #fff;
+    color: #202020;
+    box-shadow: 0 1px 4px rgb(0 0 0 / 10%);
+}
+
+.site-header__nav {
+    gap: 24px;
+    min-height: 48px;
+    overflow-x: auto;
+    white-space: nowrap;
+}
+
+.site-header__nav a {
+    color: #555;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.site-header__nav a:hover {
+    color: #111;
+}
+
+.site-header__nav .site-header__vacancies {
+    margin-left: auto;
+    color: #202020;
+}
+
+.site-header__nav .site-header__practice {
+    padding: 9px 15px;
+    border-radius: 999px;
+    background: #202020;
+    color: #fff;
+}
+
+.site-header__practice span {
+    margin-left: 4px;
+}
+
+@media (max-width: 700px) {
+    .site-header {
+        padding: 14px 16px 0;
+    }
+
+    .site-header__nav {
+        gap: 20px;
+    }
+
+    .site-header__nav .site-header__vacancies {
+        margin-left: 0;
+    }
+}
