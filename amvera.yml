@@ -1,0 +1,18 @@
+---
+meta:
+  environment: jvm
+  toolchain:
+    name: maven
+    version: 25
+build:
+  image: null
+  args: clean package
+  artifacts:
+    target/*.jar: /
+run:
+  persistenceMount: /data
+  image: null
+  jarName: Ochakovo-0.0.1-SNAPSHOT.jar
+  containerPort: 80
+  singleton: false
+  zeroDowntime: true
