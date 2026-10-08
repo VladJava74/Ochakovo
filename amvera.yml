@@ -1,0 +1,9 @@
+meta:
+  environment: java
+  toolchain:
+    name: maven
+    version: 25 # Укажите вашу версию Java (8, 11, 17, 21)
+build:
+  command: mvn clean package -DskipTests
+run:
+  command: java -jar target/*.jar --server.port=$PORT
