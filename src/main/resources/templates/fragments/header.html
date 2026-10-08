@@ -18,16 +18,12 @@
     </div>
 
     <nav class="site-header__nav" aria-label="Основная навигация">
+        <a th:href="@{/}">Главная</a>
         <a th:href="@{/about}">О компании</a>
+        <a th:href="@{/jobs}">Работа</a>
+        <a th:href="@{/try}">Попробуй себя</a>
         <a th:href="@{/professions}">Профессии</a>
-        <a th:href="@{/students}">Студентам</a>
-        <a th:href="@{/try-yourself}">Попробуй себя</a>
         <a th:href="@{/conditions}">Условия</a>
-        <a th:href="@{/more}">Ещё</a>
-        <a class="site-header__vacancies" th:href="@{/vacancies}">Вакансии</a>
-        <a class="site-header__practice" th:href="@{/internship}">
-            Найти практику <span aria-hidden="true">↗</span>
-        </a>
     </nav>
 </header>
 </body>

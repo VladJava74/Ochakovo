@@ -1,143 +1,79 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org"
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
       th:replace="~{layout/base :: layout(~{::title}, ~{::#main-content}, ~{::#page-scripts})}">
 <head>
-  <title>О компании Очаково</title>
+  <meta charset="UTF-8">
+  <title>О компании — Карьера в Очаково</title>
 </head>
 <body>
 
 <div id="main-content">
   <section class="hero">
-    <h1>Твой вклад в любимый бренд</h1>
-    <p>Открой для себя мир производства: от цеха до офиса. Стабильность, развитие и забота о каждом сотруднике.</p>
-    <a href="#" class="btn">Стать частью команды</a>
+    <h1>Об Очаково</h1>
+    <p>Место для вступления о компании.</p>
+    <div class="photo-placeholder">Место для фотографии</div>
   </section>
 
-  <section style="padding: 60px 20px; background: var(--green-light);">
+  <section class="gallery-section" id="myths">
+    <h2 class="section-title">3. Разрушение мифов: правда о компании</h2>
     <div class="conditions-grid">
-      <div class="card">
-        <div class="icon-box">💰</div>
-        <h3>Достойная оплата</h3>
-        <p>Конкурентная зарплата и ежегодная индексация. Прозрачная система премий.</p>
-      </div>
-      <div class="card">
-        <div class="icon-box">🍽️</div>
-        <h3>Питание и комфорт</h3>
-        <p>Компенсация питания, оборудованные комнаты отдыха и душевые для сотрудников смены.</p>
-      </div>
-      <div class="card">
-        <div class="icon-box">🏥</div>
-        <h3>ДМС и страховка</h3>
-        <p>Полис ДМС для сотрудника, страхование от несчастных случаев и поддержка в сложных ситуациях.</p>
-      </div>
-      <div class="card">
-        <div class="icon-box">🎓</div>
-        <h3>Обучение и рост</h3>
-        <p>Корпоративный университет, наставничество и возможность горизонтального перемещения внутри холдинга.</p>
-      </div>
+      <article class="card">
+        <h3>Миф</h3>
+        <p>Место для материала.</p>
+      </article>
+      <article class="card">
+        <h3>Правда</h3>
+        <p>Место для материала.</p>
+      </article>
     </div>
   </section>
 
-  <section class="gallery-section">
-    <h2 class="section-title">Как устроен наш день</h2>
-    <div class="gallery-grid">
-      <div class="photo-item">
-        <img src="https://media.discordapp.net/attachments/1557027987168170015/1557038115569274951/IMG_20261006_193258_357.jpg?backend=b2&ex=6ac6583f&is=6ac506bf&hm=c71c330ff39309a8c5735aca4116114746d20eb7f9a97767692011100d2d2593&=&format=webp"
-             alt="Производственный цех">
-        <div class="overlay">
-          <h4>Производственный цех</h4>
-          <p>Современное оборудование и контроль качества на каждом этапе.</p>
-        </div>
-      </div>
-      <div class="photo-item">
-        <img src="https://media.discordapp.net/attachments/1557027987168170015/1557039443574001725/1652718797897976_bG4oIMUt.png?backend=b2&ex=6ac6597b&is=6ac507fb&hm=c74cc446ff6f71f04fc95fa6afcc9f744f1215755a59adcb2b1785a3034c4e2d&=&format=webp&quality=lossless"
-             alt="Лаборатория">
-        <div class="overlay">
-          <h4>Контроль качества</h4>
-          <p>Наши технологи следят за каждым параметром продукта.</p>
-        </div>
-      </div>
-      <div class="photo-item">
-        <img src="https://media.discordapp.net/attachments/1557027987168170015/1557038114227093564/IMG_20261006_193258_329.jpg?backend=b2&ex=6ac6583e&is=6ac506be&hm=cffc15ea826e4de6da315b52bee0956ec22028d994b6b58539156d9ef0878300&=&format=webp"
-             alt="Склад">
-        <div class="overlay">
-          <h4>Логистика и склад</h4>
-          <p>Четкая работа команды, обеспечивающая поставки по всей стране.</p>
-        </div>
-      </div>
-      <div class="photo-item">
-        <img src="https://mgo-voi.ru/upload/medialibrary/696/jjlff6aan9ilppahssxg6a9fhx673vvl.png"
-             alt="Офис">
-        <div class="overlay">
-          <h4>Административный блок</h4>
-          <p>Комфортные рабочие места и зоны для совещаний.</p>
-        </div>
-      </div>
+  <section class="gallery-section" id="history">
+    <h2 class="section-title">4. История Очаково</h2>
+    <div class="photo-placeholder">
+      Место для фотографии или исторического материала
+    </div>
+    <p>Место для текста.</p>
+  </section>
+
+  <section class="gallery-section" id="why-ochakovo">
+    <h2 class="section-title">5. Почему работать именно в Очаково</h2>
+    <div class="conditions-grid">
+      <article class="card">
+        <h3>Преимущество</h3>
+        <p>Место для информации.</p>
+      </article>
+      <article class="card">
+        <h3>Преимущество</h3>
+        <p>Место для информации.</p>
+      </article>
+      <article class="card">
+        <h3>Преимущество</h3>
+        <p>Место для информации.</p>
+      </article>
     </div>
   </section>
 
-  <section class="tabs-container">
-    <div id="office-content" class="tab-content active">
-      <h2 style="color:var(--green-dark); margin-bottom:20px;">Работа в офисе</h2>
-      <p style="color:var(--muted); max-width:600px;">
-        Административные и управленческие позиции. График 5/2, гибридный формат работы.
-        Акцент на аналитику, планирование и развитие бренда.
-      </p>
-      <br>
-      <ul style="list-style:none; display:flex; gap:20px; flex-wrap:wrap;">
-        <li style="background:white; padding:10px; border-radius:10px; box-shadow:0 5px 8px rgba(0,0,0,0.05);">
-          <h4>Комфортный офис</h4>
-          <p>Эргономичные рабочие места, зоны отдыха и современные переговорные комнаты.</p>
-        </li>
-        <li style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-          <h4>Корпоративная культура</h4>
-          <p>Еженедельные встречи, тимбилдинги и корпоративные мероприятия.</p>
-        </li>
-        <li style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-          <h4>Техническое оснащение</h4>
-          <p>Высокоскоростной интернет, современные компьютеры и оборудование.</p>
-        </li>
-      </ul>
-    </div>
+  <section class="gallery-section" id="stability">
+    <h2 class="section-title">10. Стабильность работы</h2>
+    <div class="photo-placeholder">Место для фотографии</div>
+    <p>Место для информации о стабильности работы.</p>
+  </section>
 
-    <div id="factory-content" class="tab-content">
-      <h2 style="color:var(--green-dark); margin-bottom:20px;">Работа на производстве</h2>
-      <p style="color:var(--muted); max-width:600px;">
-        Производственные позиции. График сменный, 2/2 или 3/3.
-        Акцент на выполнение технологических процессов и контроль качества.
-      </p>
-      <br>
-      <ul style="list-style:none; display:flex; gap:20px; flex-wrap:wrap;">
-        <li style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-          <h4>Современное оборудование</h4>
-          <p>Автоматизированные линии и профессиональные станки.</p>
-        </li>
-        <li style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-          <h4>Безопасность труда</h4>
-          <p>Строгое соблюдение стандартов безопасности и регулярные инструктажи.</p>
-        </li>
-        <li style="background:white; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.05);">
-          <h4>Производственная дисциплина</h4>
-          <p>Четкий график смен и система контроля качества продукции.</p>
-        </li>
-      </ul>
-    </div>
+  <section class="gallery-section" id="team">
+    <h2 class="section-title">12. Весёлый и дружный коллектив</h2>
+    <div class="photo-placeholder">Место для фотографии коллектива</div>
+  </section>
+
+  <section class="gallery-section" id="management">
+    <h2 class="section-title">13. Руководство</h2>
+    <div class="photo-placeholder">Место для фотографии</div>
+    <p>Место для информации.</p>
   </section>
 </div>
 
-<div id="page-scripts">
-  <script>
-    function switchTab(tabName) {
-        const tabContents = document.getElementsByClassName('tab-content');
-
-        for (let i = 0; i < tabContents.length; i++) {
-            tabContents[i].classList.remove('active');
-        }
-
-        document.getElementById(tabName + '-content').classList.add('active');
-    }
-  </script>
-</div>
+<div id="page-scripts"></div>
 
 </body>
 </html>

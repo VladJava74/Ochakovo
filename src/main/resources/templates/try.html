@@ -1,1 +1,75 @@
-<title>Попробовать — Очаково</title>
+<!DOCTYPE html>
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::#main-content}, ~{::#page-scripts})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Попробуй себя — Карьера в Очаково</title>
+</head>
+<body>
+
+<div id="main-content">
+    <section class="hero">
+        <h1>Попробуй себя</h1>
+        <p>Место для вступления.</p>
+    </section>
+
+    <section class="gallery-section" id="route">
+        <h2 class="section-title">9. Маршрут по предприятию</h2>
+        <div class="photo-placeholder media-placeholder">
+            Место для карты или видео маршрута
+        </div>
+        <p>Место для описания маршрута.</p>
+    </section>
+
+    <section class="gallery-section" id="products">
+        <h2 class="section-title">11. QR-коды на продукцию</h2>
+
+        <div class="conditions-grid">
+            <article class="card">
+                <div class="photo-placeholder">
+                    Место для изображения продукта и QR-кода
+                </div>
+                <h3>Продукт</h3>
+            </article>
+
+            <article class="card">
+                <div class="photo-placeholder">
+                    Место для изображения продукта и QR-кода
+                </div>
+                <h3>Продукт</h3>
+            </article>
+        </div>
+    </section>
+
+    <section class="gallery-section" id="first-day">
+        <h2 class="section-title">14. Мой первый день</h2>
+        <div class="photo-placeholder">Место для фотографии</div>
+        <p>Место для истории или рассказа.</p>
+    </section>
+
+    <section class="gallery-section" id="intern-portfolio">
+        <h2 class="section-title">16. Портфолио практиканта</h2>
+
+        <div class="conditions-grid">
+            <article class="card">
+                <div class="photo-placeholder">
+                    Место для работы или фотографии
+                </div>
+                <p>Место для подписи.</p>
+            </article>
+
+            <article class="card">
+                <div class="photo-placeholder">
+                    Место для работы или фотографии
+                </div>
+                <p>Место для подписи.</p>
+            </article>
+        </div>
+    </section>
+</div>
+
+<div id="page-scripts"></div>
+
+</body>
+</html>
