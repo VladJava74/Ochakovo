@@ -1,18 +1,9 @@
----
 meta:
-  environment: jvm
+  environment: java
   toolchain:
     name: maven
-    version: 25
+    version: 25 # Укажите вашу версию Java (8, 11, 17, 21)
 build:
-  image: null
-  args: clean package
-  artifacts:
-    target/*.jar: /
+  command: mvn clean package -DskipTests
 run:
-  persistenceMount: /data
-  image: null
-  jarName: Ochakovo-0.0.1-SNAPSHOT.jar
-  containerPort: 80
-  singleton: false
-  zeroDowntime: true
+  command: java -jar target/*.jar --server.port=$PORT
