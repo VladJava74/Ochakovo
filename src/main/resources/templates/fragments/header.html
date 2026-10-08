@@ -7,9 +7,14 @@
             ОЧАКОВО <span>•</span> Карьера и Практика
         </a>
 
+        <button class="site-header__menu-toggle" id="menuToggle" aria-label="Открыть меню">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 
-    <nav class="site-header__nav" aria-label="Основная навигация">
+    <nav class="site-header__nav" id="mainNav" aria-label="Основная навигация">
         <a th:href="@{/}">Главная</a>
         <a th:href="@{/about}">О компании</a>
         <a th:href="@{/jobs}">Работа</a>
@@ -18,5 +23,21 @@
         <a th:href="@{/conditions}">Условия</a>
     </nav>
 </header>
+
+<script>
+    // Адаптивное меню для мобильных устройств
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                const isExpanded = mainNav.classList.contains('site-header__nav--open');
+                mainNav.classList.toggle('site-header__nav--open');
+                menuToggle.setAttribute('aria-expanded', !isExpanded);
+            });
+        }
+    });
+</script>
 </body>
 </html>
