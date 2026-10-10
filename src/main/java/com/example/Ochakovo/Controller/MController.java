@@ -21,6 +21,7 @@ public class MController {
         return "home";
     }
 
+
     @GetMapping({"/jobs", "/jobs.html"})
     public String jobs() {
         return "jobs";

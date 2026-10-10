@@ -19,27 +19,179 @@
   </section>
 
   <section class="gallery-section" id="contents">
-    <h2 class="section-title">1. Оглавление</h2>
 
-    <ol>
-      <li><a href="#potential">Дайте волю своему потенциалу</a></li>
-      <li><a th:href="@{/about}">Мифы и правда о компании</a></li>
-      <li><a th:href="@{/about}">История Очаково</a></li>
-      <li><a th:href="@{/about}">Почему Очаково</a></li>
-      <li><a th:href="@{/jobs}">Условия и направления работы</a></li>
-      <li><a th:href="@{/jobs}">Производство напитков</a></li>
-      <li><a th:href="@{/conditions}">Практика и обучение</a></li>
-      <li><a th:href="@{/try}">Маршрут по предприятию</a></li>
-      <li><a th:href="@{/about}">История и развитие</a></li>
-      <li><a th:href="@{/try}">Продукция и QR-коды</a></li>
-      <li><a th:href="@{/about}">Команда</a></li>
-      <li><a th:href="@{/about}">Руководство</a></li>
-      <li><a th:href="@{/try}">Первый день</a></li>
-      <li><a th:href="@{/professions}">Профессии</a></li>
-      <li><a th:href="@{/try}">Портфолио практиканта</a></li>
-      <li><a href="#conclusion">Заключение</a></li>
-      <li><a href="#ending">Завершение</a></li>
-    </ol>
+
+    <!-- Вставь этот блок в <body> существующей страницы -->
+    <section id="myth-game">
+      <h2>Миф или правда?</h2>
+      <p>Прочитай утверждение и выбери ответ.</p>
+
+      <div class="myth-status">
+        <span id="myth-progress"></span>
+        <span id="myth-score"></span>
+      </div>
+
+      <p class="myth-statement" id="myth-statement"></p>
+
+      <div class="myth-choices" id="myth-choices">
+        <button class="myth-answer" type="button" data-answer="true">Правда</button>
+        <button class="myth-answer" type="button" data-answer="false">Миф</button>
+      </div>
+
+      <p class="myth-feedback" id="myth-feedback" hidden></p>
+      <button class="myth-next" id="myth-next" type="button" hidden>Следующий вопрос</button>
+    </section>
+
+    <script>
+      (() => {
+          const questions = [
+              {
+                  statement: "Молния может ударить в одно и то же место несколько раз.",
+                  isTrue: true,
+                  explanation: "Это правда: высокие здания могут попадать под удар молнии снова и снова."
+              },
+              {
+                  statement: "Звук распространяется в вакууме.",
+                  isTrue: false,
+                  explanation: "Это миф: звуку нужна среда, например воздух, вода или твёрдое тело."
+              },
+              {
+                  statement: "Венера — самая горячая планета Солнечной системы.",
+                  isTrue: true,
+                  explanation: "Это правда: плотная атмосфера Венеры удерживает тепло."
+              },
+              {
+                  statement: "Летучие мыши полностью слепы.",
+                  isTrue: false,
+                  explanation: "Это миф: летучие мыши видят, а многие из них также используют эхолокацию."
+              },
+              {
+                  statement: "У осьминога три сердца.",
+                  isTrue: true,
+                  explanation: "Это правда: два сердца направляют кровь к жабрам, а третье — к остальному телу."
+              },
+              {
+                  statement: "Человек использует только 10% своего мозга.",
+                  isTrue: false,
+                  explanation: "Это миф: На самом деле только 1%, дотеры - 0,5%"
+              }
+          ];
+
+          const game = document.getElementById("myth-game");
+          const progress = game.querySelector("#myth-progress");
+          const scoreText = game.querySelector("#myth-score");
+          const statement = game.querySelector("#myth-statement");
+          const feedback = game.querySelector("#myth-feedback");
+          const choices = game.querySelector("#myth-choices");
+          const nextButton = game.querySelector("#myth-next");
+          const answerButtons = game.querySelectorAll(".myth-answer");
+
+          let order = [];
+          let current = 0;
+          let score = 0;
+          let answered = false;
+          let finished = false;
+
+          function shuffle(items) {
+              for (let i = items.length - 1; i > 0; i--) {
+                  const j = Math.floor(Math.random() * (i + 1));
+                  [items[i], items[j]] = [items[j], items[i]];
+              }
+              return items;
+          }
+
+          function showQuestion() {
+              const question = order[current];
+
+              progress.textContent = "Вопрос " + (current + 1) + " из " + order.length;
+              scoreText.textContent = "Счёт: " + score;
+              statement.textContent = question.statement;
+
+              feedback.hidden = true;
+              nextButton.hidden = true;
+              choices.hidden = false;
+              answered = false;
+
+              answerButtons.forEach(button => {
+                  button.disabled = false;
+                  button.classList.remove("correct", "incorrect");
+              });
+          }
+
+          function selectAnswer(button) {
+              if (answered) return;
+
+              answered = true;
+
+              const question = order[current];
+              const userAnswer = button.dataset.answer === "true";
+              const isCorrect = userAnswer === question.isTrue;
+
+              if (isCorrect) {
+                  score++;
+                  button.classList.add("correct");
+                  feedback.textContent = "Верно! " + question.explanation;
+              } else {
+                  button.classList.add("incorrect");
+                  feedback.textContent =
+                      "Неверно. Правильный ответ: " +
+                      (question.isTrue ? "правда. " : "миф. ") +
+                      question.explanation;
+
+                  answerButtons.forEach(answerButton => {
+                      if ((answerButton.dataset.answer === "true") === question.isTrue) {
+                          answerButton.classList.add("correct");
+                      }
+                  });
+              }
+
+              answerButtons.forEach(answerButton => {
+                  answerButton.disabled = true;
+              });
+
+              scoreText.textContent = "Счёт: " + score;
+              feedback.hidden = false;
+              nextButton.textContent =
+                  current === order.length - 1 ? "Завершить игру" : "Следующий вопрос";
+              nextButton.hidden = false;
+          }
+
+          function startGame() {
+              order = shuffle(questions.slice());
+              current = 0;
+              score = 0;
+              finished = false;
+              showQuestion();
+          }
+
+          answerButtons.forEach(button => {
+              button.addEventListener("click", () => selectAnswer(button));
+          });
+
+          nextButton.addEventListener("click", () => {
+              if (finished) {
+                  startGame();
+                  return;
+              }
+
+              if (current < order.length - 1) {
+                  current++;
+                  showQuestion();
+              } else {
+                  finished = true;
+                  progress.textContent = "Игра завершена";
+                  statement.textContent = "Ваш результат: " + score + " из " + order.length;
+                  feedback.hidden = true;
+                  choices.hidden = true;
+                  nextButton.textContent = "Сыграть ещё раз";
+              }
+          });
+
+          startGame();
+      })();
+    </script>
+
+
   </section>
 
   <section class="gallery-section" id="potential">
