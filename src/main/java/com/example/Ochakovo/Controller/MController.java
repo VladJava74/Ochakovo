@@ -36,4 +36,9 @@ public class MController {
     public String tryPage() {
         return "try";
     }
+
+    @GetMapping({"/game", "/game.html"})
+    public String game() {
+        return "game";
+    }
 }
