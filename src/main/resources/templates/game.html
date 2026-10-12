@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<html lang="ru"
+      xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/base :: layout(~{::title}, ~{::#main-content}, ~{::#page-scripts})}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,117 +11,119 @@
 </head>
 <body>
 
-<div th:replace="~{fragments/header :: site-header}"></div>
+<div id="main-content">
 
-<main class="games-page">
-    <section class="games-grid" aria-label="Интерактивные концепции">
-        <article class="game-card">
-            <div class="game-card__art art-green art-photo">
+    <main class="games-page">
+        <section class="games-grid" aria-label="Интерактивные концепции">
+            <article class="game-card">
+                <div class="game-card__art art-green art-photo">
+                    <img th:src="@{/images/image3.png}" alt="">
+                    <strong>Исследуй пространство</strong>
+                    <span class="game-card__icon" aria-hidden="true">↗</span>
+                </div>
+                <div class="game-card__content">
+                    <p class="game-card__number">01 / Исследование</p>
+                    <h2>Операция: путь напитка</h2>
+                    <p class="game-card__description">
+                        Маршрут по интерактивной карте завода. Открывай участки по порядку,
+                        собирай знания и проходи контрольные точки.
+                    </p>
+                    <ul class="game-card__tags">
+                        <li>Карта</li>
+                        <li>История</li>
+                        <li>Уровни</li>
+                    </ul>
+                    <a class="game-card__link" th:href="@{/demos/01_operation_route.html}">
+                        Запустить демо <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
 
+            <article class="game-card">
+                <div class="game-card__art art-dark">
+                    <strong>Реагируй быстрее</strong>
+                    <span class="game-card__icon" aria-hidden="true">◉</span>
+                </div>
+                <div class="game-card__content">
+                    <p class="game-card__number">02 / Arcade</p>
+                    <h2>Груз 200</h2>
+                    <p class="game-card__description">
+                        Аркада на время: направляй предметы на правильные участки,
+                        не допускай ошибок и бей собственный рекорд.
+                    </p>
+                    <ul class="game-card__tags">
+                        <li>Таймер</li>
+                        <li>Комбо</li>
+                        <li>Рекорд</li>
+                    </ul>
+                    <a class="game-card__link" th:href="@{/demos/02_line_60.html}">
+                        Запустить демо <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
 
-                <img th:src="@{/images/image3.png}" alt="">
+            <article class="game-card">
+                <div class="game-card__art art-peach">
+                    <strong>Придумай продукт</strong>
+                    <span class="game-card__icon" aria-hidden="true">✳</span>
+                </div>
+                <div class="game-card__content">
+                    <p class="game-card__number">03 / Креативная лаборатория</p>
+                    <h2>Лаборатория идей</h2>
+                    <p class="game-card__description">
+                        Создай концепцию напитка для молодой аудитории, выбери упаковку
+                        и продвижение — и уложись в бюджет.
+                    </p>
+                    <ul class="game-card__tags">
+                        <li>Конструктор</li>
+                        <li>Бюджет</li>
+                        <li>Питч</li>
+                    </ul>
+                    <a class="game-card__link" th:href="@{/demos/03_idea_lab.html}">
+                        Запустить демо <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
 
+            <article class="game-card">
+                <div class="game-card__art art-yellow">
+                    <strong>Реши задачи</strong>
+                    <span class="game-card__icon" aria-hidden="true">✳</span>
+                </div>
+                <div class="game-card__content">
+                    <p class="game-card__number">04 / Карьерный челлендж</p>
+                    <h2>Летний старт</h2>
+                    <p class="game-card__description">
+                        Выполни три задания: упорядочь действия, найди отклонения
+                        в измерениях и собери рейс.
+                    </p>
+                    <ul class="game-card__tags">
+                        <li>Мини-игры</li>
+                        <li>Рабочие задачи</li>
+                        <li>XP</li>
+                    </ul>
+                    <a class="game-card__link" th:href="@{/demos/04_summer_start.html}">
+                        Запустить демо <span aria-hidden="true">↗</span>
+                    </a>
+                </div>
+            </article>
+        </section>
+    </main>
+</div>
 
-                <strong>Исследуй пространство</strong>
-                <span class="game-card__icon" aria-hidden="true">↗</span>
-            </div>
-            <div class="game-card__content">
-                <p class="game-card__number">01 / Исследование</p>
-                <h2>Операция: путь напитка</h2>
-                <p class="game-card__description">
-                    Маршрут по интерактивной карте завода. Открывай участки по порядку,
-                    собирай знания и проходи контрольные точки.
-                </p>
-                <ul class="game-card__tags">
-                    <li>Карта</li><li>История</li><li>Уровни</li>
-                </ul>
-                <a class="game-card__link" th:href="@{/demos/01_operation_route.html}">
-                    Запустить демо <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </article>
+<div id="page-scripts">
+    <script>
+        const menuToggle = document.getElementById("menuToggle");
+        const mainNav = document.getElementById("mainNav");
 
-        <article class="game-card">
-            <div class="game-card__art art-dark">
-                <strong>Реагируй быстрее</strong>
-                <span class="game-card__icon" aria-hidden="true">◉</span>
-            </div>
-            <div class="game-card__content">
-                <p class="game-card__number">02 / Arcade</p>
-                <h2>Груз 200</h2>
-                <p class="game-card__description">
-                    Аркада на время: направляй предметы на правильные участки,
-                    не допускай ошибок и бей собственный рекорд.
-                </p>
-                <ul class="game-card__tags">
-                    <li>Таймер</li><li>Комбо</li><li>Рекорд</li>
-                </ul>
-                <a class="game-card__link" th:href="@{/demos/02_line_60.html}">
-                    Запустить демо <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </article>
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener("click", () => {
+                const isOpen = mainNav.classList.toggle("site-header__nav--open");
+                menuToggle.setAttribute("aria-expanded", isOpen);
+            });
+        }
+    </script>
+</div>
 
-        <article class="game-card">
-            <div class="game-card__art art-peach">
-                <strong>Придумай продукт</strong>
-                <span class="game-card__icon" aria-hidden="true">✳</span>
-            </div>
-            <div class="game-card__content">
-                <p class="game-card__number">03 / Креативная лаборатория</p>
-                <h2>Лаборатория идей</h2>
-                <p class="game-card__description">
-                    Создай концепцию напитка для молодой аудитории, выбери упаковку
-                    и продвижение — и уложись в бюджет.
-                </p>
-                <ul class="game-card__tags">
-                    <li>Конструктор</li>
-                    <li>Бюджет</li>
-                    <li>Питч</li>
-                </ul>
-                <a class="game-card__link" th:href="@{/demos/03_idea_lab.html}">
-                    Запустить демо <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </article>
-
-        <article class="game-card">
-            <div class="game-card__art art-yellow">
-                <strong>Реши задачи</strong>
-                <span class="game-card__icon" aria-hidden="true">✳</span>
-            </div>
-            <div class="game-card__content">
-                <p class="game-card__number">04 / Карьерный челлендж</p>
-                <h2>Летний старт</h2>
-                <p class="game-card__description">
-                    Выполни три задания: упорядочь действия, найди отклонения
-                    в измерениях и собери рейс.
-                </p>
-                <ul class="game-card__tags">
-                    <li>Мини-игры</li>
-                    <li>Рабочие задачи</li>
-                    <li>XP</li>
-                </ul>
-                <a class="game-card__link" th:href="@{/demos/04_summer_start.html}">
-                    Запустить демо <span aria-hidden="true">↗</span>
-                </a>
-            </div>
-        </article>
-
-
-    </section>
-</main>
-
-<script>
-    const menuToggle = document.getElementById("menuToggle");
-    const mainNav = document.getElementById("mainNav");
-
-    if (menuToggle && mainNav) {
-      menuToggle.addEventListener("click", () => {
-        const isOpen = mainNav.classList.toggle("site-header__nav--open");
-        menuToggle.setAttribute("aria-expanded", isOpen);
-      });
-    }
-</script>
 </body>
 </html>
