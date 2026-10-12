@@ -41,4 +41,9 @@ public class MController {
     public String game() {
         return "game";
     }
+
+    @GetMapping("/games/game01")
+    public String game01() {
+        return "games/game01";
+    }
 }
