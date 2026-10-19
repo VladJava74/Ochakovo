@@ -37,13 +37,18 @@ public class MController {
         return "try";
     }
 
-    @GetMapping({"/game", "/game.html"})
-    public String game() {
-        return "game";
-    }
-
-    @GetMapping("/games/game01")
+    @GetMapping({"/games/game01", "/games/game01.html"})
     public String game01() {
         return "games/game01";
+    }
+
+    @GetMapping({"/games/game02", "/games/game02.html"})
+    public String game02() {
+        return "games/game02";
+    }
+
+    @GetMapping({"/games/game03", "/games/game03.html"})
+    public String game03() {
+        return "games/game03";
     }
 }

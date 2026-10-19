@@ -9,101 +9,123 @@
 <body>
 
 <div id="main-content">
+
+    <!-- ГЛАВНЫЙ БЛОК -->
     <section class="hero">
-        <h1>Попробуй себя в «Очаково»
-        </h1>
+        <h1>Примерь роль на заводе</h1>
         <p>
-            Познакомьтесь с тем, как устроена работа на производстве напитков, откройте для себя продукцию “Очаково” и выберите направление, которое понравится именно вам. Это отличная возможность получить реальный опыт и начать карьеру прямо сейчас!
-            Актуальные возможности практики и стажировок уточняйте у отдела подбора персонала.
-
+            Производство напитков — это не только конвейер. Это сложная экосистема,
+            где каждый играет свою роль. Выбери направление, которое тебе ближе,
+            и проверь свои силы в интерактивном симуляторе.
         </p>
+        <a class="btn" href="/games/game01">Начать симулятор →</a>
     </section>
 
+    <!-- ПРОФЕССИИ -->
     <section class="gallery-section" id="route">
-        <h2 class="section-title">Маршрут по предприятию</h2>
-        <div class="photo-placeholder media-placeholder">
-            <img src="https://ochakovo.ru/wp-content/uploads/2024/12/0-2280h1520-excursia-1.jpg"
-                 alt="Экскурсия по производству «Очаково»"
-                 loading="lazy">
-        </div>
-        <p>
-            На экскурсии по московскому производству гости проходят путь от
-            варочного цеха до линии розлива и знакомятся с исторической экспозицией
-            «Изба квасовара». Это маршрут для посетителей, а не описание рабочего
-            дня или программы практики. Узнать о доступных экскурсиях можно на
-            <a href="https://ochakovo.ru/ekskursii/" target="_blank" rel="noopener">
-                официальном сайте «Очаково»
-            </a>.
+        <h2 class="section-title">Три стихии производства</h2>
+        <p style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: var(--muted);">
+            На «Очаково» нужны разные специалисты. Найди ту сферу, в которой ты сможешь прокачаться до профи.
         </p>
+
+        <div class="conditions-grid">
+            <article class="card">
+                <div class="icon-box">🍾</div>
+                <h3>Оператор линии</h3>
+                <p>Следит за розливом, скоростью и качеством. На пике сезона именно от них зависит, увидят ли покупатели свежий квас на полке.</p>
+                <a href="/games/game01" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Попробовать смену →</a>
+            </article>
+
+            <article class="card">
+                <div class="icon-box">🧪</div>
+                <h3>Технолог</h3>
+                <p>Собирает рецепты, контролирует брожение и следит за качеством в лаборатории. Настоящий химик от мира напитков.</p>
+                <a href="/#myth-game" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Проверить знания →</a>
+            </article>
+
+            <article class="card">
+                <div class="icon-box">🚚</div>
+                <h3>Логист</h3>
+                <p>Планирует поставки так, чтобы завод не простаивал, а полки магазинов не пустели. Управление цепочками поставок в реальном времени.</p>
+                <a href="/#myth-game" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Узнать факты →</a>
+            </article>
+        </div>
     </section>
 
+    <!-- ПРОДУКЦИЯ (БЕЗ ПУСТЫХ МЕСТ) -->
     <section class="gallery-section" id="products">
-        <h2 class="section-title">QR-коды на продукцию</h2>
-        <p>
-            Наведите камеру смартфона на QR-код, чтобы перейти на официальную страницу продукта и узнать больше о составе и истории напитков.
-        </p>
+        <h2 class="section-title">То, чем ты будешь управлять</h2>
 
         <div class="conditions-grid">
-            <article class="card">
-                <div class="photo-placeholder">
-                    Место для фотографии кваса «Очаковский» и проверенного QR-кода
-                </div>
+            <article class="card" style="background: linear-gradient(135deg, #f7f5eb, #dce9c8);">
                 <h3>Квас «Очаковский»</h3>
-                <p>
-                    Легендарный квас «Очаковский» — один из самых узнаваемых напитков компании. В его основе — традиционные рецепты кваса, собранные в разных регионах России.
+                <p style="color: var(--green-dark);">
+                    Легендарный напиток с двойным брожением. Рецепт собирали, расспрашивая жителей деревень.
+                    Узнай, как рождается этот вкус.
                 </p>
             </article>
 
-            <article class="card">
-                <div class="photo-placeholder">
-                    Место для фотографии белого кваса «Семейный секрет» и проверенного QR-кода
-                </div>
-                <h3>«Семейный секрет»</h3>
+            <article class="card" style="background: linear-gradient(135deg, #f7f5eb, #f0c85d); color: var(--green-dark);">
+                <h3 style="color: var(--green-dark);">Пиво в ПЭТ</h3>
                 <p>
-                    Белый квас из популярной линейки «Очаково». Актуальный состав и особенности продукта — на упаковке или официальном сайте производителя.
+                    Первые в мире! В 1994 году «Очаково» начало разливать пиво в пластик.
+                    Это перевернуло индустрию.
                 </p>
             </article>
         </div>
     </section>
 
+    <!-- ЧЕК-ЛИСТ ПЕРВОГО ДНЯ -->
     <section class="gallery-section" id="first-day">
-        <h2 class="section-title">Мой первый день</h2>
-        <div class="photo-placeholder">
-            Место для фотографии сотрудника или практиканта с разрешения на публикацию
+        <h2 class="section-title">Твой первый день: чек-лист</h2>
+
+        <div class="card" style="max-width: 800px; margin: 0 auto; background: var(--green-dark); color: var(--white); border: none; padding: 40px;">
+            <h3 style="color: var(--gold); margin-bottom: 20px;">Что нужно сделать перед сменой:</h3>
+            <ul style="list-style: none; display: flex; flex-direction: column; gap: 16px; font-size: 1.05rem;">
+                <li style="display: flex; gap: 12px; align-items: center;">
+                    <span style="background: var(--gold); color: var(--green-dark); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">✓</span>
+                    Пройти наш квест и получить «Карьерный паспорт»
+                </li>
+                <li style="display: flex; gap: 12px; align-items: center;">
+                    <span style="background: var(--gold); color: var(--green-dark); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">✓</span>
+                    Взять с собой паспорт и медкнижку (если уже есть)
+                </li>
+                <li style="display: flex; gap: 12px; align-items: center;">
+                    <span style="background: var(--gold); color: var(--green-dark); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">✓</span>
+                    Надеть удобную закрытую обувь (на линии свои правила безопасности)
+                </li>
+                <li style="display: flex; gap: 12px; align-items: center;">
+                    <span style="background: var(--gold); color: var(--green-dark); width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; border-radius: 50%; font-weight: 900;">✓</span>
+                    Познакомиться со своим наставником
+                </li>
+            </ul>
         </div>
-        <p>
-            Ваш первый день зависит от должности и программы. Чтобы всё прошло комфортно, заранее
-            уточните у организатора время и место встречи, правила прохода на предприятие и требования к одежде. Если вы выходите на практику, спросите, кто станет вашим наставником и какие задачи вас ждут.
-        </p>
     </section>
 
+    <!-- АЧИВКИ (ПОРТФОЛИО) -->
     <section class="gallery-section" id="intern-portfolio">
-        <h2 class="section-title">Портфолио практиканта</h2>
+        <h2 class="section-title">Твои будущие ачивки</h2>
+        <p style="text-align: center; max-width: 600px; margin: 0 auto 40px; color: var(--muted);">
+            За время практики ты соберешь портфолио реальных навыков. А начать можно уже сейчас.
+        </p>
 
-        <div class="conditions-grid">
-            <article class="card">
-                <div class="photo-placeholder">
-                    Место для учебного проекта, выполненного во время практики,
-                    или фотографии с разрешения на публикацию
-                </div>
-                <p>
-                    <strong>Проект и навыки.</strong>
-                    Кратко опишите задачу, свой вклад и полученный результат. Обратите внимание:
-                    внутренние материалы компании можно публиковать только с официального разрешения.
-                </p>
+        <div class="conditions-grid" style="justify-content: center;">
+            <article class="card" style="text-align: center; align-items: center; border: 2px dashed var(--green-light);">
+                <div class="icon-box" style="background: var(--gold); color: var(--green-dark); font-size: 36px;">🏆</div>
+                <h3>Знаток истории</h3>
+                <p>Открывается после прохождения игры «Миф или правда».</p>
+                <a href="/#myth-game" class="btn" style="margin-top: 20px; padding: 12px 24px; font-size: 14px;">Получить ачивку →</a>
             </article>
 
-            <article class="card">
-                <div class="photo-placeholder">
-                    Место для отзыва, сертификата или фотографии с разрешения на публикацию
-                </div>
-                <p>
-                    <strong>Опыт и выводы.</strong> Расскажите, с какими инструментами и процессами вы познакомились
-                    и чему научились. Пожалуйста, убедитесь, что все публикуемые материалы согласованы с компанией.
-                </p>
+            <article class="card" style="text-align: center; align-items: center; border: 2px dashed var(--green-light);">
+                <div class="icon-box" style="background: var(--green); color: var(--white); font-size: 36px;">⚡</div>
+                <h3>Оператор-снайпер</h3>
+                <p>Открывается после успешной смены в игре «Спаси линию».</p>
+                <a href="/games/game01" class="btn" style="margin-top: 20px; padding: 12px 24px; font-size: 14px;">На линии →</a>
             </article>
         </div>
     </section>
+
 </div>
 
 <div id="page-scripts"></div>

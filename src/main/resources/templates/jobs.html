@@ -4,66 +4,123 @@
       th:replace="~{layout/base :: layout(~{::title}, ~{::#main-content}, ~{::#page-scripts})}">
 <head>
   <meta charset="UTF-8">
-  <title>Работа в Очаково — Карьера в Очаково</title>
+  <title>Работа и практика — Карьера в Очаково</title>
 </head>
 <body>
 
 <div id="main-content">
+
+  <!-- ГЛАВНЫЙ БЛОК (HERO) -->
   <section class="hero">
-    <h1>Работа в Очаково</h1>
+    <h1>Твой оплачиваемый старт</h1>
     <p>
-      На комбинате нужны специалисты для производства напитков, обслуживания
-      оборудования, контроля качества и других задач. Актуальные должности,
-      требования и условия смотрите в объявлениях компании.
+      С марта по сентябрь на «Очаково» наступает пик производства.
+      Сотни студентов выходят на линии, чтобы учиться, зарабатывать и строить карьеру.
+      Готов присоединиться?
     </p>
+    <a class="btn" href="#how-to-join">Как попасть на завод →</a>
   </section>
 
+  <!-- ПЛЮШКИ И УСЛОВИЯ -->
   <section class="gallery-section" id="benefits">
-    <h2 class="section-title">Условия и возможности для работников</h2>
+    <h2 class="section-title">Что ты получаешь</h2>
 
     <div class="conditions-grid">
       <article class="card">
         <div class="icon-box">💰</div>
-        <h3>Условия по вакансии</h3>
+        <h3>Оплачиваемая практика</h3>
         <p>
-          Размер зарплаты, график и требования зависят от должности.
-          Проверяйте эту информацию в актуальном объявлении или уточняйте у HR.
+          Ты не работаешь «за спасибо». С первого дня практики компания
+          оформляет официальную оплату и предоставляет все соцгарантии.
         </p>
       </article>
 
       <article class="card">
-        <div class="icon-box">⭐</div>
-        <h3>Разные направления</h3>
-        <p>
-          Работа на предприятии может быть связана с производством, оборудованием,
-          логистикой и другими направлениями. Перечень доступных позиций меняется.
-        </p>
-      </article>
-
-      <article class="card">
-        <div class="icon-box">🎁</div>
+        <div class="icon-box">🏠</div>
         <h3>Общежитие в Москве</h3>
         <p>
-          На официальной странице работы указана возможность проживания
-          в общежитии компании рядом с местом работы в Москве. Условия уточняйте у HR.
+          Приезжим студентам компания предоставляет место в общежитии
+          прямо рядом с производством. Не нужно тратить часы на дорогу.
+        </p>
+      </article>
+
+      <article class="card">
+        <div class="icon-box">🚀</div>
+        <h3>Быстрый карьерный рост</h3>
+        <p>
+          На пике сезона нужны ответственные руки. Прояви себя летом —
+          и получи предложение о постоянной работе уже к осени.
         </p>
       </article>
     </div>
   </section>
 
-  <section class="gallery-section" id="shift">
-    <h2 class="section-title">Как устроено производство</h2>
-    <div class="photo-placeholder media-placeholder">
-      <img src="https://ochakovo.ru/wp-content/uploads/2024/12/0-2280h1520-excursia-1.jpg"
-           alt="Производство «Очаково»"
-           loading="lazy">
+  <!-- ПОШАГОВЫЙ ПЛАН (ВОРОНКА) -->
+  <section class="gallery-section" id="how-to-join">
+    <h2 class="section-title">Как попасть в команду: 3 шага</h2>
+
+    <div class="conditions-grid" style="align-items: stretch;">
+
+      <article class="card" style="position: relative; border-top: 4px solid var(--green);">
+        <h3 style="color: var(--green); font-size: 2rem; margin-bottom: 10px;">01</h3>
+        <h3>Узнай компанию</h3>
+        <p>
+          Пройди игру «Миф или правда» и проверь, насколько хорошо ты знаешь историю и технологии завода «Очаково».
+        </p>
+        <a href="/#myth-game" class="btn" style="margin-top: auto; width: 100%; justify-content: center; padding: 12px; font-size: 14px;">Пройти квест →</a>
+      </article>
+
+      <article class="card" style="position: relative; border-top: 4px solid var(--gold);">
+        <h3 style="color: var(--gold); font-size: 2rem; margin-bottom: 10px;">02</h3>
+        <h3>Попробуй себя</h3>
+        <p>
+          Спаси линию розлива и собери рецепты всех напитков в нашем интерактивном симуляторе. Почувствуй себя оператором и технологом.
+        </p>
+        <a href="/games/game01" class="btn" style="margin-top: auto; width: 100%; justify-content: center; padding: 12px; font-size: 14px;">Начать игры →</a>
+      </article>
+
+      <article class="card" style="position: relative; border-top: 4px solid var(--green-dark); background: var(--green-dark); color: var(--white);">
+        <h3 style="color: var(--green-light); font-size: 2rem; margin-bottom: 10px;">03</h3>
+        <h3 style="color: var(--white);">Оставь заявку</h3>
+        <p style="color: rgba(255,255,255,0.8);">
+          Понравилось? Отправляй своё резюме в отдел подбора персонала. Мы видим тех, кто уже в теме!
+        </p>
+        <!-- Ссылка ведет на почту HR -->
+        <!-- <a href="mailto:rabota@ochakovo.ru" class="btn" style="margin-top: auto; width: 100%; justify-content: center; padding: 12px; font-size: 14px;">Написать в HR →</a> -->
+      </article>
+
     </div>
-    <p>
-      На экскурсии по московскому производству показывают путь от варочного
-      цеха до линии розлива. Работа оборудования, технологические процессы
-      и обязанности сотрудников зависят от конкретного участка и должности.
-    </p>
   </section>
+
+  <!-- КАК УСТРОЕНО ПРОИЗВОДСТВО -->
+  <section class="gallery-section" id="shift">
+    <h2 class="section-title">Работа — это не скучно</h2>
+
+    <div class="card" style="max-width: 900px; margin: 0 auto; padding: 0; overflow: hidden; border: none; box-shadow: var(--shadow);">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; align-items: stretch;">
+
+        <!-- Картинка -->
+        <div style="min-height: 300px; background: url('https://ochakovo.ru/wp-content/uploads/2024/12/0-2280h1520-excursia-1.jpg') center/cover;">
+        </div>
+
+        <!-- Текст -->
+        <div style="padding: 40px; background: var(--white);">
+          <h3 style="font-size: 1.5rem; margin-bottom: 16px; color: var(--green-dark);">Твоя смена на линии</h3>
+          <p style="color: var(--muted); margin-bottom: 24px;">
+            За каждым продуктом стоит слаженная работа команды: от операторов
+            автоматизированных линий до технологов в лаборатории.
+          </p>
+          <p style="color: var(--muted); margin-bottom: 24px;">
+            Хочешь узнать, каково это — управлять розливом? Попробуй наш
+            интерактивный симулятор прямо сейчас.
+          </p>
+          <a href="/games/game01" class="btn" style="width: 100%; justify-content: center; background: var(--green); color: var(--white);">Попробовать смену →</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
 </div>
 
 <div id="page-scripts"></div>

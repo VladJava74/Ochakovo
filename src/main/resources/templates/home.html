@@ -4,24 +4,28 @@
       th:replace="~{layout/base :: layout(~{::title}, ~{::#main-content}, ~{::#page-scripts})}">
 <head>
   <meta charset="UTF-8">
-  <title>Главная — Карьера в Очаково</title>
+  <title>Карьера в Очаково — начни квест</title>
 </head>
 <body>
 
 <div id="main-content">
-  <section class="hero">
-    <h1>Карьера в Очаково</h1>
+
+  <!-- ШАГ 1: ГЕРОЙ С КНОПКОЙ КВЕСТА -->
+  <section class="hero" id="start">
+    <h1>Сезон начался. Ты в игре?</h1>
     <p>
-      Узнайте о компании, производстве напитков и профессиях, которые нужны,
-      чтобы оно работало. Здесь собрана информация о вакансиях и возможностях
-      для студентов — актуальные условия уточняйте у HR.
+      «Очаково» набирает студентов на оплачиваемую практику с марта по сентябрь.
+      Пройди 5-минутный квест: узнай бренд, попробуй профессию и получи
+      карьерный паспорт для HR.
     </p>
+    <a class="btn" href="#myth-game">Начать карьерный квест →</a>
   </section>
 
+  <!-- ШАГ 2: МИФ ИЛИ ПРАВДА -->
   <section class="gallery-section" id="contents">
     <section id="myth-game">
       <h2>Миф или правда?</h2>
-      <p>Прочитай утверждение и выбери ответ.</p>
+      <p>Прочитай утверждение и выбери ответ. 10 секунд на раздумья — как на линии.</p>
 
       <div class="myth-status">
         <span id="myth-progress"></span>
@@ -37,192 +41,20 @@
 
       <p class="myth-feedback" id="myth-feedback" hidden></p>
       <button class="myth-next" id="myth-next" type="button" hidden>Следующий вопрос</button>
+
+      <!-- 🔑 Мостик к игре: скрыт жёстко до финала -->
+      <a class="myth-bridge" id="myth-bridge"
+         th:href="@{/games/game01}"
+         hidden style="display:none !important; margin-top:16px;">
+        Дальше: спаси линию →
+      </a>
     </section>
-
-    <script>
-      (() => {
-          const questions = [
-              {
-                  statement: "На заводе «Очаково» разливали и Pepsi, и Fanta?",
-                  isTrue: true,
-                  explanation: "Правда. Спустя год после открытия завода там начали разливать первые в СССР партии Pepsi и Fanta. Компания называет это уникальным случаем одновременного выпуска продукции PepsiCo и The Coca-Cola Company."
-              },
-              {
-                  statement: "За первые десять лет у комбината сменилось 13 руководителей?",
-                  isTrue: true,
-                  explanation: "Правда. Согласно истории предприятия, частая смена руководителей закончилась в 1988 году."
-              },
-              {
-                  statement: "«Очаково» утверждает, что первым в мире стало разливать пиво в пластиковые бутылки?",
-                  isTrue: true,
-                  explanation: "Компания пишет, что сделала это в 1994 году."
-              },
-              {
-                  statement: "Рецепт кваса «Очаковский» собирали, расспрашивая жителей российских деревень?",
-                  isTrue: true,
-                  explanation: "Правда. Компания рассказывает, что сотрудники ездили по деревням и изучали старые рецепты, чтобы создать квас для промышленного производства."
-              },
-              {
-                  statement: "Производство кваса начинается ещё до завода — в поле?",
-                  isTrue: true,
-                  explanation: "Правда. Для кваса используют злаки, а компания выращивает собственное зерно и производит солод."
-              },
-              {
-                  statement: "Один заторно-варочный чан на производстве кваса вмещает 65 тысяч литров?",
-                  isTrue: true,
-                  explanation: "Правда. Именно такую вместимость компания указывает для своих чанов."
-              },
-              {
-                  statement: "Среди предприятий «Очаково» есть завод космической отрасли, санаторий и турбаза?",
-                  isTrue: true,
-                  explanation: "Правда. Все три необычных объекта перечислены на странице компании среди её предприятий."
-              },
-              {
-                  statement: "Все четыре пиво-безалкогольных комбината «Очаково» находятся в Москве?",
-                  isTrue: false,
-                  explanation: "Миф. Они расположены в Москве, Краснодаре, Тюмени и Пензе."
-              },
-              {
-                  statement: "Краснодарский завод «Очаково» начал работу с выпуска пива?",
-                  isTrue: false,
-                  explanation: "Миф. Первыми с его конвейера сошли лимонады «АХ! Дюшес». Пиво начали выпускать позже."
-              },
-              {
-                  statement: "Для кваса на заводе используют воду прямо из-под крана, не очищая её?",
-                  isTrue: false,
-                  explanation: "Миф. Воду очищают от примесей, дехлорируют и умягчают."
-              },
-              {
-                  statement: "У «Очаково» только четыре предприятия — ровно столько, сколько заводов по производству напитков?",
-                  isTrue: false,
-                  explanation: "Миф. Четыре — это пиво-безалкогольные комбинаты. Всего компания указывает десять предприятий, среди которых также солодовня, винодельня и сельскохозяйственные хозяйства."
-              },
-              {
-                  statement: "Изначально предприятие называлось «Очаково».",
-                  isTrue: false,
-                  explanation: "Миф. Сначала это был Московский пивобезалкогольный комбинат; название «Очаково» появилось позднее."
-              }
-          ];
-
-          const game = document.getElementById("myth-game");
-          const progress = game.querySelector("#myth-progress");
-          const scoreText = game.querySelector("#myth-score");
-          const statement = game.querySelector("#myth-statement");
-          const feedback = game.querySelector("#myth-feedback");
-          const choices = game.querySelector("#myth-choices");
-          const nextButton = game.querySelector("#myth-next");
-          const answerButtons = game.querySelectorAll(".myth-answer");
-
-          let order = [];
-          let current = 0;
-          let score = 0;
-          let answered = false;
-          let finished = false;
-
-          function shuffle(items) {
-              for (let i = items.length - 1; i > 0; i--) {
-                  const j = Math.floor(Math.random() * (i + 1));
-                  [items[i], items[j]] = [items[j], items[i]];
-              }
-              return items;
-          }
-
-          function showQuestion() {
-              const question = order[current];
-
-              progress.textContent = "Вопрос " + (current + 1) + " из " + order.length;
-              scoreText.textContent = "Счёт: " + score;
-              statement.textContent = question.statement;
-
-              feedback.hidden = true;
-              nextButton.hidden = true;
-              choices.hidden = false;
-              answered = false;
-
-              answerButtons.forEach(button => {
-                  button.disabled = false;
-                  button.classList.remove("correct", "incorrect");
-              });
-          }
-
-          function selectAnswer(button) {
-              if (answered) return;
-
-              answered = true;
-
-              const question = order[current];
-              const userAnswer = button.dataset.answer === "true";
-              const isCorrect = userAnswer === question.isTrue;
-              const explanation = question.explanation.replace(/^(?:Правда|Миф)\.\s*/, "");
-
-              if (isCorrect) {
-                  score++;
-                  button.classList.add("correct");
-                  feedback.textContent = "Верно! " + explanation;
-              } else {
-                  button.classList.add("incorrect");
-                  feedback.textContent =
-                      "Неверно. Правильный ответ: " +
-                      (question.isTrue ? "правда. " : "миф. ") +
-                      explanation;
-
-                  answerButtons.forEach(answerButton => {
-                      if ((answerButton.dataset.answer === "true") === question.isTrue) {
-                          answerButton.classList.add("correct");
-                      }
-                  });
-              }
-
-              answerButtons.forEach(answerButton => {
-                  answerButton.disabled = true;
-              });
-
-              scoreText.textContent = "Счёт: " + score;
-              feedback.hidden = false;
-              nextButton.textContent =
-                  current === order.length - 1 ? "Завершить игру" : "Следующий вопрос";
-              nextButton.hidden = false;
-          }
-
-          function startGame() {
-              order = shuffle(questions.slice());
-              current = 0;
-              score = 0;
-              finished = false;
-              showQuestion();
-          }
-
-          answerButtons.forEach(button => {
-              button.addEventListener("click", () => selectAnswer(button));
-          });
-
-          nextButton.addEventListener("click", () => {
-              if (finished) {
-                  startGame();
-                  return;
-              }
-
-              if (current < order.length - 1) {
-                  current++;
-                  showQuestion();
-              } else {
-                  finished = true;
-                  progress.textContent = "Игра завершена";
-                  statement.textContent = "Ваш результат: " + score + " из " + order.length;
-                  feedback.hidden = true;
-                  choices.hidden = true;
-                  nextButton.textContent = "Сыграть ещё раз";
-              }
-          });
-
-          startGame();
-      })();
-    </script>
   </section>
 
+  <!-- ШАГ 3: ПРОФЕССИИ И РАБОТА -->
   <section class="gallery-section" id="potential">
     <h2 class="section-title">Дайте волю своему потенциалу</h2>
-    <p>
+    <p style="text-align:center; max-width:720px; margin:0 auto 40px; color:var(--muted); line-height:1.7;">
       В производстве напитков работают специалисты разных направлений —
       от операторов оборудования и механиков до технологов и сотрудников
       контроля качества. Изучите профессии и подумайте, какая область вам интересна.
@@ -230,64 +62,196 @@
 
     <div class="conditions-grid">
       <article class="card">
-        <div class="photo-placeholder">
-          <img src="https://ochakovo.ru/wp-content/uploads/2024/12/0-2280h1520-career.jpg"
-               alt="Работа в «Очаково»"
-               loading="lazy">
-        </div>
-        <h3>Работа в компании</h3>
-        <p>
-          На официальной странице «Очаково» публикует вакансии и принимает
-          анкеты соискателей, если подходящей позиции пока нет.
-        </p>
+        <div class="icon-box">🍾</div>
+        <h3>Оператор линии</h3>
+        <p>Следит за розливом, качеством и скоростью. На пике сезона — ключевая роль.</p>
       </article>
-
       <article class="card">
-        <div class="photo-placeholder">
-          <img src="https://ochakovo.ru/wp-content/uploads/2024/12/1-5.jpg"
-               alt="Партнёрская программа для студентов и выпускников"
-               loading="lazy">
-        </div>
-        <h3>Практика и старт карьеры</h3>
-        <p>
-          Компания сообщала о стажировке и обучении для студентов и выпускников
-          профильных учебных заведений. Актуальные наборы и условия нужно уточнить у HR.
-        </p>
+        <div class="icon-box">🧪</div>
+        <h3>Технолог</h3>
+        <p>Собирает рецепты: от солода до двойного брожения кваса «Очаковский».</p>
+      </article>
+      <article class="card">
+        <div class="icon-box">🚚</div>
+        <h3>Логист</h3>
+        <p>Планирует поставки так, чтобы полки не пустели в сезон.</p>
       </article>
     </div>
   </section>
 
-  <section class="gallery-section" id="conclusion">
-    <h2 class="section-title">Заключение</h2>
-    <p>
-      «Очаково» — предприятие с историей, начавшейся в 1978 году. Здесь выпускают
-      разные напитки, а производственный процесс объединяет множество профессий.
-      Изучите актуальные вакансии и уточните у компании, какие возможности практики
-      доступны сейчас.
-    </p>
+  <!-- ШАГ 5: РАБОТА / CTA -->
+  <section class="gallery-section" id="career">
+    <h2 class="section-title">Практика и старт карьеры</h2>
+    <div class="conditions-grid">
+      <article class="card">
+        <h3>Оплачиваемая практика</h3>
+        <p>Компания оформляет студентов и выпускников профильных направлений на сезон март–сентябрь.</p>
+      </article>
+      <article class="card">
+        <h3>Приоритетный список</h3>
+        <p>Прошёл квест — попал в список кандидатов, которых HR смотрит первыми.</p>
+      </article>
+    </div>
   </section>
 
-  <section class="hero" id="ending">
-    <h2>Спасибо, что заглянули!</h2>
-    <p>
-      Выберите интересующий раздел, познакомьтесь с профессиями и найдите
-      информацию о трудоустройстве на официальной странице компании.
-    </p>
-    <div class="photo-placeholder">
-      <img src="https://ochakovo.ru/wp-content/uploads/2024/12/0-2280h1520-excursia-1.jpg"
-           alt="Экскурсия по производству «Очаково»"
-           loading="lazy">
-    </div>
-    <p>
-      На экскурсии по московскому производству гости проходят путь от варочного цеха
-      до линии розлива и знакомятся с исторической экспозицией «Изба квасовара».
-      Важно: это маршрут для посетителей, а не описание рабочего дня или программы
-      практики. Узнать о доступных экскурсиях можно на официальном сайте «Очаково».
-    </p>
-  </section>
 </div>
 
-<div id="page-scripts"></div>
+<div id="page-scripts">
+  <script>
+    (() => {
+      const questions = [
+        { statement: "На заводе «Очаково» разливали и Pepsi, и Fanta?", isTrue: true,
+          explanation: "Правда. Спустя год после открытия там начали разливать первые в СССР партии Pepsi и Fanta — уникальный случай одновременного выпуска PepsiCo и Coca-Cola." },
+        { statement: "За первые десять лет у комбината сменилось 13 руководителей?", isTrue: true,
+          explanation: "Правда. Частая смена руководителей закончилась в 1988 году." },
+        { statement: "«Очаково» утверждает, что первым в мире стало разливать пиво в пластиковые бутылки?", isTrue: true,
+          explanation: "Компания пишет, что сделала это в 1994 году." },
+        { statement: "Рецепт кваса «Очаковский» собирали, расспрашивая жителей российских деревень?", isTrue: true,
+          explanation: "Правда. Сотрудники ездили по деревням и изучали старые рецепты." },
+        { statement: "Производство кваса начинается ещё до завода — в поле?", isTrue: true,
+          explanation: "Правда. Компания выращивает собственное зерно и производит солод." },
+        { statement: "Один заторно-варочный чан на производстве кваса вмещает 65 тысяч литров?", isTrue: true,
+          explanation: "Правда. Именно такую вместимость компания указывает для своих чанов." },
+        { statement: "Среди предприятий «Очаково» есть завод космической отрасли, санаторий и турбаза?", isTrue: true,
+          explanation: "Правда. Все три объекта перечислены среди предприятий компании." },
+        { statement: "Все четыре пиво-безалкогольных комбината «Очаково» находятся в Москве?", isTrue: false,
+          explanation: "Миф. Они в Москве, Краснодаре, Тюмени и Пензе." },
+        { statement: "Краснодарский завод «Очаково» начал работу с выпуска пива?", isTrue: false,
+          explanation: "Миф. Первыми сошли лимонады «АХ! Дюшес», пиво начали позже." },
+        { statement: "Для кваса на заводе используют воду прямо из-под крана, не очищая её?", isTrue: false,
+          explanation: "Миф. Воду очищают, дехлорируют и умягчают." },
+        { statement: "У «Очаково» только четыре предприятия — ровно столько, сколько заводов по производству напитков?", isTrue: false,
+          explanation: "Миф. Четыре — это комбинаты. Всего компания указывает десять предприятий." },
+        { statement: "Изначально предприятие называлось «Очаково».", isTrue: false,
+          explanation: "Миф. Сначала это был Московский пивобезалкогольный комбинат." }
+      ];
+
+      const game = document.getElementById("myth-game");
+      if (!game) { console.warn("Нет #myth-game"); return; }
+
+      const progress = game.querySelector("#myth-progress");
+      const scoreText = game.querySelector("#myth-score");
+      const statement = game.querySelector("#myth-statement");
+      const feedback = game.querySelector("#myth-feedback");
+      const choices = game.querySelector("#myth-choices");
+      const nextButton = game.querySelector("#myth-next");
+      const answerButtons = game.querySelectorAll(".myth-answer");
+      const bridge = document.getElementById("myth-bridge");
+
+      // 🔑 Безопасные обёртки для localStorage (на file:// может падать)
+      const store = {
+        get(k) { try { return localStorage.getItem(k); } catch { return null; } },
+        set(k, v) { try { localStorage.setItem(k, v); } catch {} },
+        del(k) { try { localStorage.removeItem(k); } catch {} }
+      };
+
+      // 🔑 Принудительно прячем кнопку при загрузке (даже если она была видна)
+      function hideBridge() {
+        if (!bridge) return;
+        bridge.hidden = true;
+        bridge.style.display = "none";
+        bridge.style.setProperty("display", "none", "important");
+      }
+
+      // 🔑 Показ кнопки только после финала
+      function showBridge() {
+        if (!bridge) return;
+        bridge.hidden = false;
+        bridge.style.display = "block";
+        bridge.style.removeProperty("display");
+        store.set("ochakovo_myth_passed", "1");
+      }
+
+      // При старте — всегда прячем (чтобы старые тесты не оставляли кнопку)
+      hideBridge();
+
+      let order = [], current = 0, score = 0, answered = false, finished = false;
+
+      function shuffle(items) {
+        for (let i = items.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [items[i], items[j]] = [items[j], items[i]];
+        }
+        return items;
+      }
+
+      function showQuestion() {
+        const q = order[current];
+        progress.textContent = "Вопрос " + (current + 1) + " из " + order.length;
+        scoreText.textContent = "Счёт: " + score;
+        statement.textContent = q.statement;
+        feedback.hidden = true;
+        nextButton.hidden = true;
+        choices.hidden = false;
+        answered = false;
+        answerButtons.forEach(b => {
+          b.disabled = false;
+          b.classList.remove("correct", "incorrect");
+        });
+      }
+
+      function selectAnswer(button) {
+        if (answered) return;
+        answered = true;
+        const q = order[current];
+        const userAnswer = button.dataset.answer === "true";
+        const isCorrect = userAnswer === q.isTrue;
+        const explanation = q.explanation.replace(/^(?:Правда|Миф)\.\s*/, "");
+
+        if (isCorrect) {
+          score++;
+          button.classList.add("correct");
+          feedback.textContent = "Верно! " + explanation;
+        } else {
+          button.classList.add("incorrect");
+          feedback.textContent = "Неверно. Правильный ответ: " + (q.isTrue ? "правда. " : "миф. ") + explanation;
+          answerButtons.forEach(b => {
+            if ((b.dataset.answer === "true") === q.isTrue) b.classList.add("correct");
+          });
+        }
+
+        answerButtons.forEach(b => b.disabled = true);
+        scoreText.textContent = "Счёт: " + score;
+        feedback.hidden = false;
+        nextButton.textContent = current === order.length - 1 ? "Завершить игру" : "Следующий вопрос";
+        nextButton.hidden = false;
+      }
+
+      function startGame() {
+        order = shuffle(questions.slice());
+        current = 0; score = 0; finished = false;
+        // при перезапуске снова прячем
+        hideBridge();
+        store.del("ochakovo_myth_passed");
+        showQuestion();
+      }
+
+      answerButtons.forEach(b => b.addEventListener("click", () => selectAnswer(b)));
+
+      nextButton.addEventListener("click", () => {
+        if (finished) { startGame(); return; }
+        if (current < order.length - 1) {
+          current++;
+          showQuestion();
+        } else {
+          finished = true;
+          progress.textContent = "Игра завершена";
+          statement.textContent = "Твой результат: " + score + " из " + order.length;
+          feedback.hidden = true;
+          choices.hidden = true;
+          nextButton.textContent = "Сыграть ещё раз";
+
+          // 🔑 ГЕЙТ: сохраняем + показываем кнопку ТОЛЬКО здесь
+          store.set("ochakovo_myth_score", String(score));
+          store.set("ochakovo_myth_total", String(order.length));
+          showBridge();
+        }
+      });
+
+      startGame();
+    })();
+  </script>
+</div>
 
 </body>
 </html>

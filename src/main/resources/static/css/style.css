@@ -1,3 +1,6 @@
+/* ============================================================
+   1. ПЕРЕМЕННЫЕ И БАЗА (палитра «Очаково»)
+   ============================================================ */
 :root {
   --green-dark: #123c31;
   --green: #1b5944;
@@ -13,19 +16,11 @@
   --transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
+* { box-sizing: border-box; margin: 0; padding: 0; }
 
-html {
-  scroll-behavior: smooth;
-  font-size: 16px;
-}
+html { scroll-behavior: smooth; font-size: 16px; }
 
 body {
-  /* остальные свойства оставьте без изменений */
   background-color: var(--cream);
   background-image:
     linear-gradient(rgba(247, 245, 235, 0.82), rgba(247, 245, 235, 0.82)),
@@ -33,21 +28,18 @@ body {
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-  transition: var(--transition);
-}
+a { color: inherit; text-decoration: none; transition: var(--transition); }
+img { display: block; max-width: 100%; }
 
-img {
-  display: block;
-  max-width: 100%;
-}
+section[id] { scroll-margin-top: 160px; }
 
-/* --- ШАПКА И НАВИГАЦИЯ --- */
-
+/* ============================================================
+   2. ШАПКА И НАВИГАЦИЯ
+   ============================================================ */
 .site-header {
   position: sticky;
   top: 0;
@@ -77,11 +69,7 @@ img {
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
-
-.site-header__logo span {
-  color: var(--gold);
-  margin: 0 8px;
-}
+.site-header__logo span { color: var(--gold); margin: 0 8px; }
 
 .site-header__menu-toggle {
   display: none;
@@ -95,7 +83,6 @@ img {
   cursor: pointer;
   z-index: 1001;
 }
-
 .site-header__menu-toggle span {
   display: block;
   width: 100%;
@@ -115,7 +102,6 @@ img {
   scrollbar-width: thin;
   padding-bottom: 4px;
 }
-
 .site-header__nav a {
   flex-shrink: 0;
   color: var(--muted);
@@ -124,7 +110,6 @@ img {
   position: relative;
   padding-bottom: 4px;
 }
-
 .site-header__nav a::after {
   content: '';
   position: absolute;
@@ -136,17 +121,12 @@ img {
   transform: translateX(-50%);
   transition: var(--transition);
 }
+.site-header__nav a:hover { color: var(--green-dark); }
+.site-header__nav a:hover::after { width: 100%; }
 
-.site-header__nav a:hover {
-  color: var(--green-dark);
-}
-
-.site-header__nav a:hover::after {
-  width: 100%;
-}
-
-/* --- ГЛАВНЫЙ БЛОК --- */
-
+/* ============================================================
+   3. ГЛАВНЫЙ БЛОК (HERO)
+   ============================================================ */
 .hero {
   position: relative;
   display: flex;
@@ -162,23 +142,14 @@ img {
     radial-gradient(circle at 30% 50%, rgba(230, 184, 77, 0.15), transparent 60%),
     linear-gradient(135deg, var(--green-dark), var(--green));
 }
-
 .hero::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+  inset: 0;
   background: linear-gradient(90deg, rgba(18, 60, 49, 0.8), rgba(18, 60, 49, 0.2));
   z-index: 1;
 }
-
-.hero > * {
-  position: relative;
-  z-index: 2;
-}
-
+.hero > * { position: relative; z-index: 2; }
 .hero h1 {
   max-width: 900px;
   margin-bottom: 24px;
@@ -188,7 +159,6 @@ img {
   letter-spacing: -0.02em;
   text-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
-
 .hero h2 {
   max-width: 700px;
   margin-bottom: 20px;
@@ -196,7 +166,6 @@ img {
   font-weight: 700;
   opacity: 0.95;
 }
-
 .hero p {
   max-width: 650px;
   margin-bottom: 40px;
@@ -205,8 +174,9 @@ img {
   line-height: 1.8;
 }
 
-/* --- КНОПКИ --- */
-
+/* ============================================================
+   4. КНОПКИ
+   ============================================================ */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -222,15 +192,15 @@ img {
   transition: var(--transition);
   cursor: pointer;
 }
-
 .btn:hover {
   transform: translateY(-4px);
   box-shadow: 0 16px 40px rgba(230, 184, 77, 0.5);
   background: #f0c85d;
 }
 
-/* --- СЕКЦИИ И ЗАГОЛОВКИ --- */
-
+/* ============================================================
+   5. СЕКЦИИ И ЗАГОЛОВКИ
+   ============================================================ */
 .gallery-section,
 .tabs-container {
   width: 100%;
@@ -238,7 +208,6 @@ img {
   margin: 0 auto;
   padding: 100px 24px;
 }
-
 .section-title {
   margin-bottom: 56px;
   color: var(--green-dark);
@@ -248,12 +217,9 @@ img {
   letter-spacing: -0.01em;
 }
 
-section[id] {
-  scroll-margin-top: 160px;
-}
-
-/* --- КАРТОЧКИ --- */
-
+/* ============================================================
+   6. КАРТОЧКИ
+   ============================================================ */
 .conditions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
@@ -262,7 +228,6 @@ section[id] {
   margin: 40px auto;
   padding: 0 24px;
 }
-
 .card {
   display: flex;
   height: 100%;
@@ -277,41 +242,20 @@ section[id] {
   overflow: hidden;
   position: relative;
 }
-
 .card::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 0; left: 0; right: 0;
   height: 4px;
   background: linear-gradient(90deg, var(--green), var(--gold));
   transform: scaleX(0);
   transform-origin: left;
   transition: var(--transition);
 }
-
-.card:hover::before {
-  transform: scaleX(1);
-}
-
-.card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
-}
-
-.card h3 {
-  margin-bottom: 12px;
-  color: var(--green-dark);
-  font-size: 1.5rem;
-  font-weight: 800;
-}
-
-.card p {
-  color: var(--muted);
-  line-height: 1.8;
-  font-size: 1.05rem;
-}
+.card:hover::before { transform: scaleX(1); }
+.card:hover { transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.card h3 { margin-bottom: 12px; color: var(--green-dark); font-size: 1.5rem; font-weight: 800; }
+.card p { color: var(--muted); line-height: 1.8; font-size: 1.05rem; }
 
 .icon-box {
   display: flex;
@@ -326,14 +270,14 @@ section[id] {
   font-size: 28px;
 }
 
-/* --- ГАЛЕРЕЯ --- */
-
+/* ============================================================
+   7. ГАЛЕРЕЯ
+   ============================================================ */
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
   gap: 28px;
 }
-
 .photo-item {
   position: relative;
   height: 340px;
@@ -343,28 +287,16 @@ section[id] {
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
   transition: var(--transition);
 }
-
 .photo-item img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
   transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
-
-.photo-item:hover img {
-  transform: scale(1.08);
-}
-
-.photo-item:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
-}
-
+.photo-item:hover img { transform: scale(1.08); }
+.photo-item:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
 .overlay {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  right: 0; bottom: 0; left: 0;
   padding: 48px 28px 28px;
   color: var(--white);
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
@@ -372,20 +304,12 @@ section[id] {
   transform: translateY(16px);
   transition: var(--transition);
 }
+.photo-item:hover .overlay { opacity: 1; transform: translateY(0); }
+.overlay h4 { margin-bottom: 8px; font-size: 1.4rem; font-weight: 800; }
 
-.photo-item:hover .overlay {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.overlay h4 {
-  margin-bottom: 8px;
-  font-size: 1.4rem;
-  font-weight: 800;
-}
-
-/* --- ПОДВАЛ --- */
-
+/* ============================================================
+   8. ПОДВАЛ
+   ============================================================ */
 footer {
   padding: 56px 24px;
   color: var(--white);
@@ -395,25 +319,268 @@ footer {
   letter-spacing: 0.02em;
 }
 
-/* --- АДАПТИВНОСТЬ --- */
+/* ============================================================
+   9. ИГРА «МИФ ИЛИ ПРАВДА»
+   ============================================================ */
+#myth-game {
+  max-width: 620px;
+  margin: 40px auto;
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--white);
+  color: var(--text);
+  box-shadow: 0 12px 36px rgb(15 23 42 / 10%);
+}
+#myth-game h2 { margin-top: 0; color: var(--green-dark); }
+#myth-game .myth-status {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  color: var(--muted);
+}
+#myth-game .myth-statement {
+  min-height: 70px;
+  margin: 28px 0;
+  font-size: 1.5rem;
+  line-height: 1.4;
+  color: var(--text);
+}
+#myth-game .myth-choices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+#myth-game button {
+  min-height: 50px;
+  padding: 12px 18px;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+#myth-game .myth-answer {
+  background: var(--green-light);
+  color: var(--green-dark);
+  transition: var(--transition);
+}
+#myth-game .myth-answer:hover:not(:disabled) { background: #c9dcae; }
+#myth-game .myth-answer:disabled { cursor: default; }
+#myth-game .myth-answer.correct { background: #bbf7d0; color: #166534; }
+#myth-game .myth-answer.incorrect { background: #fecaca; color: #991b1b; }
+#myth-game .myth-feedback { line-height: 1.5; color: var(--text); }
+#myth-game .myth-next {
+  width: 100%;
+  margin-top: 16px;
+  background: var(--gold);
+  color: var(--green-dark);
+  font-weight: 800;
+  transition: var(--transition);
+}
+#myth-game .myth-next:hover { background: #f0c85d; }
+#myth-game [hidden] { display: none !important; }
 
+/* Кнопка-мостик к игре после «Мифа» */
+.myth-bridge {
+  display: block;
+  max-width: 620px;
+  margin: 0 auto 20px;
+  padding: 16px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 800;
+  text-align: center;
+  transition: var(--transition);
+}
+.myth-bridge:hover { background: var(--green-dark); }
+
+/* ============================================================
+   10. ИГРА «СПАСИ ЛИНИЮ»
+   ============================================================ */
+body.game-page {
+  min-height: 100vh;
+  min-height: 100svh;
+  margin: 0;
+  padding: 18px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(135deg, var(--green-dark), var(--green));
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+.line-game {
+  width: min(100%, 760px);
+  display: grid;
+  grid-template-columns: 150px minmax(0, 520px);
+  grid-template-areas: "left center";
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding: 20px;
+  background: var(--cream);
+  border-radius: 24px;
+  box-shadow: 0 24px 60px rgba(18, 60, 49, 0.35);
+}
+.line-game__center { grid-area: center; min-width: 0; text-align: center; }
+.line-game__center h1 {
+  margin: 0 0 6px;
+  color: var(--green-dark);
+  font-size: clamp(1.7rem, 4vw, 2.2rem);
+}
+.line-game__sub { margin: 0 0 12px; color: var(--muted); font-size: 0.9rem; }
+
+#gameCanvas {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  margin: 0 auto;
+  border: 4px solid var(--white);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(18, 60, 49, 0.18);
+}
+
+.line-game__side {
+  grid-area: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 16px;
+  background: var(--green-light);
+}
+.line-game__info { display: flex; flex-direction: column; gap: 12px; }
+.line-game__stat {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--white);
+}
+.line-game__stat span { color: var(--muted); font-size: 0.85rem; }
+.line-game__stat b { color: var(--green-dark); font-size: 1.2rem; }
+#lineLives { color: var(--gold); letter-spacing: 2px; }
+
+.line-game__fact {
+  padding: 10px;
+  border-radius: 12px;
+  background: var(--green-dark);
+  color: var(--green-light);
+  font-size: 0.8rem;
+  line-height: 1.4;
+}
+
+.line-game__controls {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+  max-width: 500px;
+  margin: 12px auto;
+}
+.line-game__controls button {
+  min-height: 42px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--green-light);
+  color: var(--green-dark);
+  font: inherit;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.line-game__controls button:hover { background: #c9dcae; transform: translateY(-2px); }
+
+.line-game__restart {
+  display: block;
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 10px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--gold);
+  color: var(--green-dark);
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, background-color 0.15s ease;
+}
+.line-game__restart:hover { background: #f0c85d; transform: translateY(-2px); }
+
+.line-game__next {
+  display: block;
+  max-width: 500px;
+  margin: 12px auto 0;
+  padding: 14px;
+  border-radius: 999px;
+  background: var(--green);
+  color: var(--white);
+  font-weight: 800;
+  text-align: center;
+  transition: var(--transition);
+}
+.line-game__next[hidden] { display: none; }
+.line-game__next:hover { background: var(--green-dark); }
+
+.line-game__hint { margin: 10px 0 0; color: var(--muted); font-size: 0.8rem; line-height: 1.45; }
+
+.line-game__controls button:focus-visible,
+.line-game__restart:focus-visible,
+.line-game__next:focus-visible {
+  outline: 3px solid var(--green-dark);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   11. ПРОГРЕСС-БАР КВЕСТА (сквозной)
+   ============================================================ */
+.quest-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: rgba(18, 60, 49, 0.92);
+  color: var(--cream);
+  font-size: 13px;
+  font-weight: 700;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 8px 24px rgba(18, 60, 49, 0.3);
+}
+.quest-bar__track {
+  width: 120px;
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(247, 245, 235, 0.25);
+  overflow: hidden;
+}
+.quest-bar__fill {
+  height: 100%;
+  width: 20%;
+  background: var(--gold);
+  border-radius: 999px;
+  transition: width 0.4s ease;
+}
+
+/* ============================================================
+   12. АДАПТИВНОСТЬ
+   ============================================================ */
 @media (max-width: 900px) {
-  .site-header {
-    padding: 16px 20px 0;
-  }
-
-  .site-header__top {
-    padding-bottom: 12px;
-  }
-
-  .site-header__logo {
-    font-size: 18px;
-  }
-
-  .site-header__menu-toggle {
-    display: flex;
-  }
-
+  .site-header { padding: 16px 20px 0; }
+  .site-header__top { padding-bottom: 12px; }
+  .site-header__logo { font-size: 18px; }
+  .site-header__menu-toggle { display: flex; }
   .site-header__nav {
     position: fixed;
     top: 0;
@@ -430,11 +597,7 @@ footer {
     transition: var(--transition);
     overflow-y: auto;
   }
-
-  .site-header__nav--open {
-    right: 0;
-  }
-
+  .site-header__nav--open { right: 0; }
   .site-header__nav a {
     width: 100%;
     padding: 18px 0;
@@ -442,316 +605,58 @@ footer {
     font-size: 18px;
     color: var(--green-dark);
   }
+  .site-header__nav a::after { display: none; }
 
-  .site-header__nav a::after {
-    display: none;
-  }
-
-  /* Анимация крестика для кнопки меню */
   .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(1) {
     transform: translateY(10px) rotate(45deg);
   }
-
   .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(2) {
     opacity: 0;
   }
-
   .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(3) {
     transform: translateY(-10px) rotate(-45deg);
   }
 
-  .hero {
-    min-height: 70vh;
-    padding: 100px 24px;
-    text-align: center;
-    align-items: center;
-  }
+  .hero { min-height: 70vh; padding: 100px 24px; text-align: center; align-items: center; }
+  .hero h1, .hero h2, .hero p { text-align: center; }
 
-  .hero h1,
-  .hero h2,
-  .hero p {
-    text-align: center;
-  }
+  .gallery-section, .tabs-container { padding: 64px 16px; }
+  .conditions-grid { grid-template-columns: 1fr; gap: 24px; padding: 0 16px; }
+  .card { padding: 28px; }
+  .photo-item { height: 280px; }
+  .overlay { opacity: 1; transform: none; }
+}
 
-  .gallery-section,
-  .tabs-container {
-    padding: 64px 16px;
-  }
-
-  .conditions-grid {
+@media (max-width: 700px) {
+  body.game-page { padding: 12px; }
+  .line-game {
+    width: min(100%, 520px);
     grid-template-columns: 1fr;
-    gap: 24px;
-    padding: 0 16px;
+    grid-template-areas: "center" "left";
+    gap: 12px;
+    padding: 14px;
   }
-
-  .card {
-    padding: 28px;
-  }
-
-  .photo-item {
-    height: 280px;
-  }
-
-  .overlay {
-    opacity: 1;
-    transform: none;
-  }
+  #gameCanvas { width: 100%; height: auto; max-width: 400px; }
+  .line-game__side { padding: 10px; }
+  .line-game__info { flex-direction: row; }
+  .line-game__stat { flex: 1; min-width: 0; padding: 8px; }
+  .line-game__stat b { font-size: 1rem; }
 }
 
-
-
-    #myth-game {
-        max-width: 620px;
-        margin: 40px auto;
-        padding: 24px;
-        border-radius: 20px;
-        background: #fff;
-        color: #172033;
-        font-family: Arial, sans-serif;
-        box-shadow: 0 12px 36px rgb(15 23 42 / 10%);
-    }
-
-    #myth-game h2 {
-        margin-top: 0;
-    }
-
-    #myth-game .myth-status {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        color: #64748b;
-    }
-
-    #myth-game .myth-statement {
-        min-height: 70px;
-        margin: 28px 0;
-        font-size: 1.5rem;
-        line-height: 1.4;
-    }
-
-    #myth-game .myth-choices {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    #myth-game button {
-        min-height: 50px;
-        padding: 12px 18px;
-        border: 0;
-        border-radius: 12px;
-        font: inherit;
-        font-weight: 700;
-        cursor: pointer;
-    }
-
-    #myth-game .myth-answer {
-        background: #e2e8f0;
-        color: #172033;
-    }
-
-    #myth-game .myth-answer:disabled {
-        cursor: default;
-    }
-
-    #myth-game .myth-answer.correct {
-        background: #bbf7d0;
-        color: #166534;
-    }
-
-    #myth-game .myth-answer.incorrect {
-        background: #fecaca;
-        color: #991b1b;
-    }
-
-    #myth-game .myth-feedback {
-        line-height: 1.5;
-    }
-
-    #myth-game .myth-next {
-        width: 100%;
-        margin-top: 16px;
-        background: #4f46e5;
-        color: white;
-    }
-
-    #myth-game .myth-next:hover {
-        background: #4338ca;
-    }
-
-    #myth-game [hidden] {
-        display: none !important;
-    }
-
-    @media (max-width: 480px) {
-        #myth-game {
-            margin: 24px 12px;
-            padding: 20px;
-        }
-    }
-
-
-
-
-/* Игровые карточки */
-.games-page {
-  width: min(100% - 40px, 912px);
-  margin: 0 auto;
-  padding: 10px 0 40px;
+@media (max-width: 480px) {
+  #myth-game { margin: 24px 12px; padding: 20px; }
+  .quest-bar { bottom: 10px; padding: 8px 14px; font-size: 12px; }
+  .quest-bar__track { width: 80px; }
+  .line-game { gap: 8px; padding: 10px; }
+  .line-game__side { padding: 8px; }
+  .line-game__info { gap: 6px; }
+  .line-game__stat { gap: 2px; padding: 6px; }
 }
 
-.games-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 16px;
+@media (orientation: landscape) and (max-height: 850px) {
+  body.game-page { padding: 8px; }
+  .line-game { gap: 12px; padding: 12px; }
+  .line-game__center h1 { margin-bottom: 6px; font-size: clamp(1.2rem, 4vh, 1.8rem); }
+  #gameCanvas { width: auto; height: min(700px, calc(100svh - 220px)); max-width: 100%; aspect-ratio: 5 / 7; }
+  .line-game__controls { margin: 8px auto; }
 }
-
-.game-card {
-  display: flex;
-  min-width: 0;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #e1e3dc;
-  border-radius: 20px;
-  background: #fff;
-}
-
-.game-card__art {
-  display: flex;
-  height: 134px;
-  flex: 0 0 134px;
-  align-items: flex-end;
-  justify-content: space-between;
-  padding: 18px 20px;
-}
-
-.game-card__art strong {
-  font-size: 11px;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.game-card__icon {
-  font-size: 32px;
-  line-height: 1;
-}
-
-.art-green {
-  background: #d5e7d6;
-}
-
-.art-dark {
-  background: #141d22;
-  color: #cafa5b;
-}
-
-.art-peach {
-  background: #f5d8cf;
-}
-
-.art-yellow {
-  background: #e9f56d;
-}
-
-.game-card__content {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 18px 21px 20px;
-}
-
-.game-card__number {
-  margin: 0 0 7px;
-  color: #657169;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
-}
-
-.game-card__content h2 {
-  margin: 0 0 8px;
-  font-size: 19px;
-  line-height: 1.25;
-  letter-spacing: -0.04em;
-}
-
-.game-card__description {
-  margin: 0 0 10px;
-  color: #657169;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-.game-card__tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin: 0 0 18px;
-  padding: 0;
-  list-style: none;
-}
-
-.game-card__tags li {
-  padding: 3px 8px;
-  border: 1px solid #e1e3dc;
-  border-radius: 999px;
-  font-size: 11px;
-  line-height: 1.5;
-}
-
-.game-card__link {
-  display: flex;
-  min-height: 43px;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-  margin-top: auto;
-  padding: 0 14px;
-  border-radius: 11px;
-  background: #cafa5b;
-  color: #17211d;
-  font-size: 14px;
-  font-weight: 800;
-  text-decoration: none;
-}
-
-.game-card__link:hover {
-  background: #b9ed42;
-}
-
-@media (max-width: 680px) {
-  .games-page {
-    width: min(100% - 28px, 912px);
-  }
-
-  .games-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-.game-card__art.art-photo {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-}
-
-.game-card__art.art-photo img {
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.game-card__art.art-photo strong,
-.game-card__art.art-photo .game-card__icon {
-  position: relative;
-  z-index: 1;
-}
-
-
-

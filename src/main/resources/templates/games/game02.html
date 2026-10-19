@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Собери напиток — Очаково</title>
+
+  <style>
+    :root {
+      --green-dark: #123c31; --green: #1b5944; --green-light: #dce9c8;
+      --cream: #f7f5eb; --gold: #e6b84d; --text: #17382e; --muted: #718078; --white: #fff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body.game-page {
+      height: 100vh; height: 100svh; margin: 0; padding: 16px;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
+    }
+    .drink-game {
+      position: relative; width: min(100%, 1000px); max-height: 95vh;
+      display: grid; grid-template-columns: 280px 1fr; gap: 20px; padding: 24px;
+      background: var(--cream); border-radius: 24px; box-shadow: 0 24px 60px rgba(18, 60, 49, 0.35);
+    }
+    .drink-game__close {
+      position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
+      border-radius: 50%; background: var(--green-light); color: var(--green-dark);
+      display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1;
+      text-decoration: none; transition: background 0.2s, transform 0.2s; z-index: 10; box-shadow: 0 4px 10px rgba(18, 60, 49, 0.1);
+    }
+    .drink-game__close:hover { background: #c9dcae; transform: scale(1.1); }
+    .drink-game__side { display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; }
+    .drink-game__side h1 { margin: 0; padding-right: 40px; color: var(--green-dark); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; text-align: left; }
+    .drink-game__description { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
+    .drink-game__stat { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; background: var(--green-light); border: 1px solid rgba(18, 60, 49, 0.08); }
+    .drink-game__stat span { color: var(--muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+    .drink-game__stat b { color: var(--green-dark); font-size: 1.5rem; }
+    .timer { margin-top: 10px; padding: 16px; border-radius: 14px; background: var(--white); border: 1px solid rgba(18, 60, 49, 0.1); }
+    .timer__top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; font-size: 0.9rem; font-weight: 700; color: var(--green-dark); }
+    .timer__track { height: 10px; overflow: hidden; border-radius: 99px; background: var(--green-light); }
+    .timer__fill { width: 100%; height: 100%; border-radius: inherit; background: var(--green); transition: width 0.2s linear; }
+    .timer__track.low .timer__fill { background: #e27643; }
+    .feedback { min-height: 60px; margin-top: 10px; padding: 12px; border-radius: 14px; background: var(--green-light); color: var(--green-dark); font-size: 0.85rem; line-height: 1.4; font-weight: 500; }
+    .feedback.error { background: #fae7e0; color: #8b3d30; }
+    .feedback.success { background: #dce9c8; color: #1b5944; font-weight: 700; }
+
+    .drink-game__next {
+      display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; margin-top: auto;
+      border-radius: 14px; background: var(--gold); color: var(--green-dark); font-weight: 800; font-size: 1rem;
+      text-align: center; text-decoration: none; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 8px 20px rgba(230, 184, 77, 0.3);
+    }
+    .drink-game__next[hidden] { display: none; }
+    .drink-game__next:hover { background: #f0c85d; transform: translateY(-2px); }
+
+    .drink-game__main { display: flex; flex-direction: column; min-width: 0; }
+    .drink-game__instruction { margin: 0 0 16px; padding: 16px; border-radius: 14px; background: var(--white); color: var(--green-dark); font-size: 1.05rem; font-weight: 700; line-height: 1.4; text-align: center; border: 1px solid rgba(18, 60, 49, 0.1); box-shadow: 0 4px 12px rgba(18, 60, 49, 0.05); }
+    .ingredient-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; overflow-y: auto; padding-right: 4px; flex: 1; }
+    .ingredient { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 110px; padding: 10px 6px; border: 2px solid transparent; border-radius: 14px; background: var(--white); color: var(--text); cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s; box-shadow: 0 4px 10px rgba(18, 60, 49, 0.05); }
+    .ingredient:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--green); }
+    .ingredient:disabled { cursor: not-allowed; opacity: 0.6; }
+    .ingredient.selected { border-color: var(--green-dark); background: var(--green-light); transform: scale(1.02); }
+    .ingredient__icon { font-size: 2rem; margin-bottom: 8px; }
+    .ingredient b { display: block; font-size: 0.85rem; text-align: center; line-height: 1.2; }
+    .ingredient small { display: block; margin-top: 4px; color: var(--muted); font-size: 0.7rem; text-align: center; line-height: 1.2; }
+    .actions { display: flex; gap: 10px; margin-top: 16px; }
+    .action-button { flex: 1; min-height: 48px; padding: 10px; border: 0; border-radius: 12px; background: var(--green); color: var(--white); font-weight: 800; font-size: 1rem; cursor: pointer; transition: transform 0.15s, background-color 0.15s; }
+    .action-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--green-dark); }
+    .action-button.secondary { background: var(--green-light); color: var(--green-dark); }
+    .action-button.secondary:hover { background: #c9dcae; }
+    .action-button:disabled { opacity: 0.5; cursor: not-allowed; }
+    @media (max-width: 850px) {
+      .drink-game { grid-template-columns: 1fr; padding: 16px; gap: 16px; overflow-y: auto; max-height: 100vh; }
+      .drink-game__side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .drink-game__side h1, .drink-game__description { grid-column: 1 / -1; text-align: center; padding-right: 0; padding-top: 10px; }
+      .drink-game__side .timer { margin-top: 0; }
+      .drink-game__side .feedback { grid-column: 1 / -1; margin-top: 0; min-height: auto; }
+      .ingredient-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .drink-game__close { top: 12px; right: 12px; width: 34px; height: 34px; font-size: 22px; }
+    }
+    @media (max-width: 500px) { .ingredient-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+  </style>
+</head>
+<body class="game-page">
+<main class="drink-game">
+  <a href="/" class="drink-game__close" title="Вернуться на главную">&times;</a>
+  <aside class="drink-game__side">
+    <h1>Собери напиток!</h1>
+    <p class="drink-game__description">Собери все 10 напитков «Очаково», чтобы завершить смену.</p>
+    <div class="drink-game__stat">
+      <span>Прогресс</span>
+      <b><span id="currentStep">1</span> / <span id="totalSteps">10</span></b>
+    </div>
+    <div class="drink-game__stat">
+      <span>Выбрано</span>
+      <b><span id="selectedCount">0</span> / <span id="selectedTotal">0</span></b>
+    </div>
+    <div class="timer">
+      <div class="timer__top">
+        <span>Время на замес</span>
+        <span><b id="timerValue">120</b> сек.</span>
+      </div>
+      <div id="timerTrack" class="timer__track"><div id="timerFill" class="timer__fill"></div></div>
+    </div>
+    <p id="feedback" class="feedback" aria-live="polite"></p>
+
+    <!-- 🔑 КНОПКА ВЕДЕТ В ТРЕТЬЮ ИГРУ -->
+    <a class="drink-game__next" href="/games/game03" id="toNextGame" hidden>
+      Дальше: доставка в магазин →
+    </a>
+  </aside>
+  <section class="drink-game__main">
+    <p id="drinkOrder" class="drink-game__instruction" aria-live="polite"></p>
+    <div id="ingredientGrid" class="ingredient-grid"></div>
+    <div id="actions" class="actions"></div>
+  </section>
+</main>
+<script>
+  const LINE_KEY = "ochakovo_line_passed";
+  if (localStorage.getItem(LINE_KEY) !== "1") {
+    document.body.innerHTML = `
+      <main style="max-width:520px;margin:80px auto;padding:32px;border-radius:24px;background:#f7f5eb;color:#17382e;text-align:center;font-family:system-ui,sans-serif;box-shadow:0 24px 60px rgba(18,60,49,.35);">
+        <h1 style="color:#123c31;margin:0 0 12px;">Сначала смена на линии!</h1>
+        <p style="color:#718078;line-height:1.6;margin:0 0 24px;">Чтобы попасть в лабораторию и собирать напитки, сначала спаси линию розлива в первой игре.</p>
+        <a href="/games/game01" style="display:inline-block;padding:16px 32px;border-radius:999px;background:#e6b84d;color:#123c31;font-weight:800;text-decoration:none;">Перейти к линии →</a>
+      </main>`;
+    throw new Error("Line game not passed");
+  }
+
+  (() => {
+    "use strict";
+    const DURATION = 120;
+    const WRONG_CHECK_PENALTY = 10;
+    const EXTRA_INGREDIENTS_COUNT = 4;
+
+    const ingredients = [
+      { id: "water", name: "Вода", purpose: "Основа", icon: "💧" }, { id: "kvass-wort", name: "Квасное сусло", purpose: "Основа кваса", icon: "🌾" },
+      { id: "starter", name: "Закваска", purpose: "Для брожения", icon: "🫙" }, { id: "syrup", name: "Сахарный сироп", purpose: "Сладость", icon: "🍯" },
+      { id: "carbon-dioxide", name: "Углекислый газ", purpose: "Газирование", icon: "🫧" }, { id: "berry-concentrate", name: "Ягодный концентрат", purpose: "Ягодный вкус", icon: "🍓" },
+      { id: "citrus-concentrate", name: "Цитрусовый концентрат", purpose: "Цитрусовый вкус", icon: "🍋" }, { id: "citric-acid", name: "Лимонная кислота", purpose: "Кислинка", icon: "🧪" },
+      { id: "flavoring", name: "Ароматизатор", purpose: "Аромат", icon: "🌸" }, { id: "mint-extract", name: "Мятный экстракт", purpose: "Мятный вкус", icon: "🌿" },
+      { id: "cola-flavoring", name: "Ароматизатор колы", purpose: "Вкус колы", icon: "🥤" }, { id: "caramel-color", name: "Карамельный краситель", purpose: "Цвет", icon: "🟤" },
+      { id: "phosphoric-acid", name: "Фосфорная кислота", purpose: "Компонент", icon: "⚗️" }, { id: "tea-extract", name: "Чайный экстракт", purpose: "Чайный вкус", icon: "🍵" },
+      { id: "caffeine", name: "Кофеин", purpose: "Энергия", icon: "⚡" }, { id: "taurine", name: "Таурин", purpose: "Энергия", icon: "🔋" },
+      { id: "apple-concentrate", name: "Яблочный концентрат", purpose: "Яблочный вкус", icon: "🍎" }, { id: "fruit-puree", name: "Фруктовое пюре", purpose: "Основа сока", icon: "🍑" },
+      { id: "barley-malt", name: "Ячменный солод", purpose: "Солодовая основа", icon: "🌾" }, { id: "hops", name: "Хмель", purpose: "Хмелевой вкус", icon: "🌿" }
+    ];
+
+    const drinks = [
+      { id: "ochakovsky-kvass", name: "Квас «Очаковский»", recipe: ["water", "kvass-wort", "starter", "syrup", "carbon-dioxide"] },
+      { id: "family-secret-kvass", name: "Квас «Семейный секрет»", recipe: ["water", "kvass-wort", "starter", "syrup", "berry-concentrate"] },
+      { id: "ochakovsky-lemonade", name: "Очаковский лимонад", recipe: ["water", "citrus-concentrate", "syrup", "citric-acid", "carbon-dioxide"] },
+      { id: "ah-lemonade", name: "Лимонад «Ах!»", recipe: ["water", "berry-concentrate", "syrup", "citric-acid", "flavoring", "carbon-dioxide"] },
+      { id: "mojito", name: "Мохито Освежающий", recipe: ["water", "citrus-concentrate", "mint-extract", "syrup", "carbon-dioxide"] },
+      { id: "cool-cola", name: "CoolCola", recipe: ["water", "syrup", "cola-flavoring", "caramel-color", "phosphoric-acid", "carbon-dioxide"] },
+      { id: "inice-tea", name: "Холодный чай Inice", recipe: ["water", "tea-extract", "syrup", "citrus-concentrate", "citric-acid", "carbon-dioxide"] },
+      { id: "powran-energy", name: "Энергетик Powran", recipe: ["water", "syrup", "caffeine", "taurine", "citric-acid", "carbon-dioxide"] },
+      { id: "goodini-juice", name: "Сок Goodini", recipe: ["water", "apple-concentrate", "fruit-puree", "syrup", "citric-acid", "carbon-dioxide"] },
+      { id: "kern-malt", name: "Солодовый напиток Kern", recipe: ["water", "barley-malt", "hops", "syrup", "carbon-dioxide"] }
+    ];
+
+    const grid = document.getElementById("ingredientGrid");
+    const actions = document.getElementById("actions");
+    const feedback = document.getElementById("feedback");
+    const drinkOrder = document.getElementById("drinkOrder");
+    const timerValue = document.getElementById("timerValue");
+    const timerFill = document.getElementById("timerFill");
+    const timerTrack = document.getElementById("timerTrack");
+    const selectedCount = document.getElementById("selectedCount");
+    const selectedTotal = document.getElementById("selectedTotal");
+    const currentStepEl = document.getElementById("currentStep");
+    const totalStepsEl = document.getElementById("totalSteps");
+    const toNextGame = document.getElementById("toNextGame"); // 🔑 Изменено
+
+    let timerId = null;
+    let game = null;
+
+    function shuffle(items) {
+      const result = [...items];
+      for (let i = result.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; }
+      return result;
+    }
+
+    function initGame() {
+      stopTimer();
+      const drinkQueue = shuffle([...drinks]);
+
+      game = {
+        queue: drinkQueue,
+        currentIndex: 0,
+        started: false, running: false, failed: false, complete: false,
+        timeLeft: DURATION, selected: [],
+        message: "Нажми «Начать замес», чтобы начать."
+      };
+
+      toNextGame.hidden = true;
+      totalStepsEl.textContent = drinks.length;
+
+      loadDrink();
+    }
+
+    function loadDrink() {
+      const drink = game.queue[game.currentIndex];
+      const recipeIds = new Set(drink.recipe);
+      const recipeIngredients = drink.recipe.map(id => ingredients.find(item => item.id === id));
+      const extraIngredients = shuffle(ingredients.filter(item => !recipeIds.has(item.id))).slice(0, EXTRA_INGREDIENTS_COUNT);
+
+      game.currentDrink = drink;
+      game.options = shuffle([...recipeIngredients, ...extraIngredients]);
+      game.selected = [];
+      game.started = false; game.running = false; game.failed = false;
+      game.timeLeft = DURATION;
+      game.message = `Нажми «Начать замес», чтобы собрать ${drink.name}.`;
+
+      currentStepEl.textContent = game.currentIndex + 1;
+      render();
+    }
+
+    function updateTimer() {
+      timerValue.textContent = game.timeLeft;
+      timerFill.style.width = `${(game.timeLeft / DURATION) * 100}%`;
+      timerTrack.classList.toggle("low", game.timeLeft <= 20);
+    }
+
+    function render() {
+      drinkOrder.textContent = `Заказ: ${game.currentDrink.name}. Собери все ${game.currentDrink.recipe.length} ингредиентов.`;
+
+      grid.innerHTML = game.options.map(item => {
+        const selected = game.selected.includes(item.id);
+        const disabled = !game.running || game.failed || game.complete;
+        return `<button type="button" class="ingredient ${selected ? "selected" : ""}" data-ingredient="${item.id}" aria-pressed="${selected}" ${disabled ? "disabled" : ""}><span class="ingredient__icon">${item.icon}</span><b>${item.name}</b><small>${item.purpose}</small></button>`;
+      }).join("");
+
+      selectedCount.textContent = game.selected.length;
+      selectedTotal.textContent = game.currentDrink.recipe.length;
+      updateTimer();
+
+      if (game.complete) {
+        actions.innerHTML = `<button type="button" class="action-button" id="playAgain">Пройти квест заново</button>`;
+        feedback.textContent = `Победа! Ты собрал все ${drinks.length} напитков!`;
+        feedback.className = "feedback success";
+
+        // 🔑 Сохраняем прогресс для третьей игры и показываем кнопку
+        localStorage.setItem("ochakovo_drink_passed", "1");
+        toNextGame.hidden = false;
+
+        document.getElementById("playAgain").addEventListener("click", initGame);
+        return;
+      }
+
+      if (game.failed) {
+        actions.innerHTML = `<button type="button" class="action-button" id="retry">Попробовать этот напиток ещё раз</button>`;
+        feedback.textContent = game.message;
+        feedback.className = "feedback error";
+        document.getElementById("retry").addEventListener("click", loadDrink);
+        return;
+      }
+
+      actions.innerHTML = `
+        <button type="button" class="action-button" id="startMix" ${game.started ? "disabled" : ""}>${game.started ? "Замес начат" : "Начать замес"}</button>
+        <button type="button" class="action-button" id="checkMix" ${game.running ? "" : "disabled"}>Проверить состав</button>
+      `;
+      feedback.textContent = game.message;
+      feedback.className = "feedback";
+
+      grid.querySelectorAll("[data-ingredient]").forEach(button => { button.addEventListener("click", () => toggleIngredient(button.dataset.ingredient)); });
+      document.getElementById("startMix").addEventListener("click", startMix);
+      document.getElementById("checkMix").addEventListener("click", checkMix);
+    }
+
+    function startMix() {
+      if (game.started || game.complete || game.failed) return;
+      game.started = true; game.running = true; game.message = "Таймер пошёл! Выбери ингредиенты.";
+      render();
+
+      timerId = setInterval(() => {
+        game.timeLeft = Math.max(0, game.timeLeft - 1);
+        updateTimer();
+        if (game.timeLeft === 0) {
+          stopTimer(); game.running = false; game.failed = true;
+          game.message = "Время вышло! Начни этот напиток заново.";
+          render();
+        }
+      }, 1000);
+    }
+
+    function toggleIngredient(id) {
+      if (!game.running || game.failed || game.complete) return;
+      if (game.selected.includes(id)) {
+        game.selected = game.selected.filter(item => item !== id);
+      } else if (game.selected.length < game.currentDrink.recipe.length) {
+        game.selected.push(id);
+      }
+      game.message = `Выбрано ингредиентов: ${game.selected.length} из ${game.currentDrink.recipe.length}.`;
+      render();
+    }
+
+    function checkMix() {
+      if (!game.running) return;
+
+      const expected = [...game.currentDrink.recipe].sort();
+      const selected = [...game.selected].sort();
+      const isCorrect = selected.length === expected.length && selected.every((id, index) => id === expected[index]);
+
+      if (isCorrect) {
+        stopTimer();
+        game.running = false;
+        game.currentIndex++;
+
+        if (game.currentIndex >= game.queue.length) {
+          game.complete = true;
+          render();
+        } else {
+          feedback.textContent = "Верно! Переходим к следующему напитку...";
+          feedback.className = "feedback success";
+          setTimeout(loadDrink, 800);
+        }
+        return;
+      }
+
+      game.timeLeft = Math.max(0, game.timeLeft - WRONG_CHECK_PENALTY);
+      if (game.timeLeft === 0) {
+        stopTimer(); game.running = false; game.failed = true;
+        game.message = "Время вышло! Начни этот напиток заново.";
+        render();
+        return;
+      }
+
+      const expectedSet = new Set(expected);
+      const selectedSet = new Set(selected);
+      const missing = game.currentDrink.recipe.filter(id => !selectedSet.has(id)).map(id => ingredients.find(item => item.id === id).name);
+      const wrong = game.selected.filter(id => !expectedSet.has(id)).map(id => ingredients.find(item => item.id === id).name);
+
+      let message = "Состав не прошёл проверку. ";
+      if (game.selected.length !== game.currentDrink.recipe.length) message += `Нужно выбрать ${game.currentDrink.recipe.length} ингредиентов. `;
+      if (missing.length > 0) message += `Не хватает: ${missing.join(", ")}. `;
+      if (wrong.length > 0) message += `Лишние ингредиенты: ${wrong.join(", ")}. `;
+      message += `Проверка отняла ${WRONG_CHECK_PENALTY} секунд.`;
+
+      game.message = message;
+      render();
+    }
+
+    function stopTimer() { if (timerId !== null) { clearInterval(timerId); timerId = null; } }
+
+    initGame();
+  })();
+</script>
+</body>
+</html>
