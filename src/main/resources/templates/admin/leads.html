@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Заявки — HR Очаково</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f7f5eb; padding: 40px; color: #17382e; }
+        h1 { color: #123c31; margin-bottom: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; }
+        a.btn { background: #123c31; color: #e6b84d; padding: 10px 20px; border-radius: 8px; text-decoration: none; font-weight: bold; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(18,60,49,0.1); margin-top: 20px; }
+        th { background: #123c31; color: #e6b84d; padding: 16px; text-align: left; font-size: 13px; text-transform: uppercase; }
+        td { padding: 16px; border-bottom: 1px solid #dce9c8; }
+        tr:hover td { background: #f0f8de; }
+        .empty { text-align: center; padding: 40px; color: #718078; }
+    </style>
+</head>
+<body>
+<div class="header">
+    <h1>Заявки на практику — Очаково</h1>
+    <a href="/admin/leads/export" class="btn">📥 Скачать в Excel (CSV)</a>
+</div>
+<p style="color:#718078;">Всего заявок: <strong th:text="${leads.size()}">0</strong></p>
+
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Контакт</th>
+        <th>Направление</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="lead : ${leads}">
+        <td th:text="${lead.id}">1</td>
+        <td th:text="${lead.name}">Иван</td>
+        <td th:text="${lead.contact}">@ivan</td>
+        <td th:text="${lead.direction}">Оператор</td>
+        <td th:text="${#temporals.format(lead.createdAt, 'dd.MM.yyyy HH:mm')}">01.01.2026 12:00</td>
+    </tr>
+    <tr th:if="${leads.isEmpty()}">
+        <td colspan="5" class="empty">Заявок пока нет. Пройди квест — и они появятся!</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

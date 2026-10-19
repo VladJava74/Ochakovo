@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Отзывы о проекте — Очаково</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: system-ui, sans-serif; background: #f7f5eb; padding: 32px; color: #17382e; }
+        h1 { color: #123c31; margin-bottom: 6px; }
+        .subtitle { color: #718078; margin-bottom: 24px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: #fff; border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(18,60,49,0.08); }
+        .stat-card .label { color: #718078; font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+        .stat-card .value { color: #123c31; font-size: 36px; font-weight: 900; line-height: 1.2; }
+        .stat-card .stars-mini { color: #e6b84d; font-size: 14px; margin-top: 4px; }
+        .stat-card.highlight { background: #123c31; }
+        .stat-card.highlight .label { color: #e6b84d; }
+        .stat-card.highlight .value { color: #fff; }
+        table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(18,60,49,0.1); font-size: 14px; }
+        th { background: #123c31; color: #e6b84d; padding: 14px 10px; text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: 0.05em; }
+        td { padding: 14px 10px; border-bottom: 1px solid #dce9c8; vertical-align: top; }
+        tr:hover td { background: #f0f8de; }
+        .empty { text-align: center; padding: 40px; color: #718078; }
+        .name { font-weight: 800; color: #123c31; }
+        .small { font-size: 12px; color: #718078; }
+        .stars-cell { color: #e6b84d; font-size: 16px; letter-spacing: 1px; }
+        .badge { background: #dce9c8; color: #123c31; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: 700; display: inline-block; margin: 2px; }
+        .comment { max-width: 260px; font-style: italic; color: #4b5a4e; }
+    </style>
+</head>
+<body>
+<h1>Отзывы о проекте</h1>
+<p class="subtitle">Всего отзывов: <strong th:text="${total}">0</strong></p>
+
+<div class="stats">
+    <div class="stat-card highlight">
+        <div class="label">Общая оценка</div>
+        <div class="value" th:text="${avgOverall}">0</div>
+        <div class="stars-mini">★★★★★</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">🎯 Миф или правда</div>
+        <div class="value" th:text="${avg1}">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">🍹 Собери напиток</div>
+        <div class="value" th:text="${avg2}">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">🚚 Доставка</div>
+        <div class="value" th:text="${avg3}">0</div>
+    </div>
+    <div class="stat-card">
+        <div class="label">Порекомендуют</div>
+        <div class="value"><span th:text="${recommendPercent}">0</span>%</div>
+    </div>
+</div>
+
+<table>
+    <thead>
+    <tr>
+        <th>Кто</th>
+        <th>Игра 1</th>
+        <th>Игра 2</th>
+        <th>Игра 3</th>
+        <th>Общая</th>
+        <th>Понравилось</th>
+        <th>Улучшить</th>
+        <th>Дата</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="fb : ${feedbacks}">
+        <td>
+            <div class="name" th:text="${fb.name}">Аня</div>
+            <div class="small" th:text="${fb.studentGroup != null ? fb.studentGroup : '—'}">ИТ-21</div>
+        </td>
+        <!-- 🔑 ЗАЩИТА ОТ NULL В ОЦЕНКАХ -->
+        <td class="stars-cell">
+            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame1 != null and i <= fb.ratingGame1 ? '★' : '☆'}">★</span>
+        </td>
+        <td class="stars-cell">
+            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame2 != null and i <= fb.ratingGame2 ? '★' : '☆'}">★</span>
+        </td>
+        <td class="stars-cell">
+            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame3 != null and i <= fb.ratingGame3 ? '★' : '☆'}">★</span>
+        </td>
+        <td class="stars-cell">
+            <strong><span th:text="${fb.ratingOverall != null ? fb.ratingOverall : '—'}">5</span>/5</strong>
+        </td>
+        <td>
+            <th:block th:if="${fb.likedMost != null and !fb.likedMost.isEmpty()}">
+                <span class="badge" th:each="item : ${#strings.arraySplit(fb.likedMost, ', ')}" th:text="${item}">Дизайн</span>
+            </th:block>
+            <span th:if="${fb.likedMost == null or fb.likedMost.isEmpty()}" class="small">—</span>
+        </td>
+        <td class="comment" th:text="${fb.improvements != null ? fb.improvements : '—'}">Добавить звуки</td>
+        <td class="small" th:text="${fb.createdAt != null ? #temporals.format(fb.createdAt, 'dd.MM.yy HH:mm') : '—'}">01.01.26</td>
+    </tr>
+    <tr th:if="${feedbacks.isEmpty()}">
+        <td colspan="8" class="empty">Пока никто не оценил. Пройди квест — и отзывы появятся!</td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
