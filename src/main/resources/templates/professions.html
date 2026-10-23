@@ -21,67 +21,413 @@
     <a class="btn" href="/games/game01">Попробовать смену →</a>
   </section>
 
-  <!-- КАРТОЧКИ ПРОФЕССИЙ -->
-  <section class="gallery-section" id="profession-playlist">
-    <h2 class="section-title">Выбери свой класс</h2>
-    <p style="text-align: center; max-width: 700px; margin: 0 auto 40px; color: var(--muted); font-size: 1.1rem;">
-      На производстве напитков есть профессии для тех, кто любит гаджеты, механизмы и точность.
-    </p>
+  <!-- БЛОК С ВИДЕО -->
+  <section class="gallery-section" id="video-section">
+    <h2 class="section-title">Заглянем на производство</h2>
 
-    <div class="conditions-grid">
-
-      <!-- Профессия 1: Оператор-наладчик -->
-      <article class="card">
-        <div class="icon-box">⚙️</div>
-        <h3>Оператор-наладчик на линии</h3>
-        <p>
-          Повелитель оборудования. Ты следишь за тем, чтобы линии розлива
-          работали как часы, и спасаешь производство при любых поломках.
-          Настоящий супергерой завода.
-        </p>
-        <a href="/games/game01" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Примерить роль →</a>
-      </article>
-
-      <!-- Профессия 2: Механик -->
-      <article class="card">
-        <div class="icon-box">🛠️</div>
-        <h3>Механик на пищевом производстве</h3>
-        <p>
-          Тот, кто знает устройство завода до последнего винтика. Твоя работа —
-          настраивать и ремонтировать механизмы, чтобы ни одна бутылка не сошла с дистанции.
-        </p>
-        <a href="/games/game01" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Испытать себя →</a>
-      </article>
-
-      <!-- Профессия 3: Технолог -->
-      <article class="card">
-        <div class="icon-box">🔬</div>
-        <h3>Химик-технолог</h3>
-        <p>
-          Это высший пилотаж. Ты создаешь рецепты и контролируешь процессы так,
-          чтобы вкус легендарного кваса оставался идеальным на протяжении десятилетий.
-        </p>
-        <a href="/#myth-game" style="color: var(--green); font-weight: 800; margin-top: auto; text-decoration: none;">Проверить знания →</a>
-      </article>
-
+    <!-- Видео 1: Слева видео, справа текст -->
+    <div class="video-row">
+      <div class="video-block">
+        <div class="video-wrapper">
+          <!-- 🔑 Добавлен атрибут playsinline для мобильных -->
+          <video class="video-element" preload="metadata" playsinline>
+            <source src="/video/line.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+          <div class="video-cover">
+            <span class="video-badge"><span class="dot"></span> ВИДЕО • ЛИНИЯ РОЗЛИВА</span>
+            <div class="play-btn">▶</div>
+            <h3>Как работает линия розлива</h3>
+            <p>Здесь появится видео со смены оператора: линия, оборудование, контроль качества «в потоке».</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-text">
+        <h3>Скорость и точность</h3>
+        <p>На линии розлива каждая секунда на счету. Оператор следит за тем, чтобы бутылки двигались без задержек, а оборудование работало как часы. Здесь важно не только нажимать кнопки, но и понимать, как устроен весь механизм.</p>
+        <p>Посмотрите, как происходит магия превращения простого стекла и пластика в готовый продукт.</p>
+      </div>
     </div>
+
+    <!-- Видео 2: Слева текст, справа видео -->
+    <div class="video-row video-row--reverse">
+      <div class="video-block">
+        <div class="video-wrapper">
+          <video class="video-element" preload="metadata" playsinline>
+            <source src="/video/lab.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+          <div class="video-cover">
+            <span class="video-badge"><span class="dot"></span> ВИДЕО • ЛАБОРАТОРИЯ</span>
+            <div class="play-btn">▶</div>
+            <h3>Контроль качества</h3>
+            <p>Как проверяют вкус и состав напитков в лаборатории завода.</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-text">
+        <h3>Наука о вкусе</h3>
+        <p>За каждым любимым вкусом стоит кропотливая работа химиков-технологов. В лаборатории берут пробы, проверяют кислотность, плотность и, конечно, проводят дегустации.</p>
+        <p>Именно здесь рождаются новые рецепты и гарантируется, что каждая бутылка соответствует строгим стандартам качества.</p>
+      </div>
+    </div>
+
+    <!-- Видео 3: Слева видео, справа текст -->
+    <div class="video-row">
+      <div class="video-block">
+        <div class="video-wrapper">
+          <video class="video-element" preload="metadata" playsinline>
+            <source src="/video/logistics.mp4" type="video/mp4">
+            Ваш браузер не поддерживает видео.
+          </video>
+          <div class="video-cover">
+            <span class="video-badge"><span class="dot"></span> ВИДЕО • ЛОГИСТИКА</span>
+            <div class="play-btn">▶</div>
+            <h3>Доставка в магазины</h3>
+            <p>От заводского склада до полок магазинов — путь любимых напитков.</p>
+          </div>
+        </div>
+      </div>
+      <div class="video-text">
+        <h3>Бесперебойные поставки</h3>
+        <p>Логистика — это сложный механизм, который обеспечивает наличие кваса и лимонадов по всей стране. От того, насколько быстро и точно работает команда склада и водители, зависит, увидит ли покупатель свой любимый напиток на полке.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ИГРА-ТЕСТ -->
+  <section class="gallery-section" id="profession-quiz">
+    <div class="section-pro" id="quiz">
+      <div style="text-align:center;">
+        <span class="eyebrow-pro">Проверь себя</span>
+        <h2 class="section-title-pro">Тест: насколько ты готов?</h2>
+        <div class="divider-pro"></div>
+        <p class="lead-pro" style="max-width: 740px; margin: 0 auto;">
+          10 вопросов о профессиях, вкусах и производстве «Очаково».
+          Отвечай честно — и узнай, какая роль тебе ближе.
+        </p>
+      </div>
+
+      <div class="quiz-pro" id="quizContainer">
+        <div class="quiz-progress">
+          <span class="quiz-progress__text" id="quizProgressText">Вопрос 1 / 10</span>
+          <div class="quiz-progress__bar">
+            <div class="quiz-progress__fill" id="quizProgressFill"></div>
+          </div>
+        </div>
+
+        <div id="quizBody">
+          <h3 class="quiz-question" id="quizQuestion"></h3>
+          <div class="quiz-options" id="quizOptions"></div>
+          <div class="quiz-feedback" id="quizFeedback"></div>
+          <button class="quiz-next" id="quizNext">Следующий вопрос →</button>
+        </div>
+
+        <div class="quiz-result" id="quizResult">
+          <p class="quiz-result__score" id="quizResultScore">0/10</p>
+          <p class="quiz-result__label">Правильных ответов</p>
+          <h3 class="quiz-result__title" id="quizResultTitle"></h3>
+          <p class="quiz-result__desc" id="quizResultDesc"></p>
+          <button class="quiz-restart" id="quizRestart">Пройти заново ↻</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Ждем полной загрузки HTML, прежде чем запускать скрипты
+      document.addEventListener('DOMContentLoaded', function () {
+
+        /* ============================================================
+           1. ЛОГИКА ДЛЯ ВИДЕО
+           ============================================================ */
+        const videoWrappers = document.querySelectorAll('.video-wrapper');
+
+        if (videoWrappers.length > 0) {
+          videoWrappers.forEach((wrapper, index) => {
+            const video = wrapper.querySelector('.video-element');
+            const cover = wrapper.querySelector('.video-cover');
+
+            if (!video || !cover) return;
+
+            // Клик по обложке
+            cover.addEventListener('click', () => {
+              // Скрываем обложку
+              cover.classList.add('is-hidden');
+
+              // Включаем контролы
+              video.setAttribute('controls', 'true');
+
+              // Принудительно запускаем загрузку и воспроизведение
+              video.load();
+              const playPromise = video.play();
+
+              if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                  console.error(`Ошибка видео №${index + 1}:`, error);
+                  alert(`Не удалось запустить видео №${index + 1}. Проверьте формат файла (нужен MP4/H.264) и путь.`);
+                });
+              }
+            });
+
+            // Отслеживаем ошибки загрузки самого файла
+            video.addEventListener('error', () => {
+              console.error(`Файл видео №${index + 1} не найден или поврежден.`);
+            });
+          });
+        }
+
+        /* ============================================================
+           2. ЛОГИКА ДЛЯ ТЕСТА (ИГРЫ)
+           ============================================================ */
+        const quizContainer = document.getElementById('quiz');
+
+        // Запускаем тест только если он есть на странице
+        if (quizContainer) {
+          const questions = [
+            {
+                q: "Кто первым проверяет, «правильный» ли получился вкус напитка?",
+                options: ["Оператор розлива", "Лаборант-химик", "Кладовщик", "Менеджер по продажам"],
+                correct: 1,
+                explanation: "Лаборант-химик проводит физико-химические и органолептические анализы — именно он первым узнаёт, соответствует ли вкус стандарту."
+            },
+            {
+                q: "Какая зарплата у лаборанта-химика (до вычета налога)?",
+                options: ["от 30 000 ₽", "от 45 000 ₽", "от 60 000 ₽", "от 100 000 ₽"],
+                correct: 2,
+                explanation: "Лаборант-химик получает от 60 000 ₽ до вычета налога, а с ночными сменами — больше."
+            },
+            {
+                q: "Сколько часов длится одна смена на производстве «Очаково»?",
+                options: ["8 часов", "10 часов", "12 часов", "16 часов"],
+                correct: 2,
+                explanation: "Смены по 12 часов: с 8:00 до 20:00 (день) или с 20:00 до 8:00 (ночь)."
+            },
+            {
+                q: "Что делает оператор розлива?",
+                options: ["Только нажимает одну кнопку", "Работает на машинах этикетки, упаковки и выдува", "Только моет пол", "Только считает бутылки"],
+                correct: 1,
+                explanation: "Оператор розлива управляет машинами этикетки, упаковки, выдува и паллетоукладчика, контролирует параметры и меняет комплектующие."
+            },
+            {
+                q: "Что такое «купажирование» при создании вкуса?",
+                options: ["Покупка готового вкуса в магазине", "Смешивание компонентов в лабораторных колбах", "Реклама напитка", "Утилизация брака"],
+                correct: 1,
+                explanation: "Купажирование — это смешивание десятков образцов с точностью до миллилитра, чтобы найти баланс сладости и кислоты."
+            },
+            {
+                q: "Зачем нужна слепая дегустация?",
+                options: ["Чтобы никто не видел бутылку", "Чтобы непредвзято оценить вкус, аромат и послевкусие", "Чтобы сэкономить деньги", "Чтобы ускорить производство"],
+                correct: 1,
+                explanation: "На слепой дегустации комиссия не знает, какой образец перед ней, — так оценка получается объективной."
+            },
+            {
+                q: "Какая зарплата у оператора розлива (до вычета налога)?",
+                options: ["от 40 000 ₽", "от 55 000 ₽", "от 70 000 ₽", "от 90 000 ₽"],
+                correct: 2,
+                explanation: "Оператор розлива получает от 70 000 ₽ до вычета налога, а с ночными сменами — больше."
+            },
+            {
+                q: "Какой график работы у оператора розлива?",
+                options: ["5/2 с 9:00 до 18:00", "2/2: день-ночь-отсыпной-выходной", "Только ночные смены", "Свободный график"],
+                correct: 1,
+                explanation: "График 2/2: день-ночь-отсыпной-выходной, смены по 12 часов — с 8:00 до 20:00 или с 20:00 до 8:00."
+            },
+            {
+                q: "Что проверяют на этапе «тесты и стабилизация» при создании вкуса?",
+                options: ["Только цвет бутылки", "Как вкус держится в течение срока хранения", "Скорость печати этикеток", "Количество сахара в чае сотрудников"],
+                correct: 1,
+                explanation: "На этом этапе проверяют, как вкус сохраняется при хранении, не выпадает ли осадок и совместим ли напиток с тарой."
+            },
+            {
+                q: "Что из этого НЕ входит в задачи лаборанта-химика?",
+                options: ["Брать пробы сырья и готовой продукции", "Проводить физико-химические анализы", "Продавать напитки оптовым клиентам", "Заполнять протоколы испытаний"],
+                correct: 2,
+                explanation: "Продажи — не задача лаборанта. Он работает с пробами, анализами, реактивами и протоколами."
+            }
+          ];
+
+          const letters = ['A', 'B', 'C', 'D'];
+          let current = 0;
+          let score = 0;
+          let answered = false;
+
+          // Получаем элементы
+          const bodyEl = document.getElementById('quizBody');
+          const questionEl = document.getElementById('quizQuestion');
+          const optionsEl = document.getElementById('quizOptions');
+          const feedbackEl = document.getElementById('quizFeedback');
+          const nextBtn = document.getElementById('quizNext');
+          const progressText = document.getElementById('quizProgressText');
+          const progressFill = document.getElementById('quizProgressFill');
+          const resultEl = document.getElementById('quizResult');
+          const resultScore = document.getElementById('quizResultScore');
+          const resultTitle = document.getElementById('quizResultTitle');
+          const resultDesc = document.getElementById('quizResultDesc');
+          const restartBtn = document.getElementById('quizRestart');
+
+          // Защита от ошибок верстки
+          if (!questionEl || !optionsEl || !nextBtn) {
+            console.error("ОШИБКА: Не найдены элементы теста (quizQuestion, quizOptions, quizNext). Проверьте ID в HTML.");
+            return;
+          }
+
+          function renderQuestion() {
+              answered = false;
+              const q = questions[current];
+
+              progressText.textContent = 'Вопрос ' + (current + 1) + ' / ' + questions.length;
+              progressFill.style.width = ((current) / questions.length * 100) + '%';
+
+              questionEl.textContent = q.q;
+              optionsEl.innerHTML = '';
+              feedbackEl.className = 'quiz-feedback';
+              feedbackEl.textContent = '';
+              nextBtn.className = 'quiz-next';
+
+              q.options.forEach(function (opt, i) {
+                  const btn = document.createElement('button');
+                  btn.className = 'quiz-option';
+                  btn.type = 'button';
+                  btn.innerHTML = '<span class="quiz-option__letter"><span>' + letters[i] + '</span></span><span>' + opt + '</span>';
+                  btn.addEventListener('click', function () { selectAnswer(i); });
+                  optionsEl.appendChild(btn);
+              });
+
+              questionEl.style.animation = 'none';
+              void questionEl.offsetWidth;
+              questionEl.style.animation = '';
+          }
+
+          function selectAnswer(index) {
+              if (answered) return;
+              answered = true;
+
+              const q = questions[current];
+              const optionBtns = optionsEl.querySelectorAll('.quiz-option');
+
+              optionBtns.forEach(function (btn, i) {
+                  btn.disabled = true;
+                  if (i === q.correct) {
+                      btn.classList.add('quiz-option--correct');
+                  }
+                  if (i === index && i !== q.correct) {
+                      btn.classList.add('quiz-option--wrong');
+                  }
+              });
+
+              const isCorrect = index === q.correct;
+              if (isCorrect) {
+                  score++;
+                  feedbackEl.className = 'quiz-feedback quiz-feedback--show quiz-feedback--correct';
+                  feedbackEl.textContent = '✓ Верно! ' + q.explanation;
+              } else {
+                  feedbackEl.className = 'quiz-feedback quiz-feedback--show quiz-feedback--wrong';
+                  feedbackEl.textContent = '✕ Не совсем. ' + q.explanation;
+              }
+
+              nextBtn.textContent = (current === questions.length - 1) ? 'Показать результат →' : 'Следующий вопрос →';
+              nextBtn.className = 'quiz-next quiz-next--show';
+          }
+
+          function nextQuestion() {
+              current++;
+              if (current < questions.length) {
+                  renderQuestion();
+              } else {
+                  showResult();
+              }
+          }
+
+          function showResult() {
+              bodyEl.style.display = 'none';
+              resultEl.classList.add('quiz-result--show');
+              progressFill.style.width = '100%';
+              progressText.textContent = 'Готово!';
+
+              resultScore.textContent = score + '/' + questions.length;
+
+              let title, desc;
+              if (score === questions.length) {
+                  title = 'Идеально! 🏆';
+                  desc = 'Ты знаешь о производстве «Очаково» всё — хоть завтра на смену. Лаборатория или линия розлива ждут тебя!';
+              } else if (score >= 7) {
+                  title = 'Отличный результат! 🎯';
+                  desc = 'Ты хорошо разбираешься в профессиях и процессе создания вкуса. Осталось совсем немного — и ты готов примерять роль.';
+              } else if (score >= 4) {
+                  title = 'Неплохо! 👌';
+                  desc = 'Основы ты уловил, но есть что подтянуть. Перечитай блоки про лаборанта и оператора розлива — и попробуй снова.';
+              } else {
+                  title = 'Есть куда расти 💪';
+                  desc = 'Пока не всё получилось, но это не страшно. Вернись к разделам «Попробуй себя» и «Как создаются вкусы» — и попробуй ещё раз.';
+              }
+              resultTitle.textContent = title;
+              resultDesc.textContent = desc;
+          }
+
+          function restart() {
+              current = 0;
+              score = 0;
+              bodyEl.style.display = 'block';
+              resultEl.classList.remove('quiz-result--show');
+              renderQuestion();
+          }
+
+          nextBtn.addEventListener('click', nextQuestion);
+          restartBtn.addEventListener('click', restart);
+
+          // Запуск отрисовки первого вопроса
+          renderQuestion();
+        }
+      });
+    </script>
   </section>
 
   <!-- БЛОК С ПРИЗЫВОМ (CTA) -->
   <section class="gallery-section" id="profession-cta">
-    <div class="card" style="max-width: 800px; margin: 0 auto; text-align: center; background: var(--green-dark); color: var(--white); border: none; padding: 48px;">
-      <h2 style="color: var(--gold); font-size: 2rem; margin-bottom: 16px;">Не знаешь, что выбрать?</h2>
-      <p style="color: rgba(255,255,255,0.9); font-size: 1.1rem; margin-bottom: 32px;">
+    <div class="card card--dark-accent card--wide card--cta">
+      <h2>Не знаешь, что выбрать?</h2>
+      <p>
         Пройди наш квест и симулятор смены. Возможно, именно там ты поймешь,
         какая профессия на заводе твоя.
       </p>
-      <a class="btn" href="/" style="background: var(--gold); color: var(--green-dark); font-size: 18px; padding: 16px 40px;">
+      <a class="btn btn--light" href="/">
         Начать карьерный квест →
       </a>
     </div>
   </section>
 
 </div>
+
+<!-- 🔑 СКРИПТ ДЛЯ ЗАПУСКА ВИДЕО -->
+<script>
+  document.querySelectorAll('.video-wrapper').forEach(wrapper => {
+    const video = wrapper.querySelector('.video-element');
+    const cover = wrapper.querySelector('.video-cover');
+
+    if (!video || !cover) return;
+
+    // Функция запуска
+    const startVideo = () => {
+      // Скрываем обложку
+      cover.classList.add('is-hidden');
+
+      // Включаем контролы управления
+      video.setAttribute('controls', 'true');
+
+      // Запускаем видео
+      const playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Ошибка воспроизведения:", error);
+        });
+      }
+    };
+
+    // Клик по обложке запускает видео
+    cover.addEventListener('click', startVideo);
+  });
+</script>
 
 <div id="page-scripts"></div>
 

@@ -6,55 +6,100 @@
     <title>Спаси линию — Очаково</title>
 
     <style>
-        :root {
-          --green-dark: #123c31;
-          --green: #1b5944;
-          --green-light: #dce9c8;
-          --cream: #f7f5eb;
-          --gold: #e6b84d;
-          --text: #17382e;
-          --muted: #718078;
-          --white: #fff;
+        /* Подключение фирменного шрифта */
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'),
+               url('/fonts/ProximaNova-Regular.woff') format('woff');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
         }
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'),
+               url('/fonts/ProximaNova-Bold.woff') format('woff');
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
+               url('/fonts/ProximaNova-ExtraBold.woff') format('woff');
+          font-weight: 800;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        :root {
+          /* Новая палитра Очаково */
+          --brand-red: #d50032;
+          --brand-red-dark: #ab2328;
+          --brand-white: #ffffff;
+          --brand-dark: #626262;
+          --brand-black: #000000;
+          --brand-gray: #a2aaad;
+          --brand-gray-soft: rgba(162, 170, 173, 0.16);
+          --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
+
+          /* Переменные для игры */
+          --text: var(--brand-dark);
+          --heading: var(--brand-black);
+          --white: var(--brand-white);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
+
         body.game-page {
           height: 100vh; height: 100svh; margin: 0; padding: 16px;
           display: flex; align-items: center; justify-content: center;
-          background: linear-gradient(135deg, var(--green-dark), var(--green));
-          color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
+          background: linear-gradient(135deg, var(--brand-red-dark), var(--brand-red));
+          color: var(--text); font-family: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
         }
+
         .line-game {
           position: relative; width: min(100%, 980px); max-height: 95vh;
           display: grid; grid-template-columns: 260px 1fr; gap: 20px; padding: 24px;
-          background: var(--cream); border-radius: 24px; box-shadow: 0 24px 60px rgba(18, 60, 49, 0.35);
+          background: var(--brand-white); border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
         }
+
         .line-game__close {
           position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
-          border-radius: 50%; background: var(--green-light); color: var(--green-dark);
+          border-radius: 50%; background: var(--brand-gray-soft); color: var(--brand-red);
           display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1;
-          text-decoration: none; transition: background 0.2s, transform 0.2s; z-index: 10; box-shadow: 0 4px 10px rgba(18, 60, 49, 0.1);
+          text-decoration: none; transition: background 0.2s, transform 0.2s; z-index: 10; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         }
-        .line-game__close:hover { background: #c9dcae; transform: scale(1.1); }
+        .line-game__close:hover { background: var(--brand-gray-soft-hover); transform: scale(1.1); }
+
         .line-game__side { display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; }
-        .line-game__side h1 { margin: 0; padding-right: 40px; color: var(--green-dark); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; text-align: left; }
-        .line-game__sub { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; text-align: left; }
+        .line-game__side h1 { margin: 0; padding-right: 40px; color: var(--heading); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; text-align: left; font-weight: 800; }
+        .line-game__sub { margin: 0; color: var(--text); font-size: 0.9rem; line-height: 1.4; text-align: left; }
+
         .line-game__info { display: flex; flex-direction: column; gap: 10px; margin-top: 10px; }
-        .line-game__stat { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; background: var(--green-light); border: 1px solid rgba(18, 60, 49, 0.08); }
-        .line-game__stat span { color: var(--muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-        .line-game__stat b { color: var(--green-dark); font-size: 1.5rem; }
-        #lives { color: var(--gold); letter-spacing: 2px; }
-        .line-game__fact { padding: 12px; border-radius: 12px; background: var(--green-dark); color: var(--green-light); font-size: 0.8rem; line-height: 1.4; margin-top: auto; }
-        .line-game__restart { width: 100%; padding: 12px; border: 1px solid rgba(18, 60, 49, 0.15); border-radius: 12px; background: transparent; color: var(--green-dark); font: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: background 0.2s; margin-top: auto; }
-        .line-game__restart:hover { background: var(--green-light); }
-        .line-game__next { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; border-radius: 14px; background: var(--gold); color: var(--green-dark); font-weight: 800; font-size: 1rem; text-align: center; text-decoration: none; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 8px 20px rgba(230, 184, 77, 0.3); }
+        .line-game__stat { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; background: var(--brand-gray-soft); border: 1px solid rgba(162, 170, 173, 0.2); }
+        .line-game__stat span { color: var(--text); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+        .line-game__stat b { color: var(--heading); font-size: 1.5rem; font-weight: 800; }
+        #lives { color: var(--brand-red); letter-spacing: 2px; }
+
+        .line-game__fact { padding: 12px; border-radius: 12px; background: var(--brand-red-dark); color: var(--brand-white); font-size: 0.8rem; line-height: 1.4; margin-top: auto; }
+
+        .line-game__restart { width: 100%; padding: 12px; border: 1px solid var(--brand-gray); border-radius: 12px; background: transparent; color: var(--heading); font: inherit; font-weight: 800; font-size: 0.95rem; cursor: pointer; transition: background 0.2s, border-color 0.2s; margin-top: auto; }
+        .line-game__restart:hover { background: var(--brand-gray-soft); border-color: transparent; }
+
+        .line-game__next { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; border-radius: 14px; background: var(--brand-red); color: var(--brand-white); font-weight: 800; font-size: 1rem; text-align: center; text-decoration: none; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 8px 20px rgba(213, 0, 50, 0.3); }
         .line-game__next[hidden] { display: none; }
-        .line-game__next:hover { background: #f0c85d; transform: translateY(-2px); }
+        .line-game__next:hover { background: var(--brand-red-dark); transform: translateY(-2px); }
+
         .line-game__center { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 0; }
-        #gameCanvas { display: block; width: 100%; max-width: 500px; max-height: 70vh; aspect-ratio: 5 / 7; object-fit: contain; border: 6px solid var(--white); border-radius: 20px; box-shadow: 0 12px 30px rgba(18, 60, 49, 0.15); background: var(--green-light); }
+
+        #gameCanvas { display: block; width: 100%; max-width: 500px; max-height: 70vh; aspect-ratio: 5 / 7; object-fit: contain; border: 4px solid var(--brand-white); border-radius: 20px; box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15); background: var(--brand-gray-soft); }
+
         .line-game__controls { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; width: 100%; max-width: 500px; margin: 12px 0 0; }
-        .line-game__controls button { min-height: 42px; border: 0; border-radius: 10px; background: var(--green-light); color: var(--green-dark); font: inherit; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.15s, background-color 0.15s; }
-        .line-game__controls button:hover { background: #c9dcae; transform: translateY(-2px); }
-        .line-game__hint { margin: 8px 0 0; color: var(--muted); font-size: 0.75rem; text-align: center; }
+        .line-game__controls button { min-height: 42px; border: 0; border-radius: 10px; background: var(--brand-gray-soft); color: var(--heading); font: inherit; font-weight: 800; font-size: 1.1rem; cursor: pointer; transition: transform 0.15s, background-color 0.15s; }
+        .line-game__controls button:hover { background: var(--brand-gray-soft-hover); transform: translateY(-2px); }
+        .line-game__hint { margin: 8px 0 0; color: var(--text); font-size: 0.75rem; text-align: center; }
+
         @media (max-width: 850px) {
           .line-game { grid-template-columns: 1fr; grid-template-rows: auto auto; padding: 16px; gap: 16px; overflow-y: auto; max-height: 100vh; }
           .line-game__side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -74,7 +119,7 @@
     <a href="/" class="line-game__close" title="Вернуться на главную">&times;</a>
     <aside class="line-game__side">
         <h1>Спаси линию!</h1>
-        <p class="line-game__sub">Лови хорошие бутылки. Брак (красный) пропускай.</p>
+        <p class="line-game__sub">Лови хорошие бутылки. Брак (серый) пропускай.</p>
         <div class="line-game__info">
             <div class="line-game__stat"><span>Счёт</span><b id="score">0</b></div>
             <div class="line-game__stat"><span>Партии</span><b id="lives">♥ ♥ ♥</b></div>
@@ -100,11 +145,12 @@
 <script>
     const MYTH_KEY = "ochakovo_myth_passed";
     if (localStorage.getItem(MYTH_KEY) !== "1") {
+      // Обновленный экран-заглушка под новую палитру
       document.body.innerHTML = `
-        <main style="max-width:520px;margin:80px auto;padding:32px;border-radius:24px;background:#f7f5eb;color:#17382e;text-align:center;font-family:system-ui,sans-serif;box-shadow:0 24px 60px rgba(18,60,49,.35);">
-          <h1 style="color:#123c31;margin:0 0 12px;">Сначала разминка!</h1>
-          <p style="color:#718078;line-height:1.6;margin:0 0 24px;">Чтобы попасть на линию, сначала пройди «Миф или правда».</p>
-          <a href="/" style="display:inline-block;padding:16px 32px;border-radius:999px;background:#e6b84d;color:#123c31;font-weight:800;text-decoration:none;">Пройти «Миф или правда» →</a>
+        <main style="max-width:520px;margin:80px auto;padding:40px;border-radius:24px;background:#ffffff;color:#000000;text-align:center;font-family:'Proxima Nova',system-ui,sans-serif;box-shadow:0 24px 60px rgba(0,0,0,.2);">
+          <h1 style="color:#ab2328;margin:0 0 16px;font-weight:900;">Сначала разминка!</h1>
+          <p style="color:#626262;line-height:1.6;margin:0 0 32px;font-size:1.1rem;">Чтобы попасть на линию, сначала пройди «Миф или правда».</p>
+          <a href="/" style="display:inline-block;padding:16px 32px;border-radius:999px;background:#d50032;color:#ffffff;font-weight:800;text-decoration:none;">Пройти «Миф или правда» →</a>
         </main>`;
       throw new Error("Myth game not passed");
     }
@@ -114,12 +160,13 @@
     const scoreElement = document.getElementById("score");
     const livesElement = document.getElementById("lives");
     const factElement = document.getElementById("fact");
-    const toNextGame = document.getElementById("toNextGame"); // 🔑 Изменено
+    const toNextGame = document.getElementById("toNextGame");
 
     const laneX = [70, 157, 243, 330];
     const basketY = 492;
     const FACT_EVERY = 10;
     const facts = ["«Очаково» первым в мире разлило пиво в ПЭТ — в 1994 году.","Для кваса «Очаковский» сотрудники собирали рецепты по деревням.","Один заторно-варочный чан вмещает 65 000 литров.","У «Очаково» есть свой солод, поля и даже завод «Сатурн».","Квас делают двойным брожением — как шампанское.","На заводе разливали и Pepsi, и Fanta — уникальный случай."];
+
     const backgroundImage = new Image(); backgroundImage.src = "/assets/background.png";
     const basketImage = new Image(); basketImage.src = "/images/cardboard-box-resized.png";
     const itemTextures = ["/images/egg1.png","/images/egg2.png","/images/egg3.png","/images/egg4.png","/images/egg5.png","/images/egg6.png","/images/egg7.png","/images/egg8.png"].map(src => { const img = new Image(); img.src = src; return img; });
@@ -130,7 +177,7 @@
       items = []; playerLane = 1; score = 0; lives = 3; running = true;
       lastTime = 0; spawnTimer = 0; nextFactAt = FACT_EVERY;
       factElement.hidden = true;
-      toNextGame.hidden = true; // 🔑 Прячем кнопку при рестарте
+      toNextGame.hidden = true;
       updateInfo();
     }
     function updateInfo() { scoreElement.textContent = score; livesElement.textContent = "♥ ".repeat(lives).trim() || "—"; }
@@ -138,42 +185,59 @@
       const isBad = Math.random() < 0.25;
       items.push({ lane: Math.floor(Math.random() * 4), y: 55, speed: 135 + score * 3, bad: isBad, texture: itemTextures[Math.floor(Math.random() * itemTextures.length)] });
     }
+
     function drawFallbackBackground() {
-      const g = ctx.createLinearGradient(0, 0, 0, canvas.height); g.addColorStop(0, "#dce9c8"); g.addColorStop(1, "#f7f5eb");
+      // Обновленные цвета фона
+      const g = ctx.createLinearGradient(0, 0, 0, canvas.height);
+      g.addColorStop(0, "#f9f9f9");
+      g.addColorStop(1, "#ffffff");
+
       ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
       laneX.forEach((x, i) => {
-        ctx.fillStyle = "rgba(27,89,68,.12)"; ctx.fillRect(x - 29, 42, 58, 442);
-        ctx.strokeStyle = "#1b5944"; ctx.lineWidth = 6; ctx.lineCap = "round";
+        ctx.fillStyle = "rgba(162, 170, 173, 0.15)"; ctx.fillRect(x - 29, 42, 58, 442);
+        ctx.strokeStyle = "#626262"; ctx.lineWidth = 6; ctx.lineCap = "round";
         ctx.beginPath(); ctx.moveTo(x - 29, 42); ctx.lineTo(x - 29, 484); ctx.moveTo(x + 29, 42); ctx.lineTo(x + 29, 484); ctx.stroke();
-        ctx.fillStyle = "#123c31"; ctx.font = "bold 15px system-ui"; ctx.textAlign = "center"; ctx.fillText(String(i + 1), x, 30);
+        ctx.fillStyle = "#000000"; ctx.font = "bold 15px 'Proxima Nova', system-ui"; ctx.textAlign = "center"; ctx.fillText(String(i + 1), x, 30);
       });
-      ctx.fillStyle = "#e6b84d"; ctx.fillRect(25, 484, 350, 8);
+      ctx.fillStyle = "#d50032"; ctx.fillRect(25, 484, 350, 8);
     }
+
     function drawBackground() { if (backgroundImage.complete && backgroundImage.naturalWidth > 0) { ctx.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height); } else { drawFallbackBackground(); } }
+
     function drawBottle(x, y, bad, texture) {
       if (texture && texture.complete && texture.naturalWidth > 0) {
-        ctx.save(); if (bad) { ctx.filter = 'sepia(1) hue-rotate(-50deg) saturate(5) drop-shadow(0 0 5px red)'; }
+        ctx.save(); if (bad) { ctx.filter = 'grayscale(1) brightness(0.7)'; } // Брак теперь серый
         ctx.drawImage(texture, x - 20, y - 30, 40, 60); ctx.restore(); return;
       }
-      ctx.fillStyle = bad ? "#e34f58" : "#1b5944"; ctx.beginPath(); ctx.roundRect(x - 12, y - 28, 24, 56, 8); ctx.fill();
-      ctx.fillStyle = "#e6b84d"; ctx.fillRect(x - 8, y - 32, 16, 10);
+      // Обновленные цвета бутылок
+      ctx.fillStyle = bad ? "#A2AAAD" : "#D50032"; // Брак - серый, Хорошая - красная
+      ctx.beginPath(); ctx.roundRect(x - 12, y - 28, 24, 56, 8); ctx.fill();
+      ctx.fillStyle = "#AB2328"; // Крышка темно-красная
+      ctx.fillRect(x - 8, y - 32, 16, 10);
       if (bad) { ctx.strokeStyle = "#fff"; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(x - 8, y - 10); ctx.lineTo(x + 8, y + 10); ctx.stroke(); }
     }
+
     function drawBasket() {
       const x = laneX[playerLane];
       if (basketImage.complete && basketImage.naturalWidth > 0) { ctx.drawImage(basketImage, x - 68, basketY - 44, 136, 88); return; }
-      ctx.fillStyle = "#e6b84d"; ctx.beginPath(); ctx.moveTo(x - 50, basketY - 20); ctx.lineTo(x + 50, basketY - 20); ctx.lineTo(x + 38, basketY + 32); ctx.lineTo(x - 38, basketY + 32); ctx.closePath(); ctx.fill();
+      ctx.fillStyle = "#AB2328"; // Темно-красная корзина
+      ctx.beginPath(); ctx.moveTo(x - 50, basketY - 20); ctx.lineTo(x + 50, basketY - 20); ctx.lineTo(x + 38, basketY + 32); ctx.lineTo(x - 38, basketY + 32); ctx.closePath(); ctx.fill();
     }
+
     function drawGameOver() {
-      ctx.fillStyle = "rgba(18,60,49,.78)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.fillStyle = "#f7f5eb"; ctx.textAlign = "center";
-      ctx.font = "bold 34px system-ui"; ctx.fillText("Смена окончена", canvas.width / 2, 250);
-      ctx.font = "22px system-ui"; ctx.fillText("Счёт: " + score, canvas.width / 2, 292);
-      ctx.font = "16px system-ui"; ctx.fillText("Нажми «Начать заново»", canvas.width / 2, 330);
+      ctx.fillStyle = "rgba(171, 35, 40, 0.9)"; // Темно-красный оверлей
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillStyle = "#ffffff"; // Белый текст
+      ctx.textAlign = "center";
+      ctx.font = "bold 34px 'Proxima Nova', system-ui"; ctx.fillText("Смена окончена", canvas.width / 2, 250);
+      ctx.font = "22px 'Proxima Nova', system-ui"; ctx.fillText("Счёт: " + score, canvas.width / 2, 292);
+      ctx.font = "16px 'Proxima Nova', system-ui"; ctx.fillText("Нажми «Начать заново»", canvas.width / 2, 330);
     }
+
     function draw() {
       drawBackground(); items.forEach(it => drawBottle(laneX[it.lane], it.y, it.bad, it.texture)); drawBasket(); if (!running) drawGameOver();
     }
+
     function update(dt) {
       if (!running) return;
       spawnTimer += dt; const delay = Math.max(430, 1050 - score * 12);
@@ -183,19 +247,21 @@
         if (it.y >= basketY - 12) {
           if (it.lane === playerLane) { if (it.bad) { lives--; } else { score++; } } else if (!it.bad) { lives--; }
           items.splice(i, 1); updateInfo();
-          if (score >= nextFactAt) { factElement.textContent = "🥕 " + facts[Math.floor(Math.random() * facts.length)]; factElement.hidden = false; nextFactAt += FACT_EVERY; }
+          if (score >= nextFactAt) { factElement.textContent = "⭐ " + facts[Math.floor(Math.random() * facts.length)]; factElement.hidden = false; nextFactAt += FACT_EVERY; }
           if (lives <= 0) {
             running = false;
-            toNextGame.hidden = false; // 🔑 Показываем кнопку
+            toNextGame.hidden = false;
             localStorage.setItem("ochakovo_line_passed", "1");
             localStorage.setItem("ochakovo_line_score", String(score));
           }
         }
       }
     }
+
     function loop(time) {
       const dt = lastTime ? Math.min(time - lastTime, 40) : 0; lastTime = time; update(dt); draw(); requestAnimationFrame(loop);
     }
+
     function movePlayer(dir) { playerLane = Math.max(0, Math.min(3, playerLane + dir)); }
     window.addEventListener("keydown", e => {
       if (e.key === "ArrowLeft" || e.key.toLowerCase() === "a") movePlayer(-1);

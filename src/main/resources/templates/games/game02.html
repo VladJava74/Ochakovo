@@ -6,68 +6,120 @@
   <title>Собери напиток — Очаково</title>
 
   <style>
-    :root {
-      --green-dark: #123c31; --green: #1b5944; --green-light: #dce9c8;
-      --cream: #f7f5eb; --gold: #e6b84d; --text: #17382e; --muted: #718078; --white: #fff;
+    /* Подключение фирменного шрифта */
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'),
+           url('/fonts/ProximaNova-Regular.woff') format('woff');
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
     }
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'),
+           url('/fonts/ProximaNova-Bold.woff') format('woff');
+      font-weight: 700;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Proxima Nova';
+      src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
+           url('/fonts/ProximaNova-ExtraBold.woff') format('woff');
+      font-weight: 800;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      /* Новая палитра Очаково */
+      --brand-red: #d50032;
+      --brand-red-dark: #ab2328;
+      --brand-white: #ffffff;
+      --brand-dark: #626262;
+      --brand-black: #000000;
+      --brand-gray: #a2aaad;
+      --brand-gray-soft: rgba(162, 170, 173, 0.16);
+      --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
+      --brand-green: #84bd00; /* Retail-зеленый для успешных состояний */
+
+      /* Переменные для игры */
+      --text: var(--brand-dark);
+      --heading: var(--brand-black);
+      --white: var(--brand-white);
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body.game-page {
       height: 100vh; height: 100svh; margin: 0; padding: 16px;
       display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--green-dark), var(--green));
-      color: var(--text); font-family: system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
+      background: linear-gradient(135deg, var(--brand-red-dark), var(--brand-red));
+      color: var(--text); font-family: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", sans-serif; overflow: hidden;
     }
+
     .drink-game {
       position: relative; width: min(100%, 1000px); max-height: 95vh;
       display: grid; grid-template-columns: 280px 1fr; gap: 20px; padding: 24px;
-      background: var(--cream); border-radius: 24px; box-shadow: 0 24px 60px rgba(18, 60, 49, 0.35);
+      background: var(--brand-white); border-radius: 24px; box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
     }
+
     .drink-game__close {
       position: absolute; top: 20px; right: 20px; width: 40px; height: 40px;
-      border-radius: 50%; background: var(--green-light); color: var(--green-dark);
+      border-radius: 50%; background: var(--brand-gray-soft); color: var(--brand-red);
       display: flex; align-items: center; justify-content: center; font-size: 26px; line-height: 1;
-      text-decoration: none; transition: background 0.2s, transform 0.2s; z-index: 10; box-shadow: 0 4px 10px rgba(18, 60, 49, 0.1);
+      text-decoration: none; transition: background 0.2s, transform 0.2s; z-index: 10; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
-    .drink-game__close:hover { background: #c9dcae; transform: scale(1.1); }
+    .drink-game__close:hover { background: var(--brand-gray-soft-hover); transform: scale(1.1); }
+
     .drink-game__side { display: flex; flex-direction: column; justify-content: flex-start; gap: 16px; }
-    .drink-game__side h1 { margin: 0; padding-right: 40px; color: var(--green-dark); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; text-align: left; }
-    .drink-game__description { margin: 0; color: var(--muted); font-size: 0.9rem; line-height: 1.4; }
-    .drink-game__stat { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; background: var(--green-light); border: 1px solid rgba(18, 60, 49, 0.08); }
-    .drink-game__stat span { color: var(--muted); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
-    .drink-game__stat b { color: var(--green-dark); font-size: 1.5rem; }
-    .timer { margin-top: 10px; padding: 16px; border-radius: 14px; background: var(--white); border: 1px solid rgba(18, 60, 49, 0.1); }
-    .timer__top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; font-size: 0.9rem; font-weight: 700; color: var(--green-dark); }
-    .timer__track { height: 10px; overflow: hidden; border-radius: 99px; background: var(--green-light); }
-    .timer__fill { width: 100%; height: 100%; border-radius: inherit; background: var(--green); transition: width 0.2s linear; }
-    .timer__track.low .timer__fill { background: #e27643; }
-    .feedback { min-height: 60px; margin-top: 10px; padding: 12px; border-radius: 14px; background: var(--green-light); color: var(--green-dark); font-size: 0.85rem; line-height: 1.4; font-weight: 500; }
-    .feedback.error { background: #fae7e0; color: #8b3d30; }
-    .feedback.success { background: #dce9c8; color: #1b5944; font-weight: 700; }
+    .drink-game__side h1 { margin: 0; padding-right: 40px; color: var(--heading); font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.1; text-align: left; font-weight: 800; }
+    .drink-game__description { margin: 0; color: var(--text); font-size: 0.9rem; line-height: 1.4; }
+
+    .drink-game__stat { display: flex; flex-direction: column; gap: 2px; padding: 12px 16px; border-radius: 14px; background: var(--brand-gray-soft); border: 1px solid rgba(162, 170, 173, 0.2); }
+    .drink-game__stat span { color: var(--text); font-size: 0.8rem; font-weight: 700; text-transform: uppercase; }
+    .drink-game__stat b { color: var(--heading); font-size: 1.5rem; font-weight: 800; }
+
+    .timer { margin-top: 10px; padding: 16px; border-radius: 14px; background: var(--brand-white); border: 1px solid var(--brand-gray); }
+    .timer__top { display: flex; justify-content: space-between; gap: 8px; margin-bottom: 10px; font-size: 0.9rem; font-weight: 700; color: var(--heading); }
+    .timer__track { height: 10px; overflow: hidden; border-radius: 99px; background: var(--brand-gray-soft); }
+    .timer__fill { width: 100%; height: 100%; border-radius: inherit; background: var(--brand-red); transition: width 0.2s linear; }
+    .timer__track.low .timer__fill { background: var(--brand-red-dark); }
+
+    .feedback { min-height: 60px; margin-top: 10px; padding: 12px; border-radius: 14px; background: var(--brand-gray-soft); color: var(--text); font-size: 0.85rem; line-height: 1.4; font-weight: 500; }
+    .feedback.error { background: rgba(213, 0, 50, 0.1); color: var(--brand-red-dark); font-weight: 700; }
+    .feedback.success { background: rgba(132, 189, 0, 0.15); color: #4a6a00; font-weight: 700; }
 
     .drink-game__next {
       display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px; margin-top: auto;
-      border-radius: 14px; background: var(--gold); color: var(--green-dark); font-weight: 800; font-size: 1rem;
-      text-align: center; text-decoration: none; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 8px 20px rgba(230, 184, 77, 0.3);
+      border-radius: 14px; background: var(--brand-red); color: var(--brand-white); font-weight: 800; font-size: 1rem;
+      text-align: center; text-decoration: none; transition: transform 0.2s, background-color 0.2s; box-shadow: 0 8px 20px rgba(213, 0, 50, 0.3);
     }
     .drink-game__next[hidden] { display: none; }
-    .drink-game__next:hover { background: #f0c85d; transform: translateY(-2px); }
+    .drink-game__next:hover { background: var(--brand-red-dark); transform: translateY(-2px); }
 
     .drink-game__main { display: flex; flex-direction: column; min-width: 0; }
-    .drink-game__instruction { margin: 0 0 16px; padding: 16px; border-radius: 14px; background: var(--white); color: var(--green-dark); font-size: 1.05rem; font-weight: 700; line-height: 1.4; text-align: center; border: 1px solid rgba(18, 60, 49, 0.1); box-shadow: 0 4px 12px rgba(18, 60, 49, 0.05); }
+    .drink-game__instruction { margin: 0 0 16px; padding: 16px; border-radius: 14px; background: var(--brand-white); color: var(--heading); font-size: 1.05rem; font-weight: 700; line-height: 1.4; text-align: center; border: 1px solid var(--brand-gray); box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); }
+
     .ingredient-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; overflow-y: auto; padding-right: 4px; flex: 1; }
-    .ingredient { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 110px; padding: 10px 6px; border: 2px solid transparent; border-radius: 14px; background: var(--white); color: var(--text); cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s; box-shadow: 0 4px 10px rgba(18, 60, 49, 0.05); }
-    .ingredient:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--green); }
+
+    .ingredient { display: flex; flex-direction: column; align-items: center; justify-content: flex-start; min-height: 110px; padding: 10px 6px; border: 2px solid transparent; border-radius: 14px; background: var(--brand-white); color: var(--text); cursor: pointer; transition: transform 0.15s ease, border-color 0.15s ease, background 0.15s; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05); }
+    .ingredient:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--brand-red); }
     .ingredient:disabled { cursor: not-allowed; opacity: 0.6; }
-    .ingredient.selected { border-color: var(--green-dark); background: var(--green-light); transform: scale(1.02); }
+    .ingredient.selected { border-color: var(--brand-red-dark); background: var(--brand-gray-soft); transform: scale(1.02); }
+
     .ingredient__icon { font-size: 2rem; margin-bottom: 8px; }
-    .ingredient b { display: block; font-size: 0.85rem; text-align: center; line-height: 1.2; }
-    .ingredient small { display: block; margin-top: 4px; color: var(--muted); font-size: 0.7rem; text-align: center; line-height: 1.2; }
+    .ingredient b { display: block; font-size: 0.85rem; text-align: center; line-height: 1.2; font-weight: 700; color: var(--heading); }
+    .ingredient small { display: block; margin-top: 4px; color: var(--text); font-size: 0.7rem; text-align: center; line-height: 1.2; }
+
     .actions { display: flex; gap: 10px; margin-top: 16px; }
-    .action-button { flex: 1; min-height: 48px; padding: 10px; border: 0; border-radius: 12px; background: var(--green); color: var(--white); font-weight: 800; font-size: 1rem; cursor: pointer; transition: transform 0.15s, background-color 0.15s; }
-    .action-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--green-dark); }
-    .action-button.secondary { background: var(--green-light); color: var(--green-dark); }
-    .action-button.secondary:hover { background: #c9dcae; }
+    .action-button { flex: 1; min-height: 48px; padding: 10px; border: 0; border-radius: 12px; background: var(--brand-red); color: var(--brand-white); font-weight: 800; font-size: 1rem; cursor: pointer; transition: transform 0.15s, background-color 0.15s; }
+    .action-button:hover:not(:disabled) { transform: translateY(-2px); background: var(--brand-red-dark); }
+    .action-button.secondary { background: var(--brand-gray-soft); color: var(--heading); }
+    .action-button.secondary:hover { background: var(--brand-gray-soft-hover); }
     .action-button:disabled { opacity: 0.5; cursor: not-allowed; }
+
     @media (max-width: 850px) {
       .drink-game { grid-template-columns: 1fr; padding: 16px; gap: 16px; overflow-y: auto; max-height: 100vh; }
       .drink-game__side { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
@@ -116,11 +168,12 @@
 <script>
   const LINE_KEY = "ochakovo_line_passed";
   if (localStorage.getItem(LINE_KEY) !== "1") {
+    // Обновленный экран-заглушка под новую палитру
     document.body.innerHTML = `
-      <main style="max-width:520px;margin:80px auto;padding:32px;border-radius:24px;background:#f7f5eb;color:#17382e;text-align:center;font-family:system-ui,sans-serif;box-shadow:0 24px 60px rgba(18,60,49,.35);">
-        <h1 style="color:#123c31;margin:0 0 12px;">Сначала смена на линии!</h1>
-        <p style="color:#718078;line-height:1.6;margin:0 0 24px;">Чтобы попасть в лабораторию и собирать напитки, сначала спаси линию розлива в первой игре.</p>
-        <a href="/games/game01" style="display:inline-block;padding:16px 32px;border-radius:999px;background:#e6b84d;color:#123c31;font-weight:800;text-decoration:none;">Перейти к линии →</a>
+      <main style="max-width:520px;margin:80px auto;padding:40px;border-radius:24px;background:#ffffff;color:#000000;text-align:center;font-family:'Proxima Nova',system-ui,sans-serif;box-shadow:0 24px 60px rgba(0,0,0,.2);">
+        <h1 style="color:#ab2328;margin:0 0 16px;font-weight:900;">Сначала смена на линии!</h1>
+        <p style="color:#626262;line-height:1.6;margin:0 0 32px;font-size:1.1rem;">Чтобы попасть в лабораторию и собирать напитки, сначала спаси линию розлива в первой игре.</p>
+        <a href="/games/game01" style="display:inline-block;padding:16px 32px;border-radius:999px;background:#d50032;color:#ffffff;font-weight:800;text-decoration:none;">Перейти к линии →</a>
       </main>`;
     throw new Error("Line game not passed");
   }
@@ -182,8 +235,6 @@
 
     function initGame() {
       stopTimer();
-
-      // 🔑 Выбираем один случайный напиток
       const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
 
       game = {
@@ -194,7 +245,6 @@
       };
 
       toNextGame.hidden = true;
-
       loadDrink();
     }
 
@@ -240,7 +290,6 @@
         feedback.textContent = `Победа! Ты собрал ${game.drink.name}!`;
         feedback.className = "feedback success";
 
-        // 🔑 Сохраняем прогресс для третьей игры и показываем кнопку
         localStorage.setItem("ochakovo_drink_passed", "1");
         toNextGame.hidden = false;
 
@@ -258,7 +307,7 @@
 
       actions.innerHTML = `
         <button type="button" class="action-button" id="startMix" ${game.started ? "disabled" : ""}>${game.started ? "Замес начат" : "Начать замес"}</button>
-        <button type="button" class="action-button" id="checkMix" ${game.running ? "" : "disabled"}>Проверить состав</button>
+        <button type="button" class="action-button secondary" id="checkMix" ${game.running ? "" : "disabled"}>Проверить состав</button>
       `;
       feedback.textContent = game.message;
       feedback.className = "feedback";

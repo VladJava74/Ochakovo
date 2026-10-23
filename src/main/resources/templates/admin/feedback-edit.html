@@ -4,22 +4,147 @@
     <meta charset="UTF-8">
     <title>Редактирование отзыва — Очаково</title>
     <style>
+        /* Подключение фирменного шрифта */
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'),
+               url('/fonts/ProximaNova-Regular.woff') format('woff');
+          font-weight: 400;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'),
+               url('/fonts/ProximaNova-Bold.woff') format('woff');
+          font-weight: 700;
+          font-style: normal;
+          font-display: swap;
+        }
+        @font-face {
+          font-family: 'Proxima Nova';
+          src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
+               url('/fonts/ProximaNova-ExtraBold.woff') format('woff');
+          font-weight: 800;
+          font-style: normal;
+          font-display: swap;
+        }
+
+        :root {
+          /* Новая палитра Очаково */
+          --brand-red: #d50032;
+          --brand-red-dark: #ab2328;
+          --brand-white: #ffffff;
+          --brand-dark: #626262;
+          --brand-black: #000000;
+          --brand-gray: #a2aaad;
+          --brand-gray-soft: rgba(162, 170, 173, 0.16);
+          --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
+        }
+
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: system-ui, sans-serif; background: #f7f5eb; padding: 32px; color: #17382e; display: flex; justify-content: center; }
-        .card { background: #fff; border-radius: 20px; padding: 32px; width: 100%; max-width: 560px; box-shadow: 0 12px 36px rgba(18,60,49,0.1); }
-        h1 { color: #123c31; margin-bottom: 6px; font-size: 24px; }
-        .subtitle { color: #718078; margin-bottom: 24px; font-size: 14px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
-        .form-row.full { grid-template-columns: 1fr; }
-        label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: #123c31; }
-        input, textarea { width: 100%; padding: 10px; border: 1px solid #d5decf; border-radius: 8px; font: inherit; }
-        input:focus, textarea:focus { outline: none; border-color: #1b5944; }
-        .actions { display: flex; gap: 12px; margin-top: 24px; }
-        .btn { padding: 12px 20px; border: 0; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; font-size: 14px; }
-        .btn-primary { background: #e6b84d; color: #123c31; }
-        .btn-primary:hover { background: #f0c85d; }
-        .btn-secondary { background: transparent; border: 1px solid #d5decf; color: #123c31; }
-        .btn-secondary:hover { background: #f0f8de; }
+
+        body {
+            font-family: 'Proxima Nova', system-ui, -apple-system, sans-serif;
+            background: #f9f9f9;
+            padding: 32px;
+            color: var(--brand-dark);
+            display: flex;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--brand-white);
+            border-radius: 20px;
+            padding: 32px;
+            width: 100%;
+            max-width: 560px;
+            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.03);
+        }
+
+        h1 {
+            color: var(--brand-black);
+            margin-bottom: 6px;
+            font-size: 24px;
+            font-weight: 900;
+        }
+
+        .subtitle {
+            color: var(--brand-dark);
+            margin-bottom: 24px;
+            font-size: 14px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .form-row.full {
+            grid-template-columns: 1fr;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            margin-bottom: 4px;
+            color: var(--brand-black);
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--brand-gray);
+            border-radius: 8px;
+            font: inherit;
+            background: var(--brand-white);
+            color: var(--brand-dark);
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--brand-red);
+        }
+
+        .actions {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: 0;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 14px;
+            transition: background 0.2s, transform 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--brand-red);
+            color: var(--brand-white);
+        }
+        .btn-primary:hover {
+            background: var(--brand-red-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 1px solid var(--brand-gray);
+            color: var(--brand-black);
+        }
+        .btn-secondary:hover {
+            background: var(--brand-gray-soft);
+        }
     </style>
 </head>
 <body>
