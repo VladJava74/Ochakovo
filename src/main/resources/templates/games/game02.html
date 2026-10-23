@@ -85,10 +85,10 @@
   <a href="/" class="drink-game__close" title="Вернуться на главную">&times;</a>
   <aside class="drink-game__side">
     <h1>Собери напиток!</h1>
-    <p class="drink-game__description">Собери все 10 напитков «Очаково», чтобы завершить смену.</p>
+    <p class="drink-game__description">Собери случайный напиток «Очаково», чтобы перейти к доставке.</p>
     <div class="drink-game__stat">
-      <span>Прогресс</span>
-      <b><span id="currentStep">1</span> / <span id="totalSteps">10</span></b>
+      <span>Напиток</span>
+      <b>1 / 1</b>
     </div>
     <div class="drink-game__stat">
       <span>Выбрано</span>
@@ -103,7 +103,6 @@
     </div>
     <p id="feedback" class="feedback" aria-live="polite"></p>
 
-    <!-- 🔑 КНОПКА ВЕДЕТ В ТРЕТЬЮ ИГРУ -->
     <a class="drink-game__next" href="/games/game03" id="toNextGame" hidden>
       Дальше: доставка в магазин →
     </a>
@@ -167,51 +166,53 @@
     const timerTrack = document.getElementById("timerTrack");
     const selectedCount = document.getElementById("selectedCount");
     const selectedTotal = document.getElementById("selectedTotal");
-    const currentStepEl = document.getElementById("currentStep");
-    const totalStepsEl = document.getElementById("totalSteps");
-    const toNextGame = document.getElementById("toNextGame"); // 🔑 Изменено
+    const toNextGame = document.getElementById("toNextGame");
 
     let timerId = null;
     let game = null;
 
     function shuffle(items) {
       const result = [...items];
-      for (let i = result.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [result[i], result[j]] = [result[j], result[i]]; }
+      for (let i = result.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [result[i], result[j]] = [result[j], result[i]];
+      }
       return result;
     }
 
     function initGame() {
       stopTimer();
-      const drinkQueue = shuffle([...drinks]);
+
+      // 🔑 Выбираем один случайный напиток
+      const randomDrink = drinks[Math.floor(Math.random() * drinks.length)];
 
       game = {
-        queue: drinkQueue,
-        currentIndex: 0,
+        drink: randomDrink,
         started: false, running: false, failed: false, complete: false,
         timeLeft: DURATION, selected: [],
         message: "Нажми «Начать замес», чтобы начать."
       };
 
       toNextGame.hidden = true;
-      totalStepsEl.textContent = drinks.length;
 
       loadDrink();
     }
 
     function loadDrink() {
-      const drink = game.queue[game.currentIndex];
+      const drink = game.drink;
       const recipeIds = new Set(drink.recipe);
       const recipeIngredients = drink.recipe.map(id => ingredients.find(item => item.id === id));
       const extraIngredients = shuffle(ingredients.filter(item => !recipeIds.has(item.id))).slice(0, EXTRA_INGREDIENTS_COUNT);
 
-      game.currentDrink = drink;
       game.options = shuffle([...recipeIngredients, ...extraIngredients]);
       game.selected = [];
-      game.started = false; game.running = false; game.failed = false;
+      game.started = false;
+      game.running = false;
+      game.failed = false;
+      game.complete = false;
       game.timeLeft = DURATION;
       game.message = `Нажми «Начать замес», чтобы собрать ${drink.name}.`;
 
-      currentStepEl.textContent = game.currentIndex + 1;
       render();
     }
 
@@ -222,7 +223,7 @@
     }
 
     function render() {
-      drinkOrder.textContent = `Заказ: ${game.currentDrink.name}. Собери все ${game.currentDrink.recipe.length} ингредиентов.`;
+      drinkOrder.textContent = `Заказ: ${game.drink.name}. Собери все ${game.drink.recipe.length} ингредиентов.`;
 
       grid.innerHTML = game.options.map(item => {
         const selected = game.selected.includes(item.id);
@@ -231,12 +232,12 @@
       }).join("");
 
       selectedCount.textContent = game.selected.length;
-      selectedTotal.textContent = game.currentDrink.recipe.length;
+      selectedTotal.textContent = game.drink.recipe.length;
       updateTimer();
 
       if (game.complete) {
-        actions.innerHTML = `<button type="button" class="action-button" id="playAgain">Пройти квест заново</button>`;
-        feedback.textContent = `Победа! Ты собрал все ${drinks.length} напитков!`;
+        actions.innerHTML = `<button type="button" class="action-button" id="playAgain">Собрать другой напиток</button>`;
+        feedback.textContent = `Победа! Ты собрал ${game.drink.name}!`;
         feedback.className = "feedback success";
 
         // 🔑 Сохраняем прогресс для третьей игры и показываем кнопку
@@ -248,7 +249,7 @@
       }
 
       if (game.failed) {
-        actions.innerHTML = `<button type="button" class="action-button" id="retry">Попробовать этот напиток ещё раз</button>`;
+        actions.innerHTML = `<button type="button" class="action-button" id="retry">Попробовать ещё раз</button>`;
         feedback.textContent = game.message;
         feedback.className = "feedback error";
         document.getElementById("retry").addEventListener("click", loadDrink);
@@ -262,22 +263,28 @@
       feedback.textContent = game.message;
       feedback.className = "feedback";
 
-      grid.querySelectorAll("[data-ingredient]").forEach(button => { button.addEventListener("click", () => toggleIngredient(button.dataset.ingredient)); });
+      grid.querySelectorAll("[data-ingredient]").forEach(button => {
+        button.addEventListener("click", () => toggleIngredient(button.dataset.ingredient));
+      });
       document.getElementById("startMix").addEventListener("click", startMix);
       document.getElementById("checkMix").addEventListener("click", checkMix);
     }
 
     function startMix() {
       if (game.started || game.complete || game.failed) return;
-      game.started = true; game.running = true; game.message = "Таймер пошёл! Выбери ингредиенты.";
+      game.started = true;
+      game.running = true;
+      game.message = "Таймер пошёл! Выбери ингредиенты.";
       render();
 
       timerId = setInterval(() => {
         game.timeLeft = Math.max(0, game.timeLeft - 1);
         updateTimer();
         if (game.timeLeft === 0) {
-          stopTimer(); game.running = false; game.failed = true;
-          game.message = "Время вышло! Начни этот напиток заново.";
+          stopTimer();
+          game.running = false;
+          game.failed = true;
+          game.message = "Время вышло! Попробуй ещё раз.";
           render();
         }
       }, 1000);
@@ -287,51 +294,45 @@
       if (!game.running || game.failed || game.complete) return;
       if (game.selected.includes(id)) {
         game.selected = game.selected.filter(item => item !== id);
-      } else if (game.selected.length < game.currentDrink.recipe.length) {
+      } else if (game.selected.length < game.drink.recipe.length) {
         game.selected.push(id);
       }
-      game.message = `Выбрано ингредиентов: ${game.selected.length} из ${game.currentDrink.recipe.length}.`;
+      game.message = `Выбрано ингредиентов: ${game.selected.length} из ${game.drink.recipe.length}.`;
       render();
     }
 
     function checkMix() {
       if (!game.running) return;
 
-      const expected = [...game.currentDrink.recipe].sort();
+      const expected = [...game.drink.recipe].sort();
       const selected = [...game.selected].sort();
       const isCorrect = selected.length === expected.length && selected.every((id, index) => id === expected[index]);
 
       if (isCorrect) {
         stopTimer();
         game.running = false;
-        game.currentIndex++;
-
-        if (game.currentIndex >= game.queue.length) {
-          game.complete = true;
-          render();
-        } else {
-          feedback.textContent = "Верно! Переходим к следующему напитку...";
-          feedback.className = "feedback success";
-          setTimeout(loadDrink, 800);
-        }
+        game.complete = true;
+        render();
         return;
       }
 
       game.timeLeft = Math.max(0, game.timeLeft - WRONG_CHECK_PENALTY);
       if (game.timeLeft === 0) {
-        stopTimer(); game.running = false; game.failed = true;
-        game.message = "Время вышло! Начни этот напиток заново.";
+        stopTimer();
+        game.running = false;
+        game.failed = true;
+        game.message = "Время вышло! Попробуй ещё раз.";
         render();
         return;
       }
 
       const expectedSet = new Set(expected);
       const selectedSet = new Set(selected);
-      const missing = game.currentDrink.recipe.filter(id => !selectedSet.has(id)).map(id => ingredients.find(item => item.id === id).name);
+      const missing = game.drink.recipe.filter(id => !selectedSet.has(id)).map(id => ingredients.find(item => item.id === id).name);
       const wrong = game.selected.filter(id => !expectedSet.has(id)).map(id => ingredients.find(item => item.id === id).name);
 
       let message = "Состав не прошёл проверку. ";
-      if (game.selected.length !== game.currentDrink.recipe.length) message += `Нужно выбрать ${game.currentDrink.recipe.length} ингредиентов. `;
+      if (game.selected.length !== game.drink.recipe.length) message += `Нужно выбрать ${game.drink.recipe.length} ингредиентов. `;
       if (missing.length > 0) message += `Не хватает: ${missing.join(", ")}. `;
       if (wrong.length > 0) message += `Лишние ингредиенты: ${wrong.join(", ")}. `;
       message += `Проверка отняла ${WRONG_CHECK_PENALTY} секунд.`;
@@ -340,7 +341,12 @@
       render();
     }
 
-    function stopTimer() { if (timerId !== null) { clearInterval(timerId); timerId = null; } }
+    function stopTimer() {
+      if (timerId !== null) {
+        clearInterval(timerId);
+        timerId = null;
+      }
+    }
 
     initGame();
   })();

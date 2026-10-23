@@ -66,4 +66,48 @@ public class FeedbackController {
 
         return "admin/feedback"; // ищет файл templates/admin/feedback.html
     }
+
+    // 🔑 Удалить отзыв
+    @PostMapping("/admin/feedback/{id}/delete")
+    public String deleteFeedback(@PathVariable Long id) {
+        feedbackRepository.deleteById(id);
+        return "redirect:/admin/feedback";
+    }
+
+    // 🔑 Показать форму редактирования
+    @GetMapping("/admin/feedback/{id}/edit")
+    public String editFeedbackForm(@PathVariable Long id, Model model) {
+        Feedback fb = feedbackRepository.findById(id).orElse(null);
+        if (fb == null) {
+            return "redirect:/admin/feedback";
+        }
+        model.addAttribute("fb", fb);
+        return "admin/feedback-edit";
+    }
+
+    // 🔑 Сохранить изменения
+    @PostMapping("/admin/feedback/{id}/edit")
+    public String updateFeedback(@PathVariable Long id, @ModelAttribute Feedback form) {
+        Feedback fb = feedbackRepository.findById(id).orElse(null);
+        if (fb != null) {
+            fb.setName(form.getName());
+            fb.setStudentGroup(form.getStudentGroup());
+            fb.setRatingGame1(form.getRatingGame1());
+            fb.setRatingGame2(form.getRatingGame2());
+            fb.setRatingGame3(form.getRatingGame3());
+            fb.setRatingOverall(form.getRatingOverall());
+            fb.setLikedMost(form.getLikedMost());
+            fb.setImprovements(form.getImprovements());
+            fb.setWouldRecommend(form.getWouldRecommend());
+            feedbackRepository.save(fb);
+        }
+        return "redirect:/admin/feedback";
+    }
+
+    // 🔑 Добавить отзыв вручную
+    @PostMapping("/admin/feedback/add")
+    public String addFeedback(@ModelAttribute Feedback form) {
+        feedbackRepository.save(form);
+        return "redirect:/admin/feedback";
+    }
 }
