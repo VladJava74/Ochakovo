@@ -100,7 +100,6 @@ body {
   background-size: cover;
   background-attachment: fixed;
   color: var(--text);
-  /* Изменено: добавлен Proxima Nova */
   font-family: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", sans-serif;
 }
 
