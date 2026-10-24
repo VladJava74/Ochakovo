@@ -95,7 +95,7 @@ body {
   background-color: var(--bg);
   background-image:
     linear-gradient(rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.82)),
-    url("/images/фон.png");
+    /*url("/images/фон.png");*/
   background-position: center;
   background-size: cover;
   background-attachment: fixed;
