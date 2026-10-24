@@ -17,7 +17,11 @@
       «Очаково» набирает студентов на оплачиваемую практику с марта по сентябрь.
       Пройди 5-минутный квест: узнай бренд и попробуй профессию.
     </p>
-    <a class="btn" href="#myth-game">Начать карьерный квест →</a>
+
+    <!-- Обертка для кнопок -->
+    <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px;">
+      <a class="btn" href="#myth-game">Начать карьерный квест →</a>
+    </div>
   </section>
 
   <!-- ШАГ 2: МИФ ИЛИ ПРАВДА -->
@@ -137,14 +141,12 @@
       const answerButtons = game.querySelectorAll(".myth-answer");
       const bridge = document.getElementById("myth-bridge");
 
-      // 🔑 Безопасные обёртки для localStorage (на file:// может падать)
       const store = {
         get(k) { try { return localStorage.getItem(k); } catch { return null; } },
         set(k, v) { try { localStorage.setItem(k, v); } catch {} },
         del(k) { try { localStorage.removeItem(k); } catch {} }
       };
 
-      // 🔑 Принудительно прячем кнопку при загрузке (даже если она была видна)
       function hideBridge() {
         if (!bridge) return;
         bridge.hidden = true;
@@ -152,7 +154,6 @@
         bridge.style.setProperty("display", "none", "important");
       }
 
-      // 🔑 Показ кнопки только после финала
       function showBridge() {
         if (!bridge) return;
         bridge.hidden = false;
@@ -161,7 +162,6 @@
         store.set("ochakovo_myth_passed", "1");
       }
 
-      // При старте — всегда прячем (чтобы старые тесты не оставляли кнопку)
       hideBridge();
 
       let order = [], current = 0, score = 0, answered = false, finished = false;
@@ -219,7 +219,6 @@
       function startGame() {
         order = shuffle(questions.slice());
         current = 0; score = 0; finished = false;
-        // при перезапуске снова прячем
         hideBridge();
         store.del("ochakovo_myth_passed");
         showQuestion();
@@ -240,7 +239,6 @@
           choices.hidden = true;
           nextButton.textContent = "Сыграть ещё раз";
 
-          // 🔑 ГЕЙТ: сохраняем + показываем кнопку ТОЛЬКО здесь
           store.set("ochakovo_myth_score", String(score));
           store.set("ochakovo_myth_total", String(order.length));
           showBridge();

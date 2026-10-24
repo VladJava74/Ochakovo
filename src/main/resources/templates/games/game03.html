@@ -33,7 +33,6 @@
         }
 
         :root {
-          /* Новая палитра Очаково */
           --brand-red: #d50032;
           --brand-red-dark: #ab2328;
           --brand-white: #ffffff;
@@ -44,11 +43,9 @@
           --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
           --brand-green: #84bd00;
 
-          /* Переменные для игры */
           --text: var(--brand-dark);
           --heading: var(--brand-black);
           --white: var(--brand-white);
-          --muted: var(--brand-gray);
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,7 +98,6 @@
         }
         .delivery-game__close:hover { background: var(--brand-gray-soft-hover); transform: scale(1.1); }
 
-        /* ===== ЛЕВАЯ ПАНЕЛЬ ===== */
         .delivery-game__side {
           display: flex;
           flex-direction: column;
@@ -146,9 +142,7 @@
         .delivery-game__stat span { color: var(--text); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; }
         .delivery-game__stat b { color: var(--heading); font-size: 1.3rem; font-weight: 800; }
 
-        .delivery-game__stat--full {
-          grid-column: 1 / -1;
-        }
+        .delivery-game__stat--full { grid-column: 1 / -1; }
 
         .delivery-game__progress-wrap {
           background: var(--brand-white);
@@ -209,7 +203,6 @@
         }
         .delivery-game__btn--restart:hover { background: var(--brand-gray-soft); }
 
-        /* ===== ПРАВАЯ ПАНЕЛЬ ===== */
         .delivery-game__center {
           display: flex;
           flex-direction: column;
@@ -257,145 +250,6 @@
 
         .delivery-game__hint { margin: 8px 0 0; color: var(--text); font-size: 0.75rem; text-align: center; }
 
-        /* 🔑 СТИЛИ ДЛЯ ОПРОСНИКА */
-        .survey-overlay {
-          position: fixed; inset: 0;
-          background: rgba(171, 35, 40, 0.92); /* Темно-красный оверлей */
-          backdrop-filter: blur(6px);
-          z-index: 9999;
-          display: none;
-          align-items: center;
-          justify-content: center;
-          padding: 20px;
-          overflow-y: auto;
-        }
-        .survey-overlay.active { display: flex; }
-
-        .survey-card {
-          background: var(--brand-white);
-          border-radius: 24px;
-          padding: 28px;
-          width: min(100%, 500px);
-          max-height: 92vh;
-          overflow-y: auto;
-          box-shadow: 0 32px 80px rgba(0, 0, 0, 0.5);
-          position: relative;
-        }
-
-        .survey-close {
-          position: absolute; top: 16px; right: 16px;
-          width: 34px; height: 34px;
-          border-radius: 50%;
-          background: var(--brand-gray-soft);
-          border: 0; cursor: pointer;
-          font-size: 22px; line-height: 1;
-          color: var(--brand-red);
-          display: flex; align-items: center; justify-content: center;
-        }
-        .survey-close:hover { background: var(--brand-gray-soft-hover); }
-
-        .survey-header { margin-bottom: 20px; padding-right: 40px; }
-        .survey-header h2 { color: var(--heading); margin: 0 0 6px; font-size: 1.5rem; }
-        .survey-header p { color: var(--text); font-size: 0.9rem; margin: 0; }
-
-        .survey-progress { display: flex; gap: 5px; margin-bottom: 20px; }
-        .survey-progress__step {
-          flex: 1; height: 5px;
-          background: var(--brand-gray-soft);
-          border-radius: 3px;
-          transition: background 0.3s;
-        }
-        .survey-progress__step.active { background: var(--brand-red); }
-        .survey-progress__step.done { background: var(--brand-red-dark); }
-
-        .survey-step { display: none; animation: fadeIn 0.35s ease; }
-        .survey-step.active { display: block; }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-
-        .survey-question { color: var(--heading); font-weight: 800; font-size: 1.05rem; margin-bottom: 14px; }
-
-        .form-group { margin-bottom: 12px; }
-        .form-group label.lbl { display: block; font-size: 0.8rem; font-weight: 700; color: var(--heading); margin-bottom: 5px; }
-        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="date"], .form-group select, .form-group textarea {
-          width: 100%; padding: 12px;
-          border: 1px solid var(--brand-gray);
-          border-radius: 10px; font: inherit; background: var(--brand-white); color: var(--text);
-        }
-        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-          outline: none; border-color: var(--brand-red);
-        }
-
-        /* Чекбоксы как карточки-плитки */
-        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
-        .option-card {
-          display: flex; align-items: center; gap: 8px; padding: 10px 12px;
-          background: var(--brand-white); border: 2px solid var(--brand-gray-soft); border-radius: 10px;
-          cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--heading);
-          transition: border-color 0.2s, background 0.2s;
-        }
-        .option-card:hover { border-color: var(--brand-gray); }
-        .option-card input { display: none; }
-        .option-card.checked { border-color: var(--brand-red); background: var(--brand-gray-soft); }
-
-        /* Рейтинг звёзд */
-        .rating-group { display: flex; flex-direction: column; gap: 14px; }
-        .rating-row {
-          display: flex; justify-content: space-between; align-items: center;
-          padding: 12px 16px; background: var(--brand-white); border-radius: 12px;
-          border: 1px solid var(--brand-gray);
-        }
-        .rating-label { font-weight: 700; color: var(--heading); font-size: 0.95rem; }
-        .stars { display: flex; gap: 4px; }
-        .stars span {
-          font-size: 28px; color: var(--brand-gray-soft-hover); cursor: pointer;
-          transition: color 0.15s, transform 0.15s; user-select: none;
-        }
-        .stars span:hover { transform: scale(1.15); }
-        .stars span.active { color: var(--brand-red); }
-
-        .big-rating { text-align: center; padding: 10px 0; }
-        .big-stars { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
-        .big-stars span {
-          font-size: 48px; color: var(--brand-gray-soft-hover); cursor: pointer;
-          transition: color 0.15s, transform 0.15s; user-select: none;
-        }
-        .big-stars span:hover { transform: scale(1.1); }
-        .big-stars span.active { color: var(--brand-red); }
-        .big-rating__label { color: var(--text); font-size: 0.95rem; font-weight: 600; min-height: 22px; }
-
-        .survey-nav { display: flex; gap: 8px; margin-top: 20px; }
-        .survey-nav button {
-          flex: 1; padding: 14px; border: 0; border-radius: 12px;
-          font: inherit; font-weight: 800; font-size: 0.95rem;
-          cursor: pointer; transition: transform 0.15s, background 0.15s;
-        }
-        .btn-next { background: var(--brand-red); color: var(--brand-white); }
-        .btn-next:hover { background: var(--brand-red-dark); transform: translateY(-2px); }
-        .btn-back {
-          background: transparent; border: 1px solid var(--brand-gray);
-          color: var(--heading); flex: 0 0 100px;
-        }
-        .btn-back:hover { background: var(--brand-gray-soft); }
-
-        .survey-error {
-          color: var(--brand-red); font-size: 0.85rem; margin-top: 10px; display: none; font-weight: 700;
-        }
-        .survey-error.active { display: block; }
-
-        .survey-success { text-align: center; padding: 30px 10px; }
-        .survey-success__icon {
-          width: 70px; height: 70px; margin: 0 auto 16px;
-          background: var(--brand-red); color: var(--brand-white);
-          border-radius: 50%; display: flex; align-items: center; justify-content: center;
-          font-size: 34px; font-weight: 900;
-        }
-        .survey-success h2 { color: var(--heading); margin: 0 0 8px; }
-        .survey-success p { color: var(--text); margin: 0; }
-
-        /* ===== АДАПТИВ ===== */
         @media (max-width: 850px) {
           .delivery-game {
             grid-template-columns: 1fr; padding: 16px; gap: 16px; overflow-y: auto; max-height: 100vh;
@@ -455,6 +309,9 @@
 
             <button type="button" id="btnStart" class="delivery-game__btn">Начать смену ▶</button>
             <button type="button" id="btnRestart" class="delivery-game__btn delivery-game__btn--restart" hidden>Начать заново ↻</button>
+
+            <!-- 🔑 Кнопка, которая появляется после победы -->
+            <a href="/apply" id="btnApply" class="delivery-game__btn" style="display: none; margin-top: 10px;">Заполнить карьерный паспорт →</a>
         </div>
     </aside>
 
@@ -470,154 +327,6 @@
     </section>
 
 </main>
-
-<!-- 🔑 ОВЕРЛЕЙ ОПРОСНИКА -->
-<div id="surveyOverlay" class="survey-overlay">
-    <div class="survey-card">
-        <button class="survey-close" id="surveyClose" type="button" title="Закрыть">&times;</button>
-
-        <div class="survey-header">
-            <h2 id="surveyTitle">Оцени наш проект!</h2>
-            <p>5 коротких вопросов — помогут нам стать лучше</p>
-        </div>
-
-        <div class="survey-progress" id="surveyProgress"></div>
-
-        <!-- Шаг 1: Оценка игр -->
-        <div class="survey-step active" data-step="0">
-            <div class="survey-question">Оцени каждую игру</div>
-            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">1 — скучно, 5 — огонь 🔥</p>
-            <div class="rating-group">
-                <div class="rating-row">
-                    <span class="rating-label">🎯 Миф или правда</span>
-                    <div class="stars" data-rating="game1">
-                        <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-                    </div>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-label">🍹 Собери напиток</span>
-                    <div class="stars" data-rating="game2">
-                        <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-                    </div>
-                </div>
-                <div class="rating-row">
-                    <span class="rating-label">🚚 Доставка</span>
-                    <div class="stars" data-rating="game3">
-                        <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Шаг 2: Общая оценка -->
-        <div class="survey-step" data-step="1">
-            <div class="survey-question">Как тебе проект в целом?</div>
-            <div class="big-rating">
-                <div class="big-stars" data-rating="overall">
-                    <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
-                </div>
-                <div class="big-rating__label" id="overallLabel">Выбери оценку</div>
-            </div>
-            <div class="form-group" style="margin-top:24px;">
-                <label class="lbl">Порекомендуешь друзьям?</label>
-                <div class="option-grid">
-                    <label class="option-card"><input type="radio" name="sRecommend" value="true"><span>👍 Да, конечно</span></label>
-                    <label class="option-card"><input type="radio" name="sRecommend" value="false"><span>🤔 Наверное, нет</span></label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Шаг 3: Что понравилось -->
-        <div class="survey-step" data-step="2">
-            <div class="survey-question">Что понравилось больше всего?</div>
-            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Можно выбрать несколько</p>
-            <div class="option-grid">
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Дизайн"><span>🎨 Дизайн</span></label>
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Игры"><span>🎮 Игры</span></label>
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Сюжет"><span>📖 Сюжет</span></label>
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Факты о компании"><span>💡 Факты</span></label>
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Понятность"><span>✨ Понятность</span></label>
-                <label class="option-card"><input type="checkbox" name="sLiked" value="Атмосфера"><span>🎯 Атмосфера</span></label>
-            </div>
-        </div>
-
-        <!-- Шаг 4: Что улучшить -->
-        <div class="survey-step" data-step="3">
-            <div class="survey-question">Что бы ты улучшил?</div>
-            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Честно — мы не обидимся 😉</p>
-            <div class="form-group">
-                <textarea id="sImprovements" rows="3" placeholder="Например: добавить звуки, больше игр, короче текст..."></textarea>
-            </div>
-        </div>
-
-        <!-- 🔑 Шаг 5: Карьерная анкета -->
-        <div class="survey-step" data-step="4">
-            <div class="survey-question">Карьерный паспорт</div>
-            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Заполни данные, чтобы HR мог связаться с тобой и пригласить на стажировку.</p>
-
-            <div class="form-group">
-                <label class="lbl">ФИО *</label>
-                <input type="text" id="sFullName" placeholder="Иванов Иван Иванович">
-            </div>
-            <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
-                <div class="form-group">
-                    <label class="lbl">Дата рождения *</label>
-                    <input type="date" id="sDob">
-                </div>
-                <div class="form-group">
-                    <label class="lbl">Телефон / Telegram *</label>
-                    <input type="text" id="sContact" placeholder="+7... или @username">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="lbl">Email</label>
-                <input type="email" id="sEmail" placeholder="example@mail.ru">
-            </div>
-            <div class="form-group">
-                <label class="lbl">ВУЗ / Колледж</label>
-                <input type="text" id="sUniversity" placeholder="Название учебного заведения">
-            </div>
-            <div class="form-group">
-                <label class="lbl">Интересующая вакансия *</label>
-                <select id="sVacancy">
-                    <option value="">Выбери направление...</option>
-                    <option value="engineer">Инженер-наладчик / Автоматизация</option>
-                    <option value="chemist">Химик-технолог / Лаборатория</option>
-                    <option value="operator">Оператор линии розлива</option>
-                    <option value="logistics">Логист / Склад</option>
-                    <option value="other">Другое</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="lbl">Готовность выйти на стажировку *</label>
-                <div class="option-grid" style="grid-template-columns: repeat(3, 1fr);">
-                    <label class="option-card"><input type="radio" name="sReadiness" value="yes"><span>Да, готов</span></label>
-                    <label class="option-card"><input type="radio" name="sReadiness" value="soon"><span>Скоро</span></label>
-                    <label class="option-card"><input type="radio" name="sReadiness" value="no"><span>Пока нет</span></label>
-                </div>
-            </div>
-        </div>
-
-        <!-- Финальный экран -->
-        <div class="survey-step" data-step="success">
-            <div class="survey-success">
-                <div class="survey-success__icon">✓</div>
-                <h2>Спасибо за отзыв!</h2>
-                <p>Твоё мнение поможет нам стать лучше. Если ты заполнил анкету — жди сообщения от HR «Очаково»!</p>
-            </div>
-            <div class="survey-nav">
-                <button type="button" class="btn-next" id="surveyFinish" style="flex:1;">Вернуться на главную</button>
-            </div>
-        </div>
-
-        <div class="survey-error" id="surveyError">Заполни все обязательные поля</div>
-
-        <div class="survey-nav" id="surveyNav">
-            <button type="button" class="btn-back" id="surveyBack" style="display:none;">← Назад</button>
-            <button type="button" class="btn-next" id="surveyNext">Далее →</button>
-        </div>
-    </div>
-</div>
 
 <script>
     // 🔒 ГЕЙТ: игра доступна только после «Собери напиток» (Game 2)
@@ -684,7 +393,6 @@
       const canvas = $('roadCanvas');
       const ctx = canvas.getContext('2d');
 
-      // UI элементы
       const uiLives = $('uiLives');
       const uiScore = $('uiScore');
       const uiBottles = $('uiBottles');
@@ -692,6 +400,7 @@
       const uiProgress = $('uiProgress');
       const btnStart = $('btnStart');
       const btnRestart = $('btnRestart');
+      const btnApply = $('btnApply');
 
       function updateUI() {
         uiLives.textContent = '♥ '.repeat(Math.max(0, game.lives)).trim() || '0';
@@ -713,6 +422,7 @@
 
         btnStart.hidden = true;
         btnRestart.hidden = true;
+        btnApply.style.display = 'none';
 
         updateUI();
         game.raf = requestAnimationFrame(frame);
@@ -723,11 +433,29 @@
         if (game.raf) cancelAnimationFrame(game.raf);
 
         if (isWin) {
-          openSurvey();
+          // Отрисовка победы на канвасе
+          ctx.fillStyle = "rgba(171, 35, 40, 0.95)";
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.fillStyle = "#ffffff";
+          ctx.textAlign = "center";
+          ctx.font = "bold 34px 'Proxima Nova', system-ui";
+          ctx.fillText("Успешная доставка!", canvas.width / 2, 230);
+
+          ctx.font = "20px 'Proxima Nova', system-ui";
+          ctx.fillText("Ты справился со сменой.", canvas.width / 2, 270);
+          ctx.fillText("Теперь получи свой Карьерный паспорт!", canvas.width / 2, 300);
+
+          // Скрываем кнопки старта/рестарта и показываем кнопку анкеты
+          btnStart.hidden = true;
+          btnRestart.hidden = true;
+          btnApply.style.display = 'flex';
+
+          localStorage.setItem("ochakovo_game03_passed", "1");
         } else {
           btnStart.hidden = false;
           btnStart.textContent = "Попробовать снова ↻";
           btnRestart.hidden = true;
+          btnApply.style.display = 'none';
         }
       }
 
@@ -933,7 +661,6 @@
         const w = 720, h = 580;
         ctx.clearRect(0, 0, w, h);
 
-        // Фон (небо и земля) - светлые тона
         const sky = ctx.createLinearGradient(0, 0, 0, h);
         sky.addColorStop(0, '#f9f9f9');
         sky.addColorStop(0.4, '#e8e8e8');
@@ -941,7 +668,6 @@
         ctx.fillStyle = sky; ctx.fillRect(0, 0, w, h);
 
         const rx = 100, rw = 520;
-        // Дорога - темно-серый (фирменный цвет)
         const rg = ctx.createLinearGradient(rx, 0, rx + rw, 0);
         rg.addColorStop(0, '#4a4a4a');
         rg.addColorStop(0.5, '#626262');
@@ -962,7 +688,6 @@
 
         const lc = [0, 1, 2, 3, 4].map(i => rx + laneWidth * (i + 0.5));
 
-        // Дорожные столбики
         ctx.fillStyle = '#ffffff';
         for (let y = -40; y < h + 40; y += 120) {
           const sh = (g.elapsed * (120 + g.speed * 80)) % 120;
@@ -1007,7 +732,6 @@
         });
         ctx.globalAlpha = 1;
 
-        // Вспышки при столкновении (красные)
         if (g.flash > 0) { ctx.fillStyle = `rgba(213, 0, 50, ${g.flash * 0.35})`; ctx.fillRect(0, 0, w, h); }
         if (g.bottleFlash > 0) { ctx.fillStyle = `rgba(255, 255, 255, ${g.bottleFlash * 0.18})`; ctx.fillRect(0, 0, w, h); }
 
@@ -1157,13 +881,11 @@
         rr(ctx, -tw / 2 + 6, cabY - 3, 12, 5, 2); ctx.fill();
         rr(ctx, tw / 2 - 18, cabY - 3, 12, 5, 2); ctx.fill();
 
-        // Кузов грузовика - фирменный красный
         ctx.fillStyle = '#d50032';
         rr(ctx, -tw / 2, bodyY, tw, bodyH, 10); ctx.fill();
         ctx.strokeStyle = '#ab2328'; ctx.lineWidth = 2;
         rr(ctx, -tw / 2, bodyY, tw, bodyH, 10); ctx.stroke();
 
-        // Полоски на кузове - белые
         ctx.fillStyle = '#ffffff';
         ctx.fillRect(-tw / 2 + 6, bodyY + 8, tw - 12, 3);
         ctx.fillRect(-tw / 2 + 6, bodyY + bodyH - 12, tw - 12, 3);
@@ -1238,227 +960,7 @@
         ctx.quadraticCurveTo(x, y + h, x, y + h - r); ctx.lineTo(x, y + r); ctx.quadraticCurveTo(x, y, x + r, y); ctx.closePath();
       }
 
-      // ===== ЛОГИКА ОПРОСНИКА =====
-      const SURVEY_TOTAL = 5;
-      let surveyStep = 0;
-      const surveyData = {
-        ratingGame1: null, ratingGame2: null, ratingGame3: null,
-        ratingOverall: null, wouldRecommend: null,
-        likedMost: [], improvements: '',
-        fullName: '', dob: '', contact: '', email: '', university: '', vacancy: '', readiness: ''
-      };
-
-      const surveyOverlay = document.getElementById("surveyOverlay");
-      const surveyProgress = document.getElementById("surveyProgress");
-      const surveyNav = document.getElementById("surveyNav");
-      const surveyBack = document.getElementById("surveyBack");
-      const surveyNext = document.getElementById("surveyNext");
-      const surveyError = document.getElementById("surveyError");
-
-      const overallLabels = {
-        1: "😕 Слабо",
-        2: "😐 Можно лучше",
-        3: "🙂 Нормально",
-        4: "😃 Круто!",
-        5: "🤩 Огонь!"
-      };
-
-      function renderProgress() {
-        surveyProgress.innerHTML = "";
-        for (let i = 0; i < SURVEY_TOTAL; i++) {
-          const d = document.createElement("div");
-          d.className = "survey-progress__step";
-          if (i < surveyStep) d.classList.add("done");
-          if (i === surveyStep) d.classList.add("active");
-          surveyProgress.appendChild(d);
-        }
-      }
-
-      function showSurveyStep(idx) {
-        document.querySelectorAll(".survey-step").forEach(el => el.classList.remove("active"));
-        const step = document.querySelector(`.survey-step[data-step="${idx}"]`);
-        if (step) step.classList.add("active");
-
-        surveyError.classList.remove("active");
-        surveyNav.style.display = "flex";
-        surveyBack.style.display = idx === 0 ? "none" : "block";
-        surveyNext.textContent = idx === SURVEY_TOTAL - 1 ? "Получить паспорт ✓" : "Далее →";
-        surveyNext.style.background = idx === SURVEY_TOTAL - 1 ? "var(--brand-red-dark)" : "var(--brand-red)";
-        surveyNext.style.color = "var(--brand-white)";
-
-        renderProgress();
-      }
-
-      function initStars() {
-        document.querySelectorAll(".stars, .big-stars").forEach(container => {
-          const ratingKey = container.dataset.rating;
-          const stars = container.querySelectorAll("span");
-
-          stars.forEach(star => {
-            star.addEventListener("click", () => {
-              const val = parseInt(star.dataset.val);
-
-              if (ratingKey === "game1") surveyData.ratingGame1 = val;
-              else if (ratingKey === "game2") surveyData.ratingGame2 = val;
-              else if (ratingKey === "game3") surveyData.ratingGame3 = val;
-              else if (ratingKey === "overall") {
-                surveyData.ratingOverall = val;
-                const lbl = document.getElementById("overallLabel");
-                if (lbl) lbl.textContent = overallLabels[val] || "";
-              }
-
-              stars.forEach((s, i) => {
-                s.classList.toggle("active", i < val);
-              });
-            });
-
-            star.addEventListener("mouseenter", () => {
-              stars.forEach((s, i) => s.style.color = i < parseInt(star.dataset.val) ? "var(--brand-red)" : "var(--brand-gray-soft-hover)");
-            });
-          });
-
-          container.addEventListener("mouseleave", () => {
-            const current = container.dataset.rating === "overall"
-              ? surveyData.ratingOverall
-              : container.dataset.rating === "game1" ? surveyData.ratingGame1
-              : container.dataset.rating === "game2" ? surveyData.ratingGame2
-              : surveyData.ratingGame3;
-            stars.forEach((s, i) => {
-              s.style.color = i < (current || 0) ? "var(--brand-red)" : "var(--brand-gray-soft-hover)";
-            });
-          });
-        });
-      }
-
-      function validateStep(idx) {
-        if (idx === 0) {
-          if (!surveyData.ratingGame1 || !surveyData.ratingGame2 || !surveyData.ratingGame3) return false;
-        }
-        if (idx === 1) {
-          if (!surveyData.ratingOverall) return false;
-          const rec = document.querySelector('input[name="sRecommend"]:checked');
-          if (!rec) return false;
-          surveyData.wouldRecommend = rec.value === "true";
-        }
-        if (idx === 2) {
-          const liked = [...document.querySelectorAll('input[name="sLiked"]:checked')].map(c => c.value);
-          if (liked.length === 0) return false;
-          surveyData.likedMost = liked;
-        }
-        if (idx === 3) {
-          surveyData.improvements = document.getElementById("sImprovements").value.trim();
-        }
-        if (idx === 4) {
-          const fullName = document.getElementById("sFullName").value.trim();
-          const dob = document.getElementById("sDob").value;
-          const contact = document.getElementById("sContact").value.trim();
-          const vacancy = document.getElementById("sVacancy").value;
-          const readiness = document.querySelector('input[name="sReadiness"]:checked');
-
-          if (fullName.length < 3) { surveyError.textContent = "Укажите ФИО"; return false; }
-          if (!dob) { surveyError.textContent = "Укажите дату рождения"; return false; }
-
-          const birthDate = new Date(dob);
-          const today = new Date();
-          let age = today.getFullYear() - birthDate.getFullYear();
-          const m = today.getMonth() - birthDate.getMonth();
-          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
-
-          if (age < 18) { surveyError.textContent = "Извините, стажировка доступна только с 18 лет"; return false; }
-          if (contact.length < 5) { surveyError.textContent = "Укажите телефон или Telegram"; return false; }
-          if (!vacancy) { surveyError.textContent = "Выберите вакансию"; return false; }
-          if (!readiness) { surveyError.textContent = "Укажите готовность выйти"; return false; }
-
-          surveyData.fullName = fullName;
-          surveyData.dob = dob;
-          surveyData.contact = contact;
-          surveyData.email = document.getElementById("sEmail").value.trim();
-          surveyData.university = document.getElementById("sUniversity").value.trim();
-          surveyData.vacancy = vacancy;
-          surveyData.readiness = readiness.value;
-        }
-        return true;
-      }
-
-      function submitSurvey() {
-        const payload = {
-          fullName: surveyData.fullName,
-          dob: surveyData.dob,
-          contact: surveyData.contact,
-          email: surveyData.email,
-          university: surveyData.university,
-          vacancy: surveyData.vacancy,
-          readiness: surveyData.readiness,
-          ratingGame1: surveyData.ratingGame1,
-          ratingGame2: surveyData.ratingGame2,
-          ratingGame3: surveyData.ratingGame3,
-          ratingOverall: surveyData.ratingOverall,
-          wouldRecommend: surveyData.wouldRecommend,
-          likedMost: surveyData.likedMost.join(", "),
-          improvements: surveyData.improvements
-        };
-
-        fetch("/api/feedback", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        }).then(r => {
-          if (!r.ok) throw new Error("Server error");
-          showSurveyStep("success");
-          surveyNav.style.display = "none";
-        }).catch(err => {
-          console.warn("Оффлайн:", err);
-          localStorage.setItem("ochakovo_offline_feedback", JSON.stringify(payload));
-          showSurveyStep("success");
-          surveyNav.style.display = "none";
-        });
-      }
-
-      surveyNext.addEventListener("click", () => {
-        if (!validateStep(surveyStep)) {
-          surveyError.classList.add("active");
-          return;
-        }
-        if (surveyStep === SURVEY_TOTAL - 1) {
-          submitSurvey();
-        } else {
-          surveyStep++;
-          showSurveyStep(surveyStep);
-        }
-      });
-
-      surveyBack.addEventListener("click", () => {
-        if (surveyStep > 0) {
-          surveyStep--;
-          showSurveyStep(surveyStep);
-        }
-      });
-
-      document.getElementById("surveyClose").addEventListener("click", () => {
-        surveyOverlay.classList.remove("active");
-      });
-
-      document.getElementById("surveyFinish").addEventListener("click", () => {
-        window.location.href = "/";
-      });
-
-      document.querySelectorAll(".option-card input").forEach(inp => {
-        inp.addEventListener("change", () => {
-          if (inp.type === "radio") {
-            document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => r.parentElement.classList.remove("checked"));
-          }
-          inp.parentElement.classList.toggle("checked", inp.checked);
-        });
-      });
-
-      function openSurvey() {
-        surveyStep = 0;
-        showSurveyStep(0);
-        surveyOverlay.classList.add("active");
-      }
-
       // Инициализация
-      initStars();
       drawRoad(ctx, freshDelivery());
       updateUI();
 

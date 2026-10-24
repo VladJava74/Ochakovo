@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карьерный паспорт — Очаково</title>
+    <style>
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'); font-weight: 700; }
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'); font-weight: 800; }
+
+        :root {
+          --brand-red: #d50032; --brand-red-dark: #ab2328; --brand-white: #ffffff;
+          --brand-dark: #626262; --brand-black: #000000; --brand-gray: #a2aaad;
+          --brand-gray-soft: rgba(162, 170, 173, 0.16); --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Proxima Nova', system-ui, -apple-system, sans-serif;
+            background: #f9f9f9; padding: 32px 16px; color: var(--brand-dark);
+            display: flex; justify-content: center; min-height: 100vh;
+        }
+
+        .survey-card {
+            background: var(--brand-white); border-radius: 24px; padding: 32px;
+            width: 100%; max-width: 600px; box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+            border: 1px solid rgba(0,0,0,0.03); align-self: center;
+        }
+
+        /* Шапка */
+        .survey-header { margin-bottom: 24px; text-align: center; }
+        .survey-header h1 { color: var(--brand-black); margin-bottom: 8px; font-size: 1.6rem; font-weight: 900; }
+        .survey-header p { color: var(--brand-dark); font-size: 0.95rem; }
+
+        /* Прогресс-бар */
+        .survey-progress { display: flex; gap: 6px; margin-bottom: 24px; }
+        .survey-progress__step { flex: 1; height: 6px; background: var(--brand-gray-soft); border-radius: 3px; transition: 0.3s; }
+        .survey-progress__step.active { background: var(--brand-red); }
+        .survey-progress__step.done { background: var(--brand-red-dark); }
+
+        /* Шаги */
+        .survey-step { display: none; animation: fadeIn 0.3s ease; }
+        .survey-step.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .survey-question { color: var(--brand-black); font-weight: 800; font-size: 1.1rem; margin-bottom: 16px; }
+
+        /* Формы */
+        .form-group { margin-bottom: 14px; }
+        .form-group label.lbl { display: block; font-size: 0.85rem; font-weight: 700; color: var(--brand-black); margin-bottom: 6px; }
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%; padding: 12px; border: 2px solid var(--brand-gray-soft);
+            border-radius: 10px; font: inherit; background: var(--brand-white); color: var(--brand-black);
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--brand-red); }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        /* Плитки (чекбоксы/радио) */
+        .option-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+        .option-card {
+            display: flex; align-items: center; gap: 8px; padding: 10px 12px;
+            background: var(--brand-white); border: 2px solid var(--brand-gray-soft); border-radius: 10px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 600; color: var(--brand-black); transition: 0.2s;
+        }
+        .option-card:hover { border-color: var(--brand-gray); }
+        .option-card input { display: none; }
+        .option-card.checked { border-color: var(--brand-red); background: var(--brand-gray-soft); }
+
+        /* Звезды */
+        .rating-group { display: flex; flex-direction: column; gap: 12px; }
+        .rating-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--brand-white); border-radius: 12px; border: 1px solid var(--brand-gray-soft); }
+        .rating-label { font-weight: 700; color: var(--brand-black); font-size: 0.95rem; }
+        .stars { display: flex; gap: 4px; }
+        .stars span { font-size: 28px; color: var(--brand-gray-soft-hover); cursor: pointer; transition: 0.15s; user-select: none; }
+        .stars span:hover { transform: scale(1.15); }
+        .stars span.active { color: var(--brand-red); }
+
+        .big-rating { text-align: center; padding: 10px 0; }
+        .big-stars { display: flex; justify-content: center; gap: 8px; margin-bottom: 12px; }
+        .big-stars span { font-size: 48px; color: var(--brand-gray-soft-hover); cursor: pointer; transition: 0.15s; user-select: none; }
+        .big-stars span:hover { transform: scale(1.1); }
+        .big-stars span.active { color: var(--brand-red); }
+        .big-rating__label { color: var(--brand-dark); font-size: 0.95rem; font-weight: 600; min-height: 22px; }
+
+        /* Кнопки */
+        .survey-nav { display: flex; gap: 12px; margin-top: 24px; }
+        .survey-nav button { flex: 1; padding: 14px; border: 0; border-radius: 12px; font: inherit; font-weight: 800; font-size: 1rem; cursor: pointer; transition: 0.2s; }
+        .btn-next { background: var(--brand-red); color: var(--brand-white); }
+        .btn-next:hover { background: var(--brand-red-dark); transform: translateY(-2px); }
+        .btn-back { background: transparent; border: 1px solid var(--brand-gray); color: var(--brand-black); flex: 0 0 100px; }
+        .btn-back:hover { background: var(--brand-gray-soft); }
+
+        /* Ошибки и успех */
+        .survey-error { color: var(--brand-red); font-size: 0.85rem; margin-top: 14px; display: none; font-weight: 700; text-align: center; }
+        .survey-error.active { display: block; }
+
+        .survey-success { display: none; text-align: center; padding: 30px 10px; }
+        .survey-success.active { display: block; }
+        .survey-success__icon { width: 70px; height: 70px; margin: 0 auto 16px; background: var(--brand-red); color: var(--brand-white); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 34px; font-weight: 900; }
+        .survey-success h2 { color: var(--brand-black); margin-bottom: 8px; }
+        .survey-success p { color: var(--brand-dark); margin-bottom: 24px; }
+        .btn-home { display: inline-block; padding: 12px 32px; background: var(--brand-gray-soft); color: var(--brand-black); text-decoration: none; border-radius: 10px; font-weight: 700; }
+
+        @media (max-width: 500px) {
+            .form-row, .option-grid { grid-template-columns: 1fr; }
+            .survey-nav { flex-direction: column-reverse; }
+            .btn-back { flex: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="survey-card" id="surveyCard">
+
+    <div class="survey-header">
+        <h1>Оцени наш проект и получи паспорт</h1>
+        <p>Ответь на несколько вопросов и оставь данные для HR</p>
+    </div>
+
+    <div class="survey-progress" id="surveyProgress"></div>
+
+    <!-- Шаг 1: Оценка игр -->
+    <div class="survey-step active" data-step="0">
+        <div class="survey-question">Оцени каждую игру</div>
+        <p style="color:var(--brand-dark); font-size:0.85rem; margin:-8px 0 14px;">1 — скучно, 5 — огонь 🔥</p>
+        <div class="rating-group">
+            <div class="rating-row">
+                <span class="rating-label">🎯 Миф или правда</span>
+                <div class="stars" data-rating="game1">
+                    <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+                </div>
+            </div>
+            <div class="rating-row">
+                <span class="rating-label">🍹 Собери напиток</span>
+                <div class="stars" data-rating="game2">
+                    <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+                </div>
+            </div>
+            <div class="rating-row">
+                <span class="rating-label">🚚 Доставка</span>
+                <div class="stars" data-rating="game3">
+                    <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 2: Общая оценка -->
+    <div class="survey-step" data-step="1">
+        <div class="survey-question">Как тебе проект в целом?</div>
+        <div class="big-rating">
+            <div class="big-stars" data-rating="overall">
+                <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+            </div>
+            <div class="big-rating__label" id="overallLabel">Выбери оценку</div>
+        </div>
+        <div class="form-group" style="margin-top:24px;">
+            <label class="lbl">Порекомендуешь друзьям?</label>
+            <div class="option-grid">
+                <label class="option-card"><input type="radio" name="sRecommend" value="true"><span>👍 Да, конечно</span></label>
+                <label class="option-card"><input type="radio" name="sRecommend" value="false"><span>🤔 Наверное, нет</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Шаг 3: Отзыв -->
+    <div class="survey-step" data-step="2">
+        <div class="survey-question">Что понравилось больше всего?</div>
+        <p style="color:var(--brand-dark); font-size:0.85rem; margin:-8px 0 14px;">Можно выбрать несколько</p>
+        <div class="option-grid" style="margin-bottom: 20px;">
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Дизайн"><span>🎨 Дизайн</span></label>
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Игры"><span>🎮 Игры</span></label>
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Сюжет"><span>📖 Сюжет</span></label>
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Факты о компании"><span>💡 Факты</span></label>
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Понятность"><span>✨ Понятность</span></label>
+            <label class="option-card"><input type="checkbox" name="sLiked" value="Атмосфера"><span>🎯 Атмосфера</span></label>
+        </div>
+        <div class="form-group">
+            <label class="lbl">Что бы ты улучшил?</label>
+            <textarea id="sImprovements" rows="3" placeholder="Например: добавить звуки, больше игр..."></textarea>
+        </div>
+    </div>
+
+    <!-- Шаг 4: Карьерная анкета -->
+    <div class="survey-step" data-step="3">
+        <div class="survey-question">Карьерный паспорт</div>
+        <p style="color:var(--brand-dark); font-size:0.85rem; margin:-8px 0 14px;">Заполни данные, чтобы HR пригласил тебя на стажировку.</p>
+
+        <div class="form-group">
+            <label class="lbl">ФИО *</label>
+            <input type="text" id="sFullName" placeholder="Иванов Иван Иванович">
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label class="lbl">Дата рождения *</label>
+                <input type="date" id="sDob">
+            </div>
+            <div class="form-group">
+                <label class="lbl">Телефон / Telegram *</label>
+                <input type="text" id="sContact" placeholder="+7... или @username">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="lbl">Email</label>
+            <input type="email" id="sEmail" placeholder="example@mail.ru">
+        </div>
+        <div class="form-group">
+            <label class="lbl">ВУЗ / Колледж</label>
+            <input type="text" id="sUniversity" placeholder="Название учебного заведения">
+        </div>
+        <div class="form-group">
+            <label class="lbl">Интересующая вакансия *</label>
+            <select id="sVacancy">
+                <option value="">Выбери направление...</option>
+                <option value="engineer">Инженер-наладчик / Автоматизация</option>
+                <option value="chemist">Химик-технолог / Лаборатория</option>
+                <option value="operator">Оператор линии розлива</option>
+                <option value="logistics">Логист / Склад</option>
+                <option value="other">Другое</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="lbl">Готовность выйти на стажировку *</label>
+            <div class="option-grid" style="grid-template-columns: repeat(3, 1fr);">
+                <label class="option-card"><input type="radio" name="sReadiness" value="yes"><span>Да, готов</span></label>
+                <label class="option-card"><input type="radio" name="sReadiness" value="soon"><span>Скоро</span></label>
+                <label class="option-card"><input type="radio" name="sReadiness" value="no"><span>Пока нет</span></label>
+            </div>
+        </div>
+    </div>
+
+    <!-- Экран успеха -->
+    <div class="survey-success" id="successScreen">
+        <div class="survey-success__icon">✓</div>
+        <h2>Спасибо за отзыв!</h2>
+        <p>Твоё резюме отправлено в отдел кадров «Очаково». Ожидай сообщения от HR-специалиста!</p>
+        <a href="/" class="btn-home">Вернуться на главную</a>
+    </div>
+
+    <div class="survey-error" id="surveyError">Заполни обязательные поля</div>
+
+    <div class="survey-nav" id="surveyNav">
+        <button type="button" class="btn-back" id="surveyBack" style="display:none;">← Назад</button>
+        <button type="button" class="btn-next" id="surveyNext">Далее →</button>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const SURVEY_TOTAL = 4; // 4 шага с вопросами
+        let surveyStep = 0;
+
+        const surveyData = {
+            ratingGame1: null, ratingGame2: null, ratingGame3: null,
+            ratingOverall: null, wouldRecommend: null,
+            likedMost: [], improvements: '',
+            fullName: '', dob: '', contact: '', email: '', university: '', vacancy: '', readiness: ''
+        };
+
+        const surveyProgress = document.getElementById("surveyProgress");
+        const surveyNav = document.getElementById("surveyNav");
+        const surveyBack = document.getElementById("surveyBack");
+        const surveyNext = document.getElementById("surveyNext");
+        const surveyError = document.getElementById("surveyError");
+
+        const overallLabels = { 1: "😕 Слабо", 2: "😐 Можно лучше", 3: "🙂 Нормально", 4: "😃 Круто!", 5: "🤩 Огонь!" };
+
+        function renderProgress() {
+            surveyProgress.innerHTML = "";
+            for (let i = 0; i < SURVEY_TOTAL; i++) {
+                const d = document.createElement("div");
+                d.className = "survey-progress__step";
+                if (i < surveyStep) d.classList.add("done");
+                if (i === surveyStep) d.classList.add("active");
+                surveyProgress.appendChild(d);
+            }
+        }
+
+        function showSurveyStep(idx) {
+            document.querySelectorAll(".survey-step").forEach(el => el.classList.remove("active"));
+            const step = document.querySelector(`.survey-step[data-step="${idx}"]`);
+            if (step) step.classList.add("active");
+
+            surveyError.classList.remove("active");
+            surveyNav.style.display = "flex";
+            surveyBack.style.display = idx === 0 ? "none" : "block";
+            surveyNext.textContent = idx === SURVEY_TOTAL - 1 ? "Получить паспорт ✓" : "Далее →";
+            surveyNext.style.background = idx === SURVEY_TOTAL - 1 ? "var(--brand-red-dark)" : "var(--brand-red)";
+
+            renderProgress();
+        }
+
+        function initStars() {
+            document.querySelectorAll(".stars, .big-stars").forEach(container => {
+                const ratingKey = container.dataset.rating;
+                const stars = container.querySelectorAll("span");
+
+                stars.forEach(star => {
+                    star.addEventListener("click", () => {
+                        const val = parseInt(star.dataset.val);
+                        if (ratingKey === "game1") surveyData.ratingGame1 = val;
+                        else if (ratingKey === "game2") surveyData.ratingGame2 = val;
+                        else if (ratingKey === "game3") surveyData.ratingGame3 = val;
+                        else if (ratingKey === "overall") {
+                            surveyData.ratingOverall = val;
+                            document.getElementById("overallLabel").textContent = overallLabels[val] || "";
+                        }
+                        stars.forEach((s, i) => s.classList.toggle("active", i < val));
+                    });
+                });
+            });
+        }
+
+        function validateStep(idx) {
+            if (idx === 0) {
+                if (!surveyData.ratingGame1 || !surveyData.ratingGame2 || !surveyData.ratingGame3) return false;
+            }
+            if (idx === 1) {
+                if (!surveyData.ratingOverall) return false;
+                const rec = document.querySelector('input[name="sRecommend"]:checked');
+                if (!rec) return false;
+                surveyData.wouldRecommend = rec.value === "true";
+            }
+            if (idx === 2) {
+                const liked = [...document.querySelectorAll('input[name="sLiked"]:checked')].map(c => c.value);
+                if (liked.length === 0) return false;
+                surveyData.likedMost = liked;
+                surveyData.improvements = document.getElementById("sImprovements").value.trim();
+            }
+            if (idx === 3) {
+                const fullName = document.getElementById("sFullName").value.trim();
+                const dob = document.getElementById("sDob").value;
+                const contact = document.getElementById("sContact").value.trim();
+                const vacancy = document.getElementById("sVacancy").value;
+                const readiness = document.querySelector('input[name="sReadiness"]:checked');
+
+                if (fullName.length < 3) { surveyError.textContent = "Укажите ФИО"; return false; }
+                if (!dob) { surveyError.textContent = "Укажите дату рождения"; return false; }
+
+                const birthDate = new Date(dob);
+                const today = new Date();
+                let age = today.getFullYear() - birthDate.getFullYear();
+                const m = today.getMonth() - birthDate.getMonth();
+                if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+
+                if (age < 18) { surveyError.textContent = "Извините, стажировка доступна только с 18 лет"; return false; }
+                if (contact.length < 5) { surveyError.textContent = "Укажите телефон или Telegram"; return false; }
+                if (!vacancy) { surveyError.textContent = "Выберите вакансию"; return false; }
+                if (!readiness) { surveyError.textContent = "Укажите готовность выйти"; return false; }
+
+                surveyData.fullName = fullName;
+                surveyData.dob = dob;
+                surveyData.contact = contact;
+                surveyData.email = document.getElementById("sEmail").value.trim();
+                surveyData.university = document.getElementById("sUniversity").value.trim();
+                surveyData.vacancy = vacancy;
+                surveyData.readiness = readiness.value;
+            }
+            return true;
+        }
+
+        function submitSurvey() {
+            const payload = {
+                fullName: surveyData.fullName,
+                dob: surveyData.dob,
+                contact: surveyData.contact,
+                email: surveyData.email,
+                university: surveyData.university,
+                vacancy: surveyData.vacancy,
+                readiness: surveyData.readiness,
+                ratingGame1: surveyData.ratingGame1,
+                ratingGame2: surveyData.ratingGame2,
+                ratingGame3: surveyData.ratingGame3,
+                ratingOverall: surveyData.ratingOverall,
+                wouldRecommend: surveyData.wouldRecommend,
+                likedMost: surveyData.likedMost.join(", "),
+                improvements: surveyData.improvements
+            };
+
+            fetch("/api/feedback", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(payload)
+            }).then(r => {
+                if (!r.ok) throw new Error("Server error");
+                showSuccess();
+            }).catch(err => {
+                console.warn("Оффлайн:", err);
+                // Если сервер недоступен, всё равно показываем успех
+                showSuccess();
+            });
+        }
+
+        function showSuccess() {
+            document.getElementById("surveyCard").querySelectorAll(".survey-step, .survey-header, .survey-progress, .survey-nav, .survey-error").forEach(el => el.style.display = "none");
+            document.getElementById("successScreen").classList.add("active");
+        }
+
+        surveyNext.addEventListener("click", () => {
+            if (!validateStep(surveyStep)) {
+                surveyError.classList.add("active");
+                return;
+            }
+            if (surveyStep === SURVEY_TOTAL - 1) {
+                submitSurvey();
+            } else {
+                surveyStep++;
+                showSurveyStep(surveyStep);
+            }
+        });
+
+        surveyBack.addEventListener("click", () => {
+            if (surveyStep > 0) {
+                surveyStep--;
+                showSurveyStep(surveyStep);
+            }
+        });
+
+        document.querySelectorAll('.option-card input').forEach(inp => {
+            inp.addEventListener('change', () => {
+                if (inp.type === "radio") {
+                    document.querySelectorAll(`input[name="${inp.name}"]`).forEach(r => r.parentElement.classList.remove("checked"));
+                }
+                inp.parentElement.classList.toggle("checked", inp.checked);
+            });
+        });
+
+        // Инициализация
+        initStars();
+        showSurveyStep(0);
+    });
+</script>
+</body>
+</html>

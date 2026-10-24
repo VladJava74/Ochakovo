@@ -11,11 +11,6 @@ public class MController {
         return "about";
     }
 
-    @GetMapping({"/conditions", "/conditions.html"})
-    public String conditions() {
-        return "conditions";
-    }
-
     @GetMapping({"/", "/home.html"})
     public String home() {
         return "home";
@@ -31,10 +26,9 @@ public class MController {
         return "professions";
     }
 
-
-    @GetMapping({"/try", "/try.html"})
-    public String tryPage() {
-        return "try";
+    @GetMapping({"/apply", "/apply.html"})
+    public String apply() {
+        return "apply";
     }
 
     @GetMapping({"/games/game01", "/games/game01.html"})

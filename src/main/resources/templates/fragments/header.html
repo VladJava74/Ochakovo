@@ -6,7 +6,14 @@
         <a class="site-header__logo" th:href="@{/}">
             ОЧАКОВО <span>•</span> Карьера и Практика
         </a>
-
+        <!-- Обертка для кнопок -->
+        <div style="display: flex; gap: 16px; flex-wrap: wrap; margin-top: 24px;">
+            <!-- 🔑 Кнопка на страницу с резюме -->
+            <a class="btn" th:href="@{/apply}"
+               style="background: var(--brand-white); color: var(--brand-red); border: 2px solid var(--brand-red); box-shadow: none;">
+                Написать отзыв и отправить резюме
+            </a>
+        </div>
         <button class="site-header__menu-toggle" id="menuToggle" aria-label="Открыть меню">
             <span></span>
             <span></span>
@@ -18,9 +25,7 @@
         <a th:href="@{/}">Главная</a>
         <a th:href="@{/about}">О компании</a>
         <a th:href="@{/jobs}">Работа</a>
-        <a th:href="@{/try}">Попробуй себя</a>
-        <a th:href="@{/professions}">Профессии</a>
-        <a th:href="@{/conditions}">Условия</a>
+        <a th:href="@{/professions}">Попробуй себя</a>
     </nav>
 </header>
 
