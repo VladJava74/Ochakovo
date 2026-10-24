@@ -319,7 +319,7 @@
 
         .form-group { margin-bottom: 12px; }
         .form-group label.lbl { display: block; font-size: 0.8rem; font-weight: 700; color: var(--heading); margin-bottom: 5px; }
-        .form-group input[type="text"], .form-group select, .form-group textarea {
+        .form-group input[type="text"], .form-group input[type="email"], .form-group input[type="date"], .form-group select, .form-group textarea {
           width: 100%; padding: 12px;
           border: 1px solid var(--brand-gray);
           border-radius: 10px; font: inherit; background: var(--brand-white); color: var(--text);
@@ -483,22 +483,8 @@
 
         <div class="survey-progress" id="surveyProgress"></div>
 
-        <!-- Шаг 1 -->
+        <!-- Шаг 1: Оценка игр -->
         <div class="survey-step active" data-step="0">
-            <div class="survey-question">Как тебя зовут?</div>
-            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Чтобы мы знали, кому сказать спасибо 🙌</p>
-            <div class="form-group">
-                <label class="lbl">Имя</label>
-                <input type="text" id="sName" placeholder="Например, Олег">
-            </div>
-            <div class="form-group">
-                <label class="lbl">Группа / направление (необязательно)</label>
-                <input type="text" id="sGroup" placeholder="Например, ПрИ-12">
-            </div>
-        </div>
-
-        <!-- Шаг 2 -->
-        <div class="survey-step" data-step="1">
             <div class="survey-question">Оцени каждую игру</div>
             <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">1 — скучно, 5 — огонь 🔥</p>
             <div class="rating-group">
@@ -523,8 +509,8 @@
             </div>
         </div>
 
-        <!-- Шаг 3 -->
-        <div class="survey-step" data-step="2">
+        <!-- Шаг 2: Общая оценка -->
+        <div class="survey-step" data-step="1">
             <div class="survey-question">Как тебе проект в целом?</div>
             <div class="big-rating">
                 <div class="big-stars" data-rating="overall">
@@ -541,8 +527,8 @@
             </div>
         </div>
 
-        <!-- Шаг 4 -->
-        <div class="survey-step" data-step="3">
+        <!-- Шаг 3: Что понравилось -->
+        <div class="survey-step" data-step="2">
             <div class="survey-question">Что понравилось больше всего?</div>
             <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Можно выбрать несколько</p>
             <div class="option-grid">
@@ -555,12 +541,60 @@
             </div>
         </div>
 
-        <!-- Шаг 5 -->
-        <div class="survey-step" data-step="4">
+        <!-- Шаг 4: Что улучшить -->
+        <div class="survey-step" data-step="3">
             <div class="survey-question">Что бы ты улучшил?</div>
             <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Честно — мы не обидимся 😉</p>
             <div class="form-group">
-                <textarea id="sImprovements" rows="4" placeholder="Например: добавить звуки, больше игр, короче текст..."></textarea>
+                <textarea id="sImprovements" rows="3" placeholder="Например: добавить звуки, больше игр, короче текст..."></textarea>
+            </div>
+        </div>
+
+        <!-- 🔑 Шаг 5: Карьерная анкета -->
+        <div class="survey-step" data-step="4">
+            <div class="survey-question">Карьерный паспорт</div>
+            <p style="color:var(--text); font-size:0.85rem; margin:-8px 0 14px;">Заполни данные, чтобы HR мог связаться с тобой и пригласить на стажировку.</p>
+
+            <div class="form-group">
+                <label class="lbl">ФИО *</label>
+                <input type="text" id="sFullName" placeholder="Иванов Иван Иванович">
+            </div>
+            <div class="form-row" style="display:grid; grid-template-columns: 1fr 1fr; gap:10px;">
+                <div class="form-group">
+                    <label class="lbl">Дата рождения *</label>
+                    <input type="date" id="sDob">
+                </div>
+                <div class="form-group">
+                    <label class="lbl">Телефон / Telegram *</label>
+                    <input type="text" id="sContact" placeholder="+7... или @username">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="lbl">Email</label>
+                <input type="email" id="sEmail" placeholder="example@mail.ru">
+            </div>
+            <div class="form-group">
+                <label class="lbl">ВУЗ / Колледж</label>
+                <input type="text" id="sUniversity" placeholder="Название учебного заведения">
+            </div>
+            <div class="form-group">
+                <label class="lbl">Интересующая вакансия *</label>
+                <select id="sVacancy">
+                    <option value="">Выбери направление...</option>
+                    <option value="engineer">Инженер-наладчик / Автоматизация</option>
+                    <option value="chemist">Химик-технолог / Лаборатория</option>
+                    <option value="operator">Оператор линии розлива</option>
+                    <option value="logistics">Логист / Склад</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="lbl">Готовность выйти на стажировку *</label>
+                <div class="option-grid" style="grid-template-columns: repeat(3, 1fr);">
+                    <label class="option-card"><input type="radio" name="sReadiness" value="yes"><span>Да, готов</span></label>
+                    <label class="option-card"><input type="radio" name="sReadiness" value="soon"><span>Скоро</span></label>
+                    <label class="option-card"><input type="radio" name="sReadiness" value="no"><span>Пока нет</span></label>
+                </div>
             </div>
         </div>
 
@@ -569,7 +603,7 @@
             <div class="survey-success">
                 <div class="survey-success__icon">✓</div>
                 <h2>Спасибо за отзыв!</h2>
-                <p>Твоё мнение поможет нам сделать проект лучше к хакатону.</p>
+                <p>Твоё мнение поможет нам стать лучше. Если ты заполнил анкету — жди сообщения от HR «Очаково»!</p>
             </div>
             <div class="survey-nav">
                 <button type="button" class="btn-next" id="surveyFinish" style="flex:1;">Вернуться на главную</button>
@@ -1208,10 +1242,10 @@
       const SURVEY_TOTAL = 5;
       let surveyStep = 0;
       const surveyData = {
-        name: '', group: '',
         ratingGame1: null, ratingGame2: null, ratingGame3: null,
         ratingOverall: null, wouldRecommend: null,
-        likedMost: [], improvements: ''
+        likedMost: [], improvements: '',
+        fullName: '', dob: '', contact: '', email: '', university: '', vacancy: '', readiness: ''
       };
 
       const surveyOverlay = document.getElementById("surveyOverlay");
@@ -1248,7 +1282,7 @@
         surveyError.classList.remove("active");
         surveyNav.style.display = "flex";
         surveyBack.style.display = idx === 0 ? "none" : "block";
-        surveyNext.textContent = idx === SURVEY_TOTAL - 1 ? "Отправить отзыв ✓" : "Далее →";
+        surveyNext.textContent = idx === SURVEY_TOTAL - 1 ? "Получить паспорт ✓" : "Далее →";
         surveyNext.style.background = idx === SURVEY_TOTAL - 1 ? "var(--brand-red-dark)" : "var(--brand-red)";
         surveyNext.style.color = "var(--brand-white)";
 
@@ -1298,35 +1332,63 @@
 
       function validateStep(idx) {
         if (idx === 0) {
-          const n = document.getElementById("sName").value.trim();
-          if (n.length < 2) return false;
-          surveyData.name = n;
-          surveyData.group = document.getElementById("sGroup").value.trim();
-        }
-        if (idx === 1) {
           if (!surveyData.ratingGame1 || !surveyData.ratingGame2 || !surveyData.ratingGame3) return false;
         }
-        if (idx === 2) {
+        if (idx === 1) {
           if (!surveyData.ratingOverall) return false;
           const rec = document.querySelector('input[name="sRecommend"]:checked');
           if (!rec) return false;
           surveyData.wouldRecommend = rec.value === "true";
         }
-        if (idx === 3) {
+        if (idx === 2) {
           const liked = [...document.querySelectorAll('input[name="sLiked"]:checked')].map(c => c.value);
           if (liked.length === 0) return false;
           surveyData.likedMost = liked;
         }
-        if (idx === 4) {
+        if (idx === 3) {
           surveyData.improvements = document.getElementById("sImprovements").value.trim();
+        }
+        if (idx === 4) {
+          const fullName = document.getElementById("sFullName").value.trim();
+          const dob = document.getElementById("sDob").value;
+          const contact = document.getElementById("sContact").value.trim();
+          const vacancy = document.getElementById("sVacancy").value;
+          const readiness = document.querySelector('input[name="sReadiness"]:checked');
+
+          if (fullName.length < 3) { surveyError.textContent = "Укажите ФИО"; return false; }
+          if (!dob) { surveyError.textContent = "Укажите дату рождения"; return false; }
+
+          const birthDate = new Date(dob);
+          const today = new Date();
+          let age = today.getFullYear() - birthDate.getFullYear();
+          const m = today.getMonth() - birthDate.getMonth();
+          if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) age--;
+
+          if (age < 18) { surveyError.textContent = "Извините, стажировка доступна только с 18 лет"; return false; }
+          if (contact.length < 5) { surveyError.textContent = "Укажите телефон или Telegram"; return false; }
+          if (!vacancy) { surveyError.textContent = "Выберите вакансию"; return false; }
+          if (!readiness) { surveyError.textContent = "Укажите готовность выйти"; return false; }
+
+          surveyData.fullName = fullName;
+          surveyData.dob = dob;
+          surveyData.contact = contact;
+          surveyData.email = document.getElementById("sEmail").value.trim();
+          surveyData.university = document.getElementById("sUniversity").value.trim();
+          surveyData.vacancy = vacancy;
+          surveyData.readiness = readiness.value;
         }
         return true;
       }
 
       function submitSurvey() {
         const payload = {
-          name: surveyData.name,
-          studentGroup: surveyData.group,
+          fullName: surveyData.fullName,
+          dob: surveyData.dob,
+          contact: surveyData.contact,
+          email: surveyData.email,
+          university: surveyData.university,
+          vacancy: surveyData.vacancy,
+          readiness: surveyData.readiness,
           ratingGame1: surveyData.ratingGame1,
           ratingGame2: surveyData.ratingGame2,
           ratingGame3: surveyData.ratingGame3,

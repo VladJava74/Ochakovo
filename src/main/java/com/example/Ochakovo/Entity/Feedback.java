@@ -1,6 +1,5 @@
 package com.example.Ochakovo.Entity;
 
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
@@ -11,8 +10,19 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // Старые поля (для совместимости)
     private String name;
-    private String studentGroup; // 🔑 Изменено с group на studentGroup
+    private String studentGroup;
+
+    // 🔑 НОВЫЕ ПОЛЯ ДЛЯ HR
+    private String fullName;
+    private String dob;
+    private String contact;
+    private String email;
+    private String university;
+    private String vacancy;
+    private String readiness;
+
     private Integer ratingGame1;
     private Integer ratingGame2;
     private Integer ratingGame3;
@@ -25,14 +35,36 @@ public class Feedback {
     @PrePersist
     public void prePersist() { this.createdAt = LocalDateTime.now(); }
 
+    // Геттеры и сеттеры
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
+
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
-    // 🔑 Новые геттер и сеттер
     public String getStudentGroup() { return studentGroup; }
     public void setStudentGroup(String studentGroup) { this.studentGroup = studentGroup; }
+
+    public String getFullName() { return fullName; }
+    public void setFullName(String fullName) { this.fullName = fullName; }
+
+    public String getDob() { return dob; }
+    public void setDob(String dob) { this.dob = dob; }
+
+    public String getContact() { return contact; }
+    public void setContact(String contact) { this.contact = contact; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public String getUniversity() { return university; }
+    public void setUniversity(String university) { this.university = university; }
+
+    public String getVacancy() { return vacancy; }
+    public void setVacancy(String vacancy) { this.vacancy = vacancy; }
+
+    public String getReadiness() { return readiness; }
+    public void setReadiness(String readiness) { this.readiness = readiness; }
 
     public Integer getRatingGame1() { return ratingGame1; }
     public void setRatingGame1(Integer ratingGame1) { this.ratingGame1 = ratingGame1; }

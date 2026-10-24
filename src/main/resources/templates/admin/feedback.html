@@ -2,424 +2,126 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Отзывы о проекте — Очаково</title>
+    <title>Отзывы и анкеты — Очаково</title>
     <style>
-        /* Подключение фирменного шрифта */
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'),
-               url('/fonts/ProximaNova-Regular.woff') format('woff');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'),
-               url('/fonts/ProximaNova-Bold.woff') format('woff');
-          font-weight: 700;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
-               url('/fonts/ProximaNova-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-          font-display: swap;
-        }
-
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'); font-weight: 700; }
         :root {
-          /* Новая палитра Очаково */
-          --brand-red: #d50032;
-          --brand-red-dark: #ab2328;
-          --brand-white: #ffffff;
-          --brand-dark: #626262;
-          --brand-black: #000000;
-          --brand-gray: #a2aaad;
-          --brand-gray-soft: rgba(162, 170, 173, 0.16);
-          --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
+          --brand-red: #d50032; --brand-red-dark: #ab2328; --brand-white: #ffffff;
+          --brand-dark: #626262; --brand-black: #000000; --brand-gray: #a2aaad;
+          --brand-gray-soft: rgba(162, 170, 173, 0.16); --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Proxima Nova', system-ui, sans-serif; background: #f9f9f9; padding: 32px; color: var(--brand-dark); }
+        h1 { color: var(--brand-black); margin-bottom: 6px; font-weight: 900; }
+        .subtitle { color: var(--brand-dark); margin-bottom: 24px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+        .stat-card { background: var(--brand-white); border-radius: 16px; padding: 20px; box-shadow: 0 8px 24px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.03); }
+        .stat-card .label { color: var(--brand-dark); font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: 0.05em; }
+        .stat-card .value { color: var(--brand-black); font-size: 36px; font-weight: 900; line-height: 1.2; }
+        .stat-card.highlight { background: var(--brand-red-dark); border: none; }
+        .stat-card.highlight .label { color: rgba(255,255,255,0.8); }
+        .stat-card.highlight .value { color: var(--brand-white); }
+        .toolbar { display: flex; gap: 12px; margin-bottom: 16px; align-items: center; flex-wrap: wrap; }
+        .btn { padding: 10px 18px; border: 0; border-radius: 10px; font-weight: 700; font-size: 14px; cursor: pointer; text-decoration: none; display: inline-block; transition: 0.2s; }
+        .btn-secondary { background: var(--brand-gray-soft); color: var(--brand-black); }
+        .btn-secondary:hover { background: var(--brand-gray-soft-hover); }
+        .btn-danger { background: rgba(213,0,50,0.1); color: var(--brand-red-dark); padding: 6px 10px; font-size: 12px; border-radius: 8px; border: none; cursor: pointer; }
+        .btn-danger:hover { background: rgba(213,0,50,0.2); }
+        .btn-edit { background: var(--brand-gray-soft); color: var(--brand-black); padding: 6px 10px; font-size: 12px; border-radius: 8px; text-decoration: none; display: inline-block; }
+        .btn-edit:hover { background: var(--brand-gray-soft-hover); }
 
-        body {
-            font-family: 'Proxima Nova', system-ui, -apple-system, sans-serif;
-            background: #f9f9f9;
-            padding: 32px;
-            color: var(--brand-dark);
-        }
-
-        h1 {
-            color: var(--brand-black);
-            margin-bottom: 6px;
-            font-weight: 900;
-        }
-
-        .subtitle {
-            color: var(--brand-dark);
-            margin-bottom: 24px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 16px;
-            margin-bottom: 32px;
-        }
-
-        .stat-card {
-            background: var(--brand-white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        .stat-card .label {
-            color: var(--brand-dark);
-            font-size: 12px;
-            text-transform: uppercase;
-            font-weight: 700;
-            letter-spacing: 0.05em;
-        }
-
-        .stat-card .value {
-            color: var(--brand-black);
-            font-size: 36px;
-            font-weight: 900;
-            line-height: 1.2;
-        }
-
-        .stat-card .stars-mini {
-            color: var(--brand-red);
-            font-size: 14px;
-            margin-top: 4px;
-        }
-
-        .stat-card.highlight {
-            background: var(--brand-red-dark);
-            border: none;
-        }
-
-        .stat-card.highlight .label {
-            color: rgba(255, 255, 255, 0.8);
-        }
-
-        .stat-card.highlight .value {
-            color: var(--brand-white);
-        }
-
-        .toolbar {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 10px 18px;
-            border: 0;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 14px;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .btn-primary {
-            background: var(--brand-red);
-            color: var(--brand-white);
-        }
-        .btn-primary:hover {
-            background: var(--brand-red-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: var(--brand-gray-soft);
-            color: var(--brand-black);
-        }
-        .btn-secondary:hover {
-            background: var(--brand-gray-soft-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn-danger {
-            background: rgba(213, 0, 50, 0.1);
-            color: var(--brand-red-dark);
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 8px;
-        }
-        .btn-danger:hover {
-            background: rgba(213, 0, 50, 0.2);
-        }
-
-        .btn-edit {
-            background: var(--brand-gray-soft);
-            color: var(--brand-black);
-            padding: 6px 12px;
-            font-size: 12px;
-            border-radius: 8px;
-        }
-        .btn-edit:hover {
-            background: var(--brand-gray-soft-hover);
-        }
-
-        .add-form {
-            background: var(--brand-white);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-            margin-bottom: 24px;
-            display: none;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        .add-form.active { display: block; }
-        .add-form h3 { color: var(--brand-black); margin-bottom: 16px; }
-
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-        .form-row.full { grid-template-columns: 1fr; }
-
-        .add-form input, .add-form textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--brand-gray);
-            border-radius: 8px;
-            font: inherit;
-            background: var(--brand-white);
-            color: var(--brand-dark);
-        }
-        .add-form input:focus, .add-form textarea:focus {
-            outline: none;
-            border-color: var(--brand-red);
-        }
-
-        .add-form label {
-            display: block;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--brand-black);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            background: var(--brand-white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-            font-size: 14px;
-        }
-
-        th {
-            background: var(--brand-red-dark);
-            color: var(--brand-white);
-            padding: 14px 10px;
-            text-align: left;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            font-weight: 700;
-        }
-
-        td {
-            padding: 14px 10px;
-            border-bottom: 1px solid var(--brand-gray-soft);
-            vertical-align: top;
-        }
-
-        tr:hover td {
-            background: #f4f4f4;
-        }
-
-        .empty {
-            text-align: center;
-            padding: 40px;
-            color: var(--brand-dark);
-        }
-
-        .name {
-            font-weight: 800;
-            color: var(--brand-black);
-        }
-
-        .small {
-            font-size: 12px;
-            color: var(--brand-dark);
-        }
-
-        .stars-cell {
-            color: var(--brand-red);
-            font-size: 16px;
-            letter-spacing: 1px;
-        }
-
-        .badge {
-            background: var(--brand-gray-soft);
-            color: var(--brand-black);
-            padding: 3px 8px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-            display: inline-block;
-            margin: 2px;
-        }
-
-        .comment {
-            max-width: 260px;
-            font-style: italic;
-            color: var(--brand-dark);
-        }
-
-        .actions {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-        }
+        table { width: 100%; border-collapse: collapse; background: var(--brand-white); border-radius: 16px; overflow: hidden; box-shadow: 0 12px 36px rgba(0,0,0,0.08); font-size: 13px; }
+        th { background: var(--brand-red-dark); color: var(--brand-white); padding: 12px 8px; text-align: left; font-size: 11px; text-transform: uppercase; font-weight: 700; }
+        td { padding: 12px 8px; border-bottom: 1px solid var(--brand-gray-soft); vertical-align: top; }
+        tr:hover td { background: #f4f4f4; }
+        .name { font-weight: 800; color: var(--brand-black); margin-bottom: 2px; }
+        .small { font-size: 11px; color: var(--brand-dark); }
+        .stars-cell { color: var(--brand-red); font-size: 14px; letter-spacing: 0px; }
+        .badge { background: var(--brand-gray-soft); color: var(--brand-black); padding: 3px 6px; border-radius: 4px; font-size: 10px; font-weight: 700; display: inline-block; margin: 2px 0; }
+        .badge-vacancy { background: rgba(213,0,50,0.1); color: var(--brand-red-dark); }
+        .comment { max-width: 150px; font-style: italic; font-size: 12px; }
+        .actions { display: flex; gap: 4px; }
     </style>
 </head>
 <body>
-<h1>Отзывы о проекте</h1>
-<p class="subtitle">Всего отзывов: <strong th:text="${total}">0</strong></p>
+<h1>Анкеты и отзывы</h1>
+<p class="subtitle">Всего анкет: <strong th:text="${total}">0</strong></p>
 
 <div class="toolbar">
-    <button class="btn btn-primary" onclick="document.getElementById('addForm').classList.toggle('active')">
-        ➕ Добавить отзыв вручную
-    </button>
     <a href="/" class="btn btn-secondary">← На главную</a>
 </div>
-
-<!-- Форма добавления нового отзыва -->
-<form id="addForm" class="add-form" method="post" action="/admin/feedback/add">
-    <h3>Новый отзыв (ручное добавление)</h3>
-    <div class="form-row">
-        <div>
-            <label>Имя *</label>
-            <input type="text" name="name" required>
-        </div>
-        <div>
-            <label>Группа</label>
-            <input type="text" name="studentGroup">
-        </div>
-    </div>
-    <div class="form-row">
-        <div>
-            <label>Игра 1 (1-5) *</label>
-            <input type="number" name="ratingGame1" min="1" max="5" required>
-        </div>
-        <div>
-            <label>Игра 2 (1-5) *</label>
-            <input type="number" name="ratingGame2" min="1" max="5" required>
-        </div>
-    </div>
-    <div class="form-row">
-        <div>
-            <label>Игра 3 (1-5) *</label>
-            <input type="number" name="ratingGame3" min="1" max="5" required>
-        </div>
-        <div>
-            <label>Общая оценка (1-5) *</label>
-            <input type="number" name="ratingOverall" min="1" max="5" required>
-        </div>
-    </div>
-    <div class="form-row full">
-        <div>
-            <label>Что понравилось (через запятую)</label>
-            <input type="text" name="likedMost" placeholder="Дизайн, Игры">
-        </div>
-    </div>
-    <div class="form-row full">
-        <div>
-            <label>Что улучшить</label>
-            <textarea name="improvements" rows="2"></textarea>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">💾 Сохранить отзыв</button>
-</form>
 
 <div class="stats">
     <div class="stat-card highlight">
         <div class="label">Общая оценка</div>
         <div class="value" th:text="${avgOverall}">0</div>
-        <div class="stars-mini">★★★★★</div>
     </div>
     <div class="stat-card">
-        <div class="label">🎯 Миф или правда</div>
+        <div class="label">🎯 Игра 1</div>
         <div class="value" th:text="${avg1}">0</div>
     </div>
     <div class="stat-card">
-        <div class="label">🍹 Собери напиток</div>
+        <div class="label">🍹 Игра 2</div>
         <div class="value" th:text="${avg2}">0</div>
     </div>
     <div class="stat-card">
-        <div class="label">🚚 Доставка</div>
+        <div class="label">🚚 Игра 3</div>
         <div class="value" th:text="${avg3}">0</div>
-    </div>
-    <div class="stat-card">
-        <div class="label">Порекомендуют</div>
-        <div class="value"><span th:text="${recommendPercent}">0</span>%</div>
     </div>
 </div>
 
 <table>
     <thead>
     <tr>
-        <th>Кто</th>
-        <th>Игра 1</th>
-        <th>Игра 2</th>
-        <th>Игра 3</th>
-        <th>Общая</th>
-        <th>Понравилось</th>
-        <th>Улучшить</th>
-        <th>Дата</th>
+        <th>Кандидат</th>
+        <th>Контакты и ВУЗ</th>
+        <th>Вакансия и Готовность</th>
+        <th>Оценки</th>
+        <th>Отзыв</th>
         <th>Действия</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="fb : ${feedbacks}">
         <td>
-            <div class="name" th:text="${fb.name}">Аня</div>
-            <div class="small" th:text="${fb.studentGroup != null ? fb.studentGroup : '—'}">ИТ-21</div>
-        </td>
-        <td class="stars-cell">
-            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame1 != null and i <= fb.ratingGame1 ? '★' : '☆'}">★</span>
-        </td>
-        <td class="stars-cell">
-            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame2 != null and i <= fb.ratingGame2 ? '★' : '☆'}">★</span>
-        </td>
-        <td class="stars-cell">
-            <span th:each="i : ${#numbers.sequence(1, 5)}" th:text="${fb.ratingGame3 != null and i <= fb.ratingGame3 ? '★' : '☆'}">★</span>
-        </td>
-        <td class="stars-cell">
-            <strong><span th:text="${fb.ratingOverall != null ? fb.ratingOverall : '—'}">5</span>/5</strong>
+            <div class="name" th:text="${fb.fullName != null ? fb.fullName : fb.name}">Иванов Иван</div>
+            <div class="small" th:if="${fb.dob != null}" th:text="'ДР: ' + ${fb.dob}">ДР: 2000-01-01</div>
+            <div class="small" th:text="${fb.studentGroup != null ? fb.studentGroup : ''}">ИТ-21</div>
         </td>
         <td>
-            <th:block th:if="${fb.likedMost != null and !fb.likedMost.isEmpty()}">
-                <span class="badge" th:each="item : ${#strings.arraySplit(fb.likedMost, ', ')}" th:text="${item}">Дизайн</span>
-            </th:block>
-            <span th:if="${fb.likedMost == null or fb.likedMost.isEmpty()}" class="small">—</span>
+            <div style="font-weight:700; color:var(--brand-black);" th:text="${fb.contact != null ? fb.contact : '—'}">+7 999...</div>
+            <div class="small" th:text="${fb.email != null ? fb.email : ''}">mail@mail.ru</div>
+            <div class="small" th:text="${fb.university != null ? fb.university : ''}">МГУ</div>
         </td>
-        <td class="comment" th:text="${fb.improvements != null ? fb.improvements : '—'}">Добавить звуки</td>
-        <td class="small" th:text="${fb.createdAt != null ? #temporals.format(fb.createdAt, 'dd.MM.yy HH:mm') : '—'}">01.01.26</td>
+        <td>
+            <span class="badge badge-vacancy" th:if="${fb.vacancy != null and !fb.vacancy.isEmpty()}" th:text="${fb.vacancy}">operator</span>
+            <span class="badge" th:if="${fb.readiness != null and !fb.readiness.isEmpty()}" th:text="${fb.readiness}">yes</span>
+        </td>
+        <td>
+            <div class="stars-cell">
+                <span th:text="${fb.ratingGame1}">5</span> /
+                <span th:text="${fb.ratingGame2}">5</span> /
+                <span th:text="${fb.ratingGame3}">5</span>
+            </div>
+            <div class="small" style="margin-top:4px;">Общая: <strong th:text="${fb.ratingOverall}">5</strong>/5</div>
+        </td>
+        <td class="comment">
+            <div th:text="${fb.improvements != null ? fb.improvements : '—'}">Добавить звуки</div>
+        </td>
         <td>
             <div class="actions">
-                <a th:href="@{/admin/feedback/{id}/edit(id=${fb.id})}" class="btn btn-edit">✏️</a>
-                <form th:action="@{/admin/feedback/{id}/delete(id=${fb.id})}" method="post"
-                      onsubmit="return confirm('Удалить отзыв от ' + '[[${fb.name}]]' + '?')" style="display:inline;">
-                    <button type="submit" class="btn btn-danger">🗑</button>
+                <!-- Кнопка редактирования -->
+                <a th:href="@{/admin/feedback/{id}/edit(id=${fb.id})}" class="btn-edit" title="Редактировать">✏️</a>
+                <!-- Кнопка удаления -->
+                <form th:action="@{/admin/feedback/{id}/delete(id=${fb.id})}" method="post" onsubmit="return confirm('Удалить анкету?');" style="display:inline;">
+                    <button type="submit" class="btn-danger" title="Удалить">🗑</button>
                 </form>
             </div>
         </td>
     </tr>
     <tr th:if="${feedbacks.isEmpty()}">
-        <td colspan="9" class="empty">Пока никто не оценил. Пройди квест — и отзывы появятся!</td>
+        <td colspan="6" style="text-align:center; padding:40px; color:var(--brand-dark);">Пока нет анкет. Пройди квест, чтобы оставить заявку!</td>
     </tr>
     </tbody>
 </table>

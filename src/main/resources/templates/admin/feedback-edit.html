@@ -2,161 +2,66 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Редактирование отзыва — Очаково</title>
+    <title>Редактирование анкеты — Очаково</title>
     <style>
-        /* Подключение фирменного шрифта */
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'),
-               url('/fonts/ProximaNova-Regular.woff') format('woff');
-          font-weight: 400;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'),
-               url('/fonts/ProximaNova-Bold.woff') format('woff');
-          font-weight: 700;
-          font-style: normal;
-          font-display: swap;
-        }
-        @font-face {
-          font-family: 'Proxima Nova';
-          src: url('/fonts/ProximaNova-ExtraBold.woff2') format('woff2'),
-               url('/fonts/ProximaNova-ExtraBold.woff') format('woff');
-          font-weight: 800;
-          font-style: normal;
-          font-display: swap;
-        }
-
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Regular.woff2') format('woff2'); font-weight: 400; }
+        @font-face { font-family: 'Proxima Nova'; src: url('/fonts/ProximaNova-Bold.woff2') format('woff2'); font-weight: 700; }
         :root {
-          /* Новая палитра Очаково */
-          --brand-red: #d50032;
-          --brand-red-dark: #ab2328;
-          --brand-white: #ffffff;
-          --brand-dark: #626262;
-          --brand-black: #000000;
-          --brand-gray: #a2aaad;
+          --brand-red: #d50032; --brand-red-dark: #ab2328; --brand-white: #ffffff;
+          --brand-dark: #626262; --brand-black: #000000; --brand-gray: #a2aaad;
           --brand-gray-soft: rgba(162, 170, 173, 0.16);
-          --brand-gray-soft-hover: rgba(162, 170, 173, 0.32);
         }
-
         * { box-sizing: border-box; margin: 0; padding: 0; }
-
-        body {
-            font-family: 'Proxima Nova', system-ui, -apple-system, sans-serif;
-            background: #f9f9f9;
-            padding: 32px;
-            color: var(--brand-dark);
-            display: flex;
-            justify-content: center;
-        }
-
-        .card {
-            background: var(--brand-white);
-            border-radius: 20px;
-            padding: 32px;
-            width: 100%;
-            max-width: 560px;
-            box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-            border: 1px solid rgba(0, 0, 0, 0.03);
-        }
-
-        h1 {
-            color: var(--brand-black);
-            margin-bottom: 6px;
-            font-size: 24px;
-            font-weight: 900;
-        }
-
-        .subtitle {
-            color: var(--brand-dark);
-            margin-bottom: 24px;
-            font-size: 14px;
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 14px;
-        }
-
-        .form-row.full {
-            grid-template-columns: 1fr;
-        }
-
-        label {
-            display: block;
-            font-size: 12px;
-            font-weight: 700;
-            margin-bottom: 4px;
-            color: var(--brand-black);
-        }
-
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid var(--brand-gray);
-            border-radius: 8px;
-            font: inherit;
-            background: var(--brand-white);
-            color: var(--brand-dark);
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--brand-red);
-        }
-
-        .actions {
-            display: flex;
-            gap: 12px;
-            margin-top: 24px;
-        }
-
-        .btn {
-            padding: 12px 20px;
-            border: 0;
-            border-radius: 10px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 14px;
-            transition: background 0.2s, transform 0.2s;
-        }
-
-        .btn-primary {
-            background: var(--brand-red);
-            color: var(--brand-white);
-        }
-        .btn-primary:hover {
-            background: var(--brand-red-dark);
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            border: 1px solid var(--brand-gray);
-            color: var(--brand-black);
-        }
-        .btn-secondary:hover {
-            background: var(--brand-gray-soft);
-        }
+        body { font-family: 'Proxima Nova', system-ui, sans-serif; background: #f9f9f9; padding: 32px; color: var(--brand-dark); display: flex; justify-content: center; }
+        .card { background: var(--brand-white); border-radius: 20px; padding: 32px; width: 100%; max-width: 700px; box-shadow: 0 12px 36px rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.03); }
+        h1 { color: var(--brand-black); margin-bottom: 6px; font-size: 24px; font-weight: 900; }
+        .subtitle { color: var(--brand-dark); margin-bottom: 24px; font-size: 14px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+        .form-row.full { grid-template-columns: 1fr; }
+        label { display: block; font-size: 12px; font-weight: 700; margin-bottom: 4px; color: var(--brand-black); }
+        input, textarea, select { width: 100%; padding: 10px; border: 1px solid var(--brand-gray); border-radius: 8px; font: inherit; background: var(--brand-white); color: var(--brand-dark); }
+        input:focus, textarea:focus, select:focus { outline: none; border-color: var(--brand-red); }
+        .actions { display: flex; gap: 12px; margin-top: 24px; }
+        .btn { padding: 12px 20px; border: 0; border-radius: 10px; font-weight: 700; cursor: pointer; text-decoration: none; display: inline-block; font-size: 14px; transition: background 0.2s; }
+        .btn-primary { background: var(--brand-red); color: var(--brand-white); }
+        .btn-primary:hover { background: var(--brand-red-dark); }
+        .btn-secondary { background: transparent; border: 1px solid var(--brand-gray); color: var(--brand-black); }
+        .btn-secondary:hover { background: var(--brand-gray-soft); }
+        .section-title { font-weight: 800; color: var(--brand-red-dark); margin: 20px 0 10px; font-size: 16px; border-bottom: 2px solid var(--brand-gray-soft); padding-bottom: 4px; }
     </style>
 </head>
 <body>
 <div class="card">
-    <h1>Редактирование отзыва</h1>
-    <p class="subtitle">Отзыв #<span th:text="${fb.id}">1</span> от <span th:text="${fb.name}">Имя</span></p>
+    <h1>Редактирование анкеты</h1>
+    <p class="subtitle">Анкета #<span th:text="${fb.id}">1</span> от <span th:text="${fb.fullName != null ? fb.fullName : fb.name}">Имя</span></p>
 
     <form th:action="@{/admin/feedback/{id}/edit(id=${fb.id})}" th:object="${fb}" method="post">
+
+        <div class="section-title">Карьерные данные (HR)</div>
         <div class="form-row">
             <div>
-                <label>Имя</label>
-                <input type="text" th:field="*{name}" required>
+                <label>ФИО</label>
+                <input type="text" th:field="*{fullName}">
+            </div>
+            <div>
+                <label>Дата рождения</label>
+                <input type="date" th:field="*{dob}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label>Контакты (Тел/Telegram)</label>
+                <input type="text" th:field="*{contact}">
+            </div>
+            <div>
+                <label>Email</label>
+                <input type="email" th:field="*{email}">
+            </div>
+        </div>
+        <div class="form-row">
+            <div>
+                <label>ВУЗ / Колледж</label>
+                <input type="text" th:field="*{university}">
             </div>
             <div>
                 <label>Группа</label>
@@ -165,6 +70,40 @@
         </div>
         <div class="form-row">
             <div>
+                <label>Интересующая вакансия</label>
+                <select th:field="*{vacancy}">
+                    <option value="">Не выбрана</option>
+                    <option value="engineer">Инженер-наладчик</option>
+                    <option value="chemist">Химик-технолог</option>
+                    <option value="operator">Оператор линии</option>
+                    <option value="logistics">Логист / Склад</option>
+                    <option value="other">Другое</option>
+                </select>
+            </div>
+            <div>
+                <label>Готовность выйти</label>
+                <select th:field="*{readiness}">
+                    <option value="">Не указана</option>
+                    <option value="yes">Да, готов</option>
+                    <option value="soon">Скоро</option>
+                    <option value="no">Пока нет</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="section-title">Оценки и отзыв</div>
+        <div class="form-row">
+            <div>
+                <label>Имя (старое поле)</label>
+                <input type="text" th:field="*{name}">
+            </div>
+            <div>
+                <label>Общая оценка (1-5)</label>
+                <input type="number" th:field="*{ratingOverall}" min="1" max="5">
+            </div>
+        </div>
+        <div class="form-row" style="grid-template-columns: repeat(3, 1fr);">
+            <div>
                 <label>Игра 1</label>
                 <input type="number" th:field="*{ratingGame1}" min="1" max="5">
             </div>
@@ -172,27 +111,21 @@
                 <label>Игра 2</label>
                 <input type="number" th:field="*{ratingGame2}" min="1" max="5">
             </div>
-        </div>
-        <div class="form-row">
             <div>
                 <label>Игра 3</label>
                 <input type="number" th:field="*{ratingGame3}" min="1" max="5">
-            </div>
-            <div>
-                <label>Общая оценка</label>
-                <input type="number" th:field="*{ratingOverall}" min="1" max="5">
             </div>
         </div>
         <div class="form-row full">
             <div>
                 <label>Что понравилось</label>
-                <input type="text" th:field="*{likedMost}" placeholder="Дизайн, Игры">
+                <input type="text" th:field="*{likedMost}">
             </div>
         </div>
         <div class="form-row full">
             <div>
                 <label>Что улучшить</label>
-                <textarea th:field="*{improvements}" rows="3"></textarea>
+                <textarea th:field="*{improvements}" rows="2"></textarea>
             </div>
         </div>
 

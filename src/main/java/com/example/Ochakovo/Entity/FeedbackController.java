@@ -1,14 +1,10 @@
 package com.example.Ochakovo.Entity;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import java.util.List;
-
-
 import java.util.List;
 
 @Controller
@@ -17,27 +13,28 @@ public class FeedbackController {
     @Autowired
     private FeedbackRepository feedbackRepository;
 
-    // API для сохранения отзыва
+    // API для сохранения новой анкеты из игры
     @PostMapping("/api/feedback")
     @ResponseBody
     public ResponseEntity<?> createFeedback(@RequestBody Feedback fb) {
-        if (fb.getName() == null || fb.getName().trim().length() < 2) {
-            return ResponseEntity.badRequest().body("Укажите имя");
+        if (fb.getFullName() == null || fb.getFullName().trim().length() < 2) {
+            return ResponseEntity.badRequest().body("Укажите ФИО");
         }
         if (fb.getRatingOverall() == null || fb.getRatingOverall() < 1 || fb.getRatingOverall() > 5) {
             return ResponseEntity.badRequest().body("Оцените проект от 1 до 5");
         }
         feedbackRepository.save(fb);
-        return ResponseEntity.ok("Спасибо за отзыв!");
+        return ResponseEntity.ok("Спасибо! Анкета отправлена HR.");
     }
 
-    // Страница со всеми отзывами
+    // Страница со списком всех отзывов
     @GetMapping("/admin/feedback")
     public String feedbackPage(Model model) {
         List<Feedback> all = feedbackRepository.findAll();
         model.addAttribute("feedbacks", all);
         model.addAttribute("total", all.size());
 
+        // Подсчет статистики
         if (!all.isEmpty()) {
             double avgOverall = all.stream().filter(f -> f.getRatingOverall() != null)
                     .mapToInt(Feedback::getRatingOverall).average().orElse(0);
@@ -64,17 +61,17 @@ public class FeedbackController {
             model.addAttribute("recommendPercent", 0);
         }
 
-        return "admin/feedback"; // ищет файл templates/admin/feedback.html
+        return "admin/feedback";
     }
 
-    // 🔑 Удалить отзыв
+    // 🔑 УДАЛЕНИЕ АНКЕТЫ
     @PostMapping("/admin/feedback/{id}/delete")
     public String deleteFeedback(@PathVariable Long id) {
         feedbackRepository.deleteById(id);
         return "redirect:/admin/feedback";
     }
 
-    // 🔑 Показать форму редактирования
+    // 🔑 ОТКРЫТИЕ ФОРМЫ РЕДАКТИРОВАНИЯ
     @GetMapping("/admin/feedback/{id}/edit")
     public String editFeedbackForm(@PathVariable Long id, Model model) {
         Feedback fb = feedbackRepository.findById(id).orElse(null);
@@ -85,11 +82,12 @@ public class FeedbackController {
         return "admin/feedback-edit";
     }
 
-    // 🔑 Сохранить изменения
+    // 🔑 СОХРАНЕНИЕ ИЗМЕНЕНИЙ
     @PostMapping("/admin/feedback/{id}/edit")
     public String updateFeedback(@PathVariable Long id, @ModelAttribute Feedback form) {
         Feedback fb = feedbackRepository.findById(id).orElse(null);
         if (fb != null) {
+            // Обновляем старые поля
             fb.setName(form.getName());
             fb.setStudentGroup(form.getStudentGroup());
             fb.setRatingGame1(form.getRatingGame1());
@@ -99,12 +97,22 @@ public class FeedbackController {
             fb.setLikedMost(form.getLikedMost());
             fb.setImprovements(form.getImprovements());
             fb.setWouldRecommend(form.getWouldRecommend());
+
+            // Обновляем новые поля (HR)
+            fb.setFullName(form.getFullName());
+            fb.setDob(form.getDob());
+            fb.setContact(form.getContact());
+            fb.setEmail(form.getEmail());
+            fb.setUniversity(form.getUniversity());
+            fb.setVacancy(form.getVacancy());
+            fb.setReadiness(form.getReadiness());
+
             feedbackRepository.save(fb);
         }
         return "redirect:/admin/feedback";
     }
 
-    // 🔑 Добавить отзыв вручную
+    // Ручное добавление анкеты (если нужно)
     @PostMapping("/admin/feedback/add")
     public String addFeedback(@ModelAttribute Feedback form) {
         feedbackRepository.save(form);
