@@ -48,13 +48,6 @@
 
 /* ============================================================
    ФИРМЕННАЯ ПАЛИТРА ОЧАКОВО (web)
-   красный        #D50032
-   тёмно-красный  #AB2328
-   белый          #FFFFFF
-   тёмно-серый    #626262
-   чёрный         #000000
-   серый          #A2AAAD
-   зелёный (Retail) #84BD00
    ============================================================ */
 
 /* ============================================================
@@ -101,7 +94,7 @@ body {
   background-attachment: fixed;
   color: var(--text);
   font-family: 'Proxima Nova', system-ui, -apple-system, "Segoe UI", sans-serif;
-  overflow-x: hidden; /* 🔑 Защита от горизонтальной прокрутки на мобильных */
+  overflow-x: hidden; /* Защита от горизонтальной прокрутки на мобильных */
 }
 
 a { color: inherit; text-decoration: none; transition: var(--transition); }
@@ -313,7 +306,6 @@ section[id] { scroll-margin-top: 160px; }
   gap: 32px;
   max-width: 1280px;
   margin: 40px auto;
-  /* padding: 0 24px;  <-- УДАЛЕНО во избежание двойных отступов */
 }
 .card {
   display: flex;
@@ -1237,122 +1229,131 @@ body.game-page {
 }
 
 /* ============================================================
-   15. АДАПТИВНОСТЬ (ИСПРАВЛЕННАЯ)
+   15. АДАПТИВНОСТЬ (ИСПРАВЛЕННАЯ ДЛЯ МОБИЛЬНЫХ)
    ============================================================ */
 
-/* Планшеты и небольшие ноутбуки */
 @media (max-width: 900px) {
-  .site-header { padding: 16px 20px 0; }
-  .site-header__top { padding-bottom: 12px; flex-wrap: wrap; gap: 12px; }
-  .site-header__logo { font-size: 18px; }
-  .site-header__menu-toggle { display: flex; }
+  /* Шапка: убираем гамбургер, выстраиваем элементы в строку */
+  .site-header { padding: 16px 16px 0; }
 
-  /* Мобильное меню */
-  .site-header__nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 85%;
-    max-width: 320px;
-    height: 100vh;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0;
-    padding: 80px 24px 32px;
-    background: var(--brand-white);
-    box-shadow: -8px 0 32px rgba(0, 0, 0, 0.12);
-    transition: var(--transition);
-    overflow-y: auto;
+  .site-header__top {
+    padding-bottom: 12px;
+    flex-wrap: nowrap;
+    align-items: center;
+    gap: 10px;
   }
-  .site-header__nav--open { right: 0; }
-  .site-header__nav a {
-    width: 100%;
-    padding: 16px 0;
-    border-bottom: 1px solid rgba(98, 98, 98, 0.12);
+
+  .site-header__logo {
     font-size: 16px;
-    color: var(--brand-black);
+    line-height: 1.2;
   }
-  .site-header__nav a::after { display: none; }
 
-  /* Анимация бургера */
-  .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(1) { transform: translateY(10px) rotate(45deg); }
-  .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(2) { opacity: 0; }
-  .site-header__nav--open ~ .site-header__top .site-header__menu-toggle span:nth-child(3) { transform: translateY(-10px) rotate(-45deg); }
+  /* Прячем гамбургер */
+  .site-header__menu-toggle { display: none; }
 
-  /* Главный экран */
+  /* Убираем лишний отступ у кнопки в шапке, который ломал вид */
+  .site-header__top > div { margin-top: 0 !important; }
+
+  /* Делаем кнопку в шапке компактной */
+  .site-header__top .btn {
+    padding: 8px 16px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  /* Навигация: горизонтальная, переносится под логотип */
+  .site-header__nav {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    box-shadow: none;
+    padding: 10px 0;
+    overflow-x: visible;
+  }
+
+  .site-header__nav a {
+    padding: 5px 0;
+    font-size: 14px;
+    border-bottom: none;
+    color: var(--brand-dark);
+  }
+
+  .site-header__nav a::after {
+    display: block;
+    width: 0;
+    bottom: 0;
+    height: 2px;
+    background: var(--brand-red);
+  }
+  .site-header__nav a:hover::after { width: 100%; }
+
+  /* Главный экран (Hero) */
   .hero {
     min-height: auto;
-    padding: 100px 20px 60px;
+    padding: 60px 16px;
     text-align: center;
     align-items: center;
   }
-  .hero h1 { font-size: 2.2rem; word-wrap: break-word; }
-  .hero h2 { font-size: 1.8rem; }
-  .hero p { font-size: 1.05rem; margin-bottom: 30px; }
+  .hero h1 { font-size: 2.2rem; }
+  .hero p { font-size: 1rem; margin-bottom: 24px; }
+  .hero .btn { width: 100%; justify-content: center; }
 
-  /* Кнопки в Hero */
-  .hero .btn { width: 100%; justify-content: center; margin-bottom: 10px; }
+  /* Сетки и карточки */
+  .gallery-section, .tabs-container { padding: 40px 16px; }
+  .conditions-grid {
+    grid-template-columns: 1fr 1fr; /* 2 колонки */
+    gap: 16px;
+    margin: 20px auto;
+  }
+  .card { padding: 20px; }
+  .card h3 { font-size: 1.2rem; }
+  .card p { font-size: 0.9rem; }
+  .icon-box { width: 48px; height: 48px; font-size: 24px; margin-bottom: 16px; }
 
-  /* Секции */
-  .gallery-section, .tabs-container { padding: 48px 16px; }
-  .conditions-grid { grid-template-columns: 1fr; gap: 20px; margin: 20px auto; }
-  .card { padding: 24px; }
-  .photo-item { height: 240px; }
-  .overlay { opacity: 1; transform: none; }
+  /* Split-карточка (видео/фото + текст) */
+  .split-card__grid { grid-template-columns: 1fr; }
+  .split-card__image { min-height: 200px; }
+  .split-card__content { padding: 20px; }
+  .split-card__content h3 { font-size: 1.3rem; }
+
+  /* Блок статистики */
+  .stats-card { padding: 20px 16px; }
+  .stats-item--bordered {
+    border-left: none;
+    border-right: none;
+    border-top: 1px solid rgba(255,255,255,0.25);
+    border-bottom: 1px solid rgba(255,255,255,0.25);
+    padding: 20px 0;
+  }
+  .stats-number { font-size: 2rem; }
 
   /* Видео-блок */
-  .video-row, .video-row--reverse { flex-direction: column; gap: 24px; margin-bottom: 40px; }
+  .video-row, .video-row--reverse { flex-direction: column; gap: 20px; margin-bottom: 30px; }
   .video-text { text-align: center; }
+  .video-text h3 { font-size: 1.4rem; }
+  .video-text p { font-size: 0.95rem; }
 
-  /* Блок со статистикой */
-  .stats-card { padding: 24px 16px; }
-  .stats-item--bordered { border-left: none; border-right: none; border-top: 1px solid rgba(255,255,255,0.25); border-bottom: 1px solid rgba(255,255,255,0.25); padding: 20px 0; }
-  .stats-number { font-size: 2.5rem; }
-
-  /* Split карточка */
-  .split-card__grid { grid-template-columns: 1fr; }
-  .split-card__image { min-height: 250px; }
-  .split-card__content { padding: 24px; }
-}
-
-/* Смартфоны */
-@media (max-width: 600px) {
-  /* Игры (Game 01, 02, 03) */
+  /* Игры и формы */
   body.game-page { padding: 10px; align-items: flex-start; overflow-y: auto; }
-  .line-game, .delivery-game {
-    grid-template-columns: 1fr;
-    padding: 16px;
-    gap: 16px;
-    width: 100%;
-    margin-top: 40px;
-  }
+  .line-game, .delivery-game { grid-template-columns: 1fr; padding: 16px; gap: 16px; width: 100%; margin-top: 40px; }
   .line-game__side, .delivery-game__side { display: flex; flex-direction: column; gap: 12px; }
   .line-game__info, .delivery-game__stats { flex-direction: row; flex-wrap: wrap; }
   .line-game__stat, .delivery-game__stat { flex: 1 1 45%; }
   #gameCanvas, #roadCanvas { max-height: 45vh; width: 100%; }
-  .line-game__controls { gap: 6px; }
-  .line-game__controls button { font-size: 1rem; }
-
-  /* Игра-тест (Профессии) */
-  .quiz-pro { padding: 20px 16px; }
-  .quiz-option { padding: 14px 16px; font-size: 0.9rem; }
-  .quiz-option__letter { width: 28px; height: 28px; font-size: 0.85rem; }
-  .big-stars span { font-size: 36px; }
-  .stars span { font-size: 24px; }
-
-  /* Формы (Apply) */
   .form-row { grid-template-columns: 1fr; }
   .option-grid { grid-template-columns: 1fr; }
-  .survey-nav { flex-direction: column-reverse; gap: 8px; }
-  .survey-nav button { width: 100%; flex: none; }
-  .btn-back { margin-top: 0; }
+}
 
-  /* Заголовки */
-  .section-title, .section-title-pro { font-size: 1.6rem; margin-bottom: 32px; }
-  h1, h2, h3 { word-wrap: break-word; }
-
-  /* Видео-обложка */
-  .play-btn { width: 50px; height: 50px; font-size: 20px; margin-bottom: 12px; }
-  .video-cover h3 { font-size: 1.1rem; }
-  .video-cover p { font-size: 0.8rem; max-width: 100%; }
+/* Для очень маленьких экранов телефонов (например, iPhone SE) */
+@media (max-width: 500px) {
+  .conditions-grid { grid-template-columns: 1fr; } /* Карточки в одну колонку */
+  .site-header__logo { font-size: 14px; }
+  .site-header__top .btn { padding: 6px 12px; font-size: 11px; }
+  .site-header__nav { gap: 10px; }
+  .site-header__nav a { font-size: 13px; }
 }
