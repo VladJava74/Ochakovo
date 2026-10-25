@@ -29,7 +29,6 @@
     <div class="video-row">
       <div class="video-block">
         <div class="video-wrapper">
-          <!-- 🔑 Добавлен атрибут playsinline для мобильных -->
           <video class="video-element" preload="metadata" playsinline>
             <source src="/video/line.mp4" type="video/mp4">
             Ваш браузер не поддерживает видео.
@@ -46,6 +45,7 @@
         <h3>Скорость и точность</h3>
         <p>На линии розлива каждая секунда на счету. Оператор следит за тем, чтобы бутылки двигались без задержек, а оборудование работало как часы. Здесь важно не только нажимать кнопки, но и понимать, как устроен весь механизм.</p>
         <p>Посмотрите, как происходит магия превращения простого стекла и пластика в готовый продукт.</p>
+        <a class="btn" href="/games/game04" style="margin-top: 1.25rem;">Попробовать смену оператора →</a>
       </div>
     </div>
 
@@ -69,6 +69,7 @@
         <h3>Наука о вкусе</h3>
         <p>За каждым любимым вкусом стоит кропотливая работа химиков-технологов. В лаборатории берут пробы, проверяют кислотность, плотность и, конечно, проводят дегустации.</p>
         <p>Именно здесь рождаются новые рецепты и гарантируется, что каждая бутылка соответствует строгим стандартам качества.</p>
+        <a class="btn" href="/games/game05" style="margin-top: 1.25rem;">Попробовать роль лаборанта →</a>
       </div>
     </div>
 
@@ -91,6 +92,7 @@
       <div class="video-text">
         <h3>Бесперебойные поставки</h3>
         <p>Логистика — это сложный механизм, который обеспечивает наличие кваса и лимонадов по всей стране. От того, насколько быстро и точно работает команда склада и водители, зависит, увидит ли покупатель свой любимый напиток на полке.</p>
+        <a class="btn" href="/games/game06" style="margin-top: 1.25rem;">Попробовать роль логиста →</a>
       </div>
     </div>
 
@@ -135,7 +137,6 @@
     </div>
 
     <script>
-      // Ждем полной загрузки HTML, прежде чем запускать скрипты
       document.addEventListener('DOMContentLoaded', function () {
 
         /* ============================================================
@@ -150,15 +151,9 @@
 
             if (!video || !cover) return;
 
-            // Клик по обложке
             cover.addEventListener('click', () => {
-              // Скрываем обложку
               cover.classList.add('is-hidden');
-
-              // Включаем контролы
               video.setAttribute('controls', 'true');
-
-              // Принудительно запускаем загрузку и воспроизведение
               video.load();
               const playPromise = video.play();
 
@@ -170,7 +165,6 @@
               }
             });
 
-            // Отслеживаем ошибки загрузки самого файла
             video.addEventListener('error', () => {
               console.error(`Файл видео №${index + 1} не найден или поврежден.`);
             });
@@ -182,7 +176,6 @@
            ============================================================ */
         const quizContainer = document.getElementById('quiz');
 
-        // Запускаем тест только если он есть на странице
         if (quizContainer) {
           const questions = [
             {
@@ -252,7 +245,6 @@
           let score = 0;
           let answered = false;
 
-          // Получаем элементы
           const bodyEl = document.getElementById('quizBody');
           const questionEl = document.getElementById('quizQuestion');
           const optionsEl = document.getElementById('quizOptions');
@@ -266,7 +258,6 @@
           const resultDesc = document.getElementById('quizResultDesc');
           const restartBtn = document.getElementById('quizRestart');
 
-          // Защита от ошибок верстки
           if (!questionEl || !optionsEl || !nextBtn) {
             console.error("ОШИБКА: Не найдены элементы теста (quizQuestion, quizOptions, quizNext). Проверьте ID в HTML.");
             return;
@@ -376,7 +367,6 @@
           nextBtn.addEventListener('click', nextQuestion);
           restartBtn.addEventListener('click', restart);
 
-          // Запуск отрисовки первого вопроса
           renderQuestion();
         }
       });
@@ -399,7 +389,6 @@
 
 </div>
 
-<!-- 🔑 СКРИПТ ДЛЯ ЗАПУСКА ВИДЕО -->
 <script>
   document.querySelectorAll('.video-wrapper').forEach(wrapper => {
     const video = wrapper.querySelector('.video-element');
@@ -407,15 +396,9 @@
 
     if (!video || !cover) return;
 
-    // Функция запуска
     const startVideo = () => {
-      // Скрываем обложку
       cover.classList.add('is-hidden');
-
-      // Включаем контролы управления
       video.setAttribute('controls', 'true');
-
-      // Запускаем видео
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.catch(error => {
@@ -424,7 +407,6 @@
       }
     };
 
-    // Клик по обложке запускает видео
     cover.addEventListener('click', startVideo);
   });
 </script>

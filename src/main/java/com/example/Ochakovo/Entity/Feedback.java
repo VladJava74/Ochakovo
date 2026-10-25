@@ -10,11 +10,11 @@ public class Feedback {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Старые поля (для совместимости)
+
     private String name;
     private String studentGroup;
 
-    // 🔑 НОВЫЕ ПОЛЯ ДЛЯ HR
+
     private String fullName;
     private String dob;
     private String contact;
@@ -35,7 +35,7 @@ public class Feedback {
     @PrePersist
     public void prePersist() { this.createdAt = LocalDateTime.now(); }
 
-    // Геттеры и сеттеры
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -80,6 +80,5 @@ public class Feedback {
     public void setImprovements(String improvements) { this.improvements = improvements; }
     public Boolean getWouldRecommend() { return wouldRecommend; }
     public void setWouldRecommend(Boolean wouldRecommend) { this.wouldRecommend = wouldRecommend; }
-    public LocalDateTime getCreatedAt() { return createdAt; }
-    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
+
 }

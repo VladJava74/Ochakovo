@@ -82,12 +82,12 @@ public class FeedbackController {
         return "admin/feedback-edit";
     }
 
-    // 🔑 СОХРАНЕНИЕ ИЗМЕНЕНИЙ
+
     @PostMapping("/admin/feedback/{id}/edit")
     public String updateFeedback(@PathVariable Long id, @ModelAttribute Feedback form) {
         Feedback fb = feedbackRepository.findById(id).orElse(null);
         if (fb != null) {
-            // Обновляем старые поля
+
             fb.setName(form.getName());
             fb.setStudentGroup(form.getStudentGroup());
             fb.setRatingGame1(form.getRatingGame1());
@@ -98,7 +98,7 @@ public class FeedbackController {
             fb.setImprovements(form.getImprovements());
             fb.setWouldRecommend(form.getWouldRecommend());
 
-            // Обновляем новые поля (HR)
+
             fb.setFullName(form.getFullName());
             fb.setDob(form.getDob());
             fb.setContact(form.getContact());
@@ -112,7 +112,7 @@ public class FeedbackController {
         return "redirect:/admin/feedback";
     }
 
-    // Ручное добавление анкеты (если нужно)
+
     @PostMapping("/admin/feedback/add")
     public String addFeedback(@ModelAttribute Feedback form) {
         feedbackRepository.save(form);

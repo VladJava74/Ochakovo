@@ -14,17 +14,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                // 🔑 Защищаем только админку, остальное оставляем открытым
+
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/admin/**").authenticated() // Сюда пускаем только с паролем
-                        .requestMatchers("/**", "/api/**", "/games/**", "/css/**", "/js/**", "/images/**").permitAll() // Всё остальное — открыто
+                        .requestMatchers("/admin/**").authenticated()
+                        .requestMatchers("/**", "/api/**", "/games/**", "/css/**", "/js/**", "/images/**").permitAll()
                 )
-                // 🔑 Включаем стандартную форму логина
+
                 .formLogin(form -> form
-                        .defaultSuccessUrl("/admin/feedback", true) // Куда перенаправить после входа
+                        .defaultSuccessUrl("/admin/feedback", true)
                         .permitAll()
                 )
-                // 🔑 Отключаем CSRF для API (чтобы игра могла отправлять отзывы)
+
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/api/**")
                 );

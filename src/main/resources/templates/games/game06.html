@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Бесперебойные доставки — Очаково</title>
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#eef2f5;color:#333;line-height:1.6}
+        .site-header{background:#fff;padding:20px 40px;box-shadow:0 2px 10px rgba(0,0,0,.05)}
+        .site-header__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:15px}
+        .site-header__logo{font-size:24px;font-weight:800;color:#000;text-decoration:none}
+        .site-header__logo span{color:#ff0033}
+        .site-header__nav{display:flex;gap:25px}
+        .site-header__nav a{color:#555;text-decoration:none;font-weight:500;font-size:15px}
+        .site-header__nav a:hover{color:#ff0033}
+        .hero-game{background:linear-gradient(135deg,#a31e22,#7a1417);min-height:calc(100vh - 120px);display:flex;align-items:center;justify-content:center;padding:40px 20px}
+        .game-card{max-width:700px;width:100%;background:#fff;padding:30px;border-radius:24px;box-shadow:0 20px 50px rgba(0,0,0,.3);text-align:center;position:relative}
+        .game-card h1{font-size:2rem;color:#333;margin-bottom:10px;font-weight:800}
+        .game-card p.subtitle{font-size:1.05rem;color:#666;margin-bottom:20px}
+        .hud{display:flex;justify-content:space-between;margin-bottom:15px;font-weight:800;font-size:1.2rem;color:#333}
+        .hud span{color:#ff0033}
+        .timer-bar{height:10px;background:#e2e8f0;border-radius:10px;margin-bottom:20px;overflow:hidden}
+        .timer-fill{height:100%;width:100%;background:#ff0033;transition:width .1s linear;border-radius:10px}
+        .timer-fill.warn{background:#c1121f;animation:pulse .5s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+        .play-area{position:relative;height:300px;background:#f8fafc;border-radius:16px;overflow:hidden;margin-bottom:20px;border:2px dashed #cbd5e1}
+        .box{position:absolute;width:60px;height:60px;background:#d97706;border-radius:8px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.5rem;color:#fff;box-shadow:0 4px 10px rgba(0,0,0,.15);transition:transform .1s;animation:appear .3s ease}
+        .box:hover{transform:scale(1.1)}
+        .box::before{content:'';position:absolute;top:50%;left:0;right:0;height:4px;background:rgba(0,0,0,.2)}
+        @keyframes appear{from{transform:scale(0)}to{transform:scale(1)}}
+        .popup{position:absolute;font-weight:900;font-size:1.5rem;pointer-events:none;animation:pop 0.8s forwards;z-index:10;color:#10b981}
+        @keyframes pop{from{opacity:1;transform:translateY(0)}to{opacity:0;transform:translateY(-30px)}}
+        .btn{background:#ff0033;color:#fff;padding:14px 30px;border-radius:50px;border:none;font-size:1rem;font-weight:800;cursor:pointer;transition:.3s;box-shadow:0 4px 15px rgba(255,0,51,.2);text-transform:uppercase;letter-spacing:1px}
+        .btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(255,0,51,.3)}
+        .overlay{position:absolute;inset:0;background:rgba(255,255,255,.95);backdrop-filter:blur(5px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:20px;border-radius:24px;z-index:20}
+        .overlay.hidden{display:none}
+        .overlay h2{font-size:1.8rem;color:#333;margin-bottom:10px}
+        .overlay p{color:#666;font-size:1rem;max-width:400px;margin-bottom:20px;line-height:1.5}
+        @media(max-width:600px){.site-header{padding:15px}.site-header__nav{gap:15px}.hero-game{padding:20px 10px}.game-card{padding:20px}.box{width:50px;height:50px}}
+    </style>
+</head>
+<body>
+
+<section class="hero-game">
+    <div class="game-card">
+        <h1>Бесперебойные доставки</h1>
+        <p class="subtitle">Успей отправить все коробки, пока таймер не дошёл до нуля!</p>
+        <div class="hud">
+            <div>Собрано: <span id="score">0</span></div>
+            <div>Жизни: <span id="lives">❤❤❤</span></div>
+            <div>Время: <span id="time">10</span>с</div>
+        </div>
+        <div class="timer-bar"><div class="timer-fill" id="timerFill"></div></div>
+        <div class="play-area" id="playArea"></div>
+        <div class="overlay" id="startOverlay">
+            <h2>Смена начинается</h2>
+            <p>Кликай по коробкам, чтобы отправить их на склад. Каждая коробка даёт +1 секунду. Не дай таймеру дойти до нуля!</p>
+            <button class="btn" id="startBtn">Начать работу</button>
+        </div>
+        <div class="overlay hidden" id="endOverlay">
+            <h2 id="endTitle">Смена окончена</h2>
+            <p id="endText">Собрано коробок: 0</p>
+            <button class="btn" id="restartBtn">Попробовать снова</button>
+        </div>
+    </div>
+</section>
+
+<script>
+    const playArea = document.getElementById('playArea'), scoreEl = document.getElementById('score'), livesEl = document.getElementById('lives'), timeEl = document.getElementById('time'), timerFill = document.getElementById('timerFill');
+    const startOverlay = document.getElementById('startOverlay'), endOverlay = document.getElementById('endOverlay');
+    let state = null;
+
+    function startGame() {
+        if (state && state.spawnInterval) clearInterval(state.spawnInterval);
+        if (state && state.timerInterval) clearInterval(state.timerInterval);
+        state = { running: true, score: 0, lives: 3, time: 10, maxTime: 10, spawnInterval: null, timerInterval: null };
+        scoreEl.textContent = '0'; livesEl.textContent = '❤❤❤'; timeEl.textContent = '10';
+        timerFill.style.width = '100%'; timerFill.classList.remove('warn');
+        startOverlay.classList.add('hidden'); endOverlay.classList.add('hidden');
+        playArea.querySelectorAll('.box').forEach(el => el.remove());
+
+        state.timerInterval = setInterval(() => {
+            if (!state.running) return;
+            state.time -= 0.1;
+            if (state.time <= 0) { state.time = 0; endGame(); }
+            timeEl.textContent = Math.ceil(state.time);
+            timerFill.style.width = (state.time / state.maxTime) * 100 + '%';
+            if (state.time <= 3) timerFill.classList.add('warn');
+        }, 100);
+
+        state.spawnInterval = setInterval(() => { if (state.running) spawnBox(); }, 800);
+        spawnBox();
+    }
+
+    function spawnBox() {
+        if (!state || !state.running) return;
+        const box = document.createElement('div');
+        box.className = 'box'; box.textContent = '📦';
+        box.style.left = (Math.random() * (playArea.clientWidth - 70) + 10) + 'px';
+        box.style.top = (Math.random() * (playArea.clientHeight - 70) + 10) + 'px';
+        box.addEventListener('click', () => handleBoxClick(box));
+        playArea.appendChild(box);
+    }
+
+    function handleBoxClick(box) {
+        if (!state || !state.running) return;
+        box.remove();
+        state.score++; scoreEl.textContent = state.score;
+        state.time = Math.min(state.time + 1, state.maxTime);
+        timeEl.textContent = Math.ceil(state.time);
+        if (state.time > 3) timerFill.classList.remove('warn');
+        showPopup(box, '+1с');
+    }
+
+    function showPopup(el, text) {
+        const rect = el.getBoundingClientRect(), parentRect = playArea.getBoundingClientRect();
+        const popup = document.createElement('div');
+        popup.className = 'popup'; popup.textContent = text;
+        popup.style.left = (rect.left - parentRect.left) + 'px';
+        popup.style.top = (rect.top - parentRect.top) + 'px';
+        playArea.appendChild(popup); setTimeout(() => popup.remove(), 800);
+    }
+
+    function endGame() {
+        if (!state || !state.running) return;
+        state.running = false;
+        clearInterval(state.spawnInterval); clearInterval(state.timerInterval);
+        playArea.querySelectorAll('.box').forEach(el => el.remove());
+        document.getElementById('endTitle').textContent = 'Смена окончена';
+        document.getElementById('endText').textContent = `Собрано коробок: ${state.score}`;
+        endOverlay.classList.remove('hidden');
+    }
+
+    document.getElementById('startBtn').onclick = startGame;
+    document.getElementById('restartBtn').onclick = startGame;
+</script>
+</body>
+</html>

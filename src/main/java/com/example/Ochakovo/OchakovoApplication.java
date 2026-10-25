@@ -9,7 +9,6 @@ public class OchakovoApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(OchakovoApplication.class, args);
 	}
-//1234545
 }
 
 

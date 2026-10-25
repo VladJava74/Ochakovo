@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Найди брак — Очаково</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;background:#eef2f5;color:#333;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:100vh;padding:20px;overflow:hidden}
+h1{font-size:3rem;margin-bottom:5px;color:#a31e22;text-shadow:0 4px 10px rgba(163,30,34,.15);text-align:center;letter-spacing:1px;font-weight:900}
+p.subtitle{font-size:1.1rem;color:#666;margin-bottom:25px;text-align:center;max-width:700px}
+.game{max-width:1100px;width:100%;background:#fff;padding:30px;border-radius:32px;box-shadow:0 20px 50px rgba(0,0,0,.08);border:1px solid #e1e8ed}
+.hud{display:flex;justify-content:space-between;gap:15px;margin-bottom:25px;flex-wrap:wrap}
+.box{background:#f8fafc;border:2px solid #e2e8f0;border-radius:50px;padding:14px 28px;font-weight:900;font-size:20px;color:#1e293b;box-shadow:inset 0 2px 4px rgba(0,0,0,.02);display:flex;align-items:center;gap:10px}
+.box span{color:#ff0033;font-size:24px}
+.box.time{border-color:#ff0033;color:#ff0033;text-shadow:0 0 10px rgba(255,0,51,.2);transition:.3s}
+.box.time.warn{background:#ff0033;color:#fff;animation:pulse .6s infinite}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.conveyor{position:relative;height:380px;background:linear-gradient(#f1f5f9,#e2e8f0);border-radius:24px;overflow:hidden;border:4px solid #cbd5e1;box-shadow:inset 0 15px 30px rgba(0,0,0,.08)}
+.conveyor::after{content:'';position:absolute;left:0;right:0;bottom:0;height:50px;background:repeating-linear-gradient(90deg,#cbd5e1 0 40px,#94a3b8 40px 80px);animation:belt .6s linear infinite;border-top:4px solid #64748b}
+@keyframes belt{to{background-position:80px 0}}
+.bottle{position:absolute;bottom:54px;width:85px;height:220px;cursor:pointer;transition:.15s;animation:wobble 3s ease-in-out infinite}
+@keyframes wobble{0%,100%{transform:rotate(0)}50%{transform:rotate(-2deg)}}
+.bottle:hover{transform:scale(1.1);filter:drop-shadow(0 10px 15px rgba(0,0,0,.2))}
+.bottle svg{width:100%;height:100%;filter:drop-shadow(3px 5px 5px rgba(0,0,0,.2))}
+.bottle.caught{animation:caught .4s forwards}
+@keyframes caught{to{transform:translateY(-150px) rotate(40deg) scale(1.3);opacity:0}}
+.popup{position:absolute;font-weight:900;font-size:36px;pointer-events:none;animation:pop .9s forwards;z-index:5;text-shadow:0 2px 5px rgba(0,0,0,.2)}
+.popup.good{color:#10b981}.popup.bad{color:#ef4444}
+@keyframes pop{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(-100px) scale(1.8)}}
+.overlay{position:absolute;inset:0;background:#f8fafc;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;z-index:10;padding:20px}
+.overlay.hidden{display:none}
+.overlay > *{margin-bottom:15px}.overlay > *:last-child{margin-bottom:0}
+.overlay h2{font-size:2.8rem;color:#a31e22;font-weight:900;line-height:1.1}
+.overlay p{color:#64748b;max-width:500px;font-size:1.2rem;line-height:1.4}
+.overlay .emoji{font-size:7rem;line-height:1;filter:drop-shadow(0 15px 20px rgba(0,0,0,.1))}
+.btn{background:linear-gradient(135deg,#ff0033,#c1121f);color:#fff;padding:20px 60px;border-radius:50px;border:none;font-size:22px;font-weight:900;cursor:pointer;transition:.3s;box-shadow:0 10px 25px rgba(255,0,51,.3);text-transform:uppercase;letter-spacing:1px}
+.btn:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 15px 35px rgba(255,0,51,.5)}
+.hidden{display:none!important}
+@media(max-width:768px){h1{font-size:2rem}.game{padding:20px}.conveyor{height:300px}.bottle{width:65px;height:165px;bottom:44px}.box{padding:10px 20px;font-size:16px}.box span{font-size:18px}.overlay h2{font-size:2rem}.overlay p{font-size:1rem}.overlay .emoji{font-size:5rem}.btn{padding:16px 40px;font-size:18px}}
+</style>
+</head>
+<body>
+<h1>Найди брак</h1>
+<p class="subtitle">Лови бутылки с дефектом на конвейере «Очаково»!</p>
+<div class="game">
+    <div class="hud">
+        <div class="box">Очки: <span id="score">0</span></div>
+        <div class="box">Жизни: <span id="lives">❤❤❤</span></div>
+        <div class="box time" id="timeBox">Время: <span id="time">30</span>с</div>
+    </div>
+    <div class="conveyor" id="conveyor">
+        <div class="overlay" id="startOv">
+            <div class="emoji">🍾</div>
+            <h2>Смена начинается!</h2>
+            <p>Кликай по бутылкам с браком (без крышки, кривая этикетка, трещина). Хорошие не трогай!</p>
+            <button class="btn" id="startBtn">Начать смену</button>
+        </div>
+        <div class="overlay hidden" id="endOv">
+            <div class="emoji" id="endEmoji">🏁</div>
+            <h2 id="endTitle">Смена окончена</h2>
+            <p id="endText">Результат: 0 очков</p>
+            <button class="btn" id="restartBtn">Ещё смена</button>
+        </div>
+    </div>
+</div>
+<script>
+const C={duration:30,lives:3,spawnMin:600,spawnMax:1100,defectChance:0.35,speedMin:100,speedMax:160};
+const conv=document.getElementById('conveyor'),scoreEl=document.getElementById('score'),livesEl=document.getElementById('lives'),timeEl=document.getElementById('time'),timeBox=document.getElementById('timeBox'),startOv=document.getElementById('startOv'),endOv=document.getElementById('endOv'),endTitle=document.getElementById('endTitle'),endText=document.getElementById('endText'),endEmoji=document.getElementById('endEmoji');
+let state=null,rafId=null,spawnT=null,timerInt=null;
+function bottleSvg(color,defect){
+    const cap=defect==='nocap'?'':'<rect x="30" y="2" width="22" height="14" rx="4" fill="#c1121f"/>';
+    const tilt=defect==='tilt'?' transform="rotate(-15 42 140)"':'';
+    const off=defect==='off'?' transform="translate(12 0)"':'';
+    const crack=defect==='crack'?'<path d="M35 90 L46 120 L36 150 L49 180" stroke="#000" stroke-width="3" fill="none" opacity=".85"/>':'';
+    return `<svg viewBox="0 0 84 220" xmlns="http://www.w3.org/2000/svg"><path d="M28 35 Q28 55 17 72 Q9 85 9 118 L9 200 Q9 213 23 213 L61 213 Q75 213 75 200 L75 118 Q75 85 67 72 Q56 55 56 35 Z" fill="${color}" stroke="#1f3d2b" stroke-width="3"/><path d="M20 100 Q20 140 20 190" stroke="rgba(255,255,255,.6)" stroke-width="7" fill="none" stroke-linecap="round"/><rect x="29" y="14" width="26" height="28" fill="${color}" stroke="#1f3d2b" stroke-width="3"/>${cap}<g${tilt}${off}><rect x="12" y="130" width="60" height="48" rx="6" fill="#fff" stroke="#a31e22" stroke-width="2"/><rect x="12" y="130" width="60" height="11" rx="6" fill="#a31e22"/><text x="42" y="167" font-size="13" font-weight="900" text-anchor="middle" fill="#a31e22" font-family="Arial">ОЧАКОВО</text></g>${crack}</svg>`;
+}
+function startGame(){
+    clearAll();
+    state={running:true,score:0,lives:C.lives,time:C.duration,bottles:[],lastTs:null};
+    scoreEl.textContent='0';updateLives();timeEl.textContent=state.time;timeBox.classList.remove('warn');
+    startOv.classList.add('hidden');endOv.classList.add('hidden');
+    timerInt=setInterval(()=>{if(!state.running)return;state.time--;timeEl.textContent=state.time;if(state.time<=5)timeBox.classList.add('warn');if(state.time<=0)endGame('time');},1000);
+    scheduleSpawn();rafId=requestAnimationFrame(loop);
+}
+function scheduleSpawn(){spawnT=setTimeout(()=>{if(!state.running)return;spawnBottle();scheduleSpawn();},C.spawnMin+Math.random()*(C.spawnMax-C.spawnMin));}
+function spawnBottle(){
+    const isDefect=Math.random()<C.defectChance,d=isDefect?['nocap','tilt','off','crack'][Math.floor(Math.random()*4)]:null,el=document.createElement('div'),colors=['#2f6b3f','#3a7d4a','#245c36'];
+    el.className='bottle';el.innerHTML=bottleSvg(colors[Math.floor(Math.random()*3)],d);
+    const obj={el,x:conv.clientWidth+30,speed:C.speedMin+Math.random()*(C.speedMax-C.speedMin),isDefect,width:85,clicked:false};
+    el.style.left=obj.x+'px';el.addEventListener('click',e=>{e.stopPropagation();handleClick(obj);});conv.appendChild(el);state.bottles.push(obj);
+}
+function loop(ts){
+    if(!state||!state.running)return;
+    if(state.lastTs===null)state.lastTs=ts;
+    const dt=(ts-state.lastTs)/1000;state.lastTs=ts;
+    for(let i=state.bottles.length-1;i>=0;i--){const b=state.bottles[i];if(b.clicked)continue;b.x-=b.speed*dt;b.el.style.left=b.x+'px';if(b.x+b.width<0){if(b.isDefect)loseLife();removeBottle(i);}}
+    rafId=requestAnimationFrame(loop);
+}
+function handleClick(b){
+    if(!state||!state.running||b.clicked)return;b.clicked=true;
+    if(b.isDefect){state.score+=10;scoreEl.textContent=state.score;showPopup(b.el,'+10','good');}
+    else{state.score=Math.max(0,state.score-5);scoreEl.textContent=state.score;showPopup(b.el,'-5','bad');loseLife();}
+    b.el.classList.add('caught');removeBottle(state.bottles.indexOf(b),400);
+}
+function loseLife(){if(!state||!state.running)return;state.lives--;updateLives();if(state.lives<=0)endGame('lives');}
+function updateLives(){livesEl.textContent='❤'.repeat(Math.max(0,state.lives))+'♡'.repeat(Math.max(0,C.lives-state.lives));}
+function showPopup(el,text,type){
+    const r=el.getBoundingClientRect(),cr=conv.getBoundingClientRect(),p=document.createElement('div');
+    p.className='popup '+type;p.textContent=text;p.style.left=(r.left-cr.left+r.width/2-20)+'px';p.style.top=(r.top-cr.top-30)+'px';conv.appendChild(p);setTimeout(()=>p.remove(),900);
+}
+function removeBottle(i,delay=0){if(i<0||i>=state.bottles.length)return;const b=state.bottles[i];state.bottles.splice(i,1);delay?setTimeout(()=>b.el.remove(),delay):b.el.remove();}
+function endGame(reason){
+    if(!state||!state.running)return;state.running=false;clearAll();state.bottles.forEach(b=>b.el.remove());state.bottles=[];
+    let t='Смена окончена',msg=`Очки: ${state.score}`,e='🏁';
+    if(reason==='lives'){e='😵';t='Слишком много брака!';}if(reason==='time'){e='⏰';t='Время вышло!';}if(state.lives>0&&state.score>=100){e='🏆';t='Отличная смена!';}
+    endEmoji.textContent=e;endTitle.textContent=t;endText.textContent=msg;endOv.classList.remove('hidden');
+}
+function clearAll(){clearInterval(timerInt);clearTimeout(spawnT);cancelAnimationFrame(rafId);timerInt=spawnT=rafId=null;}
+document.getElementById('startBtn').onclick=startGame;
+document.getElementById('restartBtn').onclick=startGame;
+</script>
+</body>
+</html>
