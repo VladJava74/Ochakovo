@@ -1349,7 +1349,7 @@ body.game-page {
   .option-grid { grid-template-columns: 1fr; }
 }
 
-/* Для очень маленьких экранов телефонов (например, iPhone SE) */
+/* Для очень маленьких экранов телефонов */
 @media (max-width: 500px) {
   .conditions-grid { grid-template-columns: 1fr; } /* Карточки в одну колонку */
   .site-header__logo { font-size: 14px; }
